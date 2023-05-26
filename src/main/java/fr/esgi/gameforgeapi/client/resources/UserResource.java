@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/user")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class UserResource  extends GenericResource {
 
     private final UserCreatorApi userCreatorApi;

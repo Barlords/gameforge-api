@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
 @Import({GameforgeApiConfiguration.class})
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "fr.esgi")
 public class GameforgeApiApplication {
 
     public static void main(String[] args) {
