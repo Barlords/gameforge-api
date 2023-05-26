@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
@@ -21,5 +22,11 @@ public class User {
 
     @With
     String pseudo;
+
+    @With
+    UUID token;
+
+    @With
+    LocalDate tokenDate;
 
 }

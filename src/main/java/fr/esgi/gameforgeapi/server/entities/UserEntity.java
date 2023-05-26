@@ -10,6 +10,7 @@ import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.TypeAlias;
 
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -42,4 +43,12 @@ public class UserEntity {
 
     @Column(unique = true, nullable = false)
     private String pseudo;
+
+    @Column(name = "token", updatable = false, nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private UUID token;
+
+    @Column(name = "token_date", updatable = false, nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private LocalDate tokenDate;
 }
