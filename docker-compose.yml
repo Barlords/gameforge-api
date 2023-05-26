@@ -1,13 +1,18 @@
-services:
+volumes:
+  data:
 
+services:
   database:
     container_name: gameforge-db
     image: mariadb:latest
     restart: always
     environment:
-      MARIADB_USER: gameforge
-      MARIADB_PASSWORD: gameforge
-      MARIADB_ROOT_PASSWORD: gameforge
+      MYSQL_DATABASE: gameforge
+      MYSQL_USER: gameforge
+      MYSQL_PASSWORD: gameforge
+      MYSQL_ROOT_PASSWORD: gameforge
+    volumes:
+      - data:/var/lib/mysql
     expose:
       - "3306"
     ports:
