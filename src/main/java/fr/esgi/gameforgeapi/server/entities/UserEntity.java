@@ -31,7 +31,6 @@ public class UserEntity {
             strategy =  "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "ID", updatable = false, nullable = false)
-    @ColumnDefault("random_uuid()")
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
