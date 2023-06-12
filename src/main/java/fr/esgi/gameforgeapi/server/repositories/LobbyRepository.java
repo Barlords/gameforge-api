@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.server.repositories;
 
 import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
+import fr.esgi.gameforgeapi.server.entities.MessageEntity;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import io.vavr.control.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +18,6 @@ public interface LobbyRepository extends JpaRepository<LobbyEntity, UUID> {
 
     List<LobbyEntity> findAll();
 
-
+    Option<LobbyEntity> findLobbyEntityById(UUID id);
 
 }

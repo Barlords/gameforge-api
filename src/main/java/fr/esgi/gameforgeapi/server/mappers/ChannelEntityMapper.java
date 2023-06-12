@@ -1,25 +1,28 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
-import fr.esgi.gameforgeapi.domain.functional.models.User;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
+
+import fr.esgi.gameforgeapi.domain.functional.models.Channel;
+import fr.esgi.gameforgeapi.server.entities.ChannelEntity;
 
 public interface ChannelEntityMapper {
 
-    static User toDomain(UserEntity entity) {
-        return User.builder()
+    static Channel toDomain(ChannelEntity entity) {
+        return Channel.builder()
                 .id(entity.getId())
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .pseudo(entity.getPseudo())
+                .friendId1(entity.getFriend1_id())
+                .friendId2(entity.getFriend2_id())
+                .creationDate(entity.getCreationDate())
+                .token(entity.getToken())
                 .build();
     }
 
-    static UserEntity fromDomain(User domain) {
-        return UserEntity.builder()
+    static ChannelEntity fromDomain(Channel domain) {
+        return ChannelEntity.builder()
                 .id(domain.getId())
-                .email(domain.getEmail())
-                .password(domain.getPassword())
-                .pseudo(domain.getPseudo())
+                .friend1_id(domain.getFriendId1())
+                .friend2_id(domain.getFriendId2())
+                .creationDate(domain.getCreationDate())
+                .token(domain.getToken())
                 .build();
     }
 

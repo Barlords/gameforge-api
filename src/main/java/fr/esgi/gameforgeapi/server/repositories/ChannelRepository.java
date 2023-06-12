@@ -2,6 +2,8 @@ package fr.esgi.gameforgeapi.server.repositories;
 
 import fr.esgi.gameforgeapi.server.entities.ActionEntity;
 import fr.esgi.gameforgeapi.server.entities.ChannelEntity;
+import fr.esgi.gameforgeapi.server.entities.GameEntity;
+import io.vavr.control.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -16,6 +18,6 @@ public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
 
     List<ChannelEntity> findAll();
 
-
+    Option<ChannelEntity> findChannelEntityById(UUID id);
 
 }
