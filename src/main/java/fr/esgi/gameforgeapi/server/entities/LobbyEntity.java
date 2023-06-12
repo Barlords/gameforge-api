@@ -3,11 +3,8 @@ package fr.esgi.gameforgeapi.server.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.TypeAlias;
 
 import java.sql.Types;
 import java.time.LocalDate;
@@ -20,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "lobby")
+public class LobbyEntity {
 
     @Id
     @EqualsAndHashCode.Include
@@ -34,20 +31,21 @@ public class UserEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @Column(name = "game_id", nullable = false)
+    private UUID gameId;
 
-    @Column(nullable = false)
-    private String password;
-
-    @Column(unique = true, nullable = false)
-    private String pseudo;
-
-    @Column(name = "token", updatable = false, nullable = false)
+    @Column(name = "creation_date", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID token;
+    private LocalDate creationDate;
 
-    @Column(name = "token_date", nullable = false)
+    @Column(name = "start_date")
     @JdbcTypeCode(Types.VARCHAR)
-    private LocalDate tokenDate;
+    private LocalDate startDate;
+
+    @Column(name = "finished", nullable = false)
+    private boolean finished;
+
+    @Column(name = "winner", nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private UUID winner;
 }

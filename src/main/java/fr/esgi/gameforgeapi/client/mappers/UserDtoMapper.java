@@ -8,10 +8,10 @@ public interface UserDtoMapper {
 
     static UserDto toDto(User domain) {
         return new UserDto(
-                domain.getId(),
                 domain.getEmail(),
-                domain.getPassword(),
-                domain.getPseudo()
+                domain.getPseudo(),
+                domain.getToken(),
+                domain.getTokenDate()
         );
     }
 

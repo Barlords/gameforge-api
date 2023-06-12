@@ -3,11 +3,8 @@ package fr.esgi.gameforgeapi.server.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.TypeAlias;
 
 import java.sql.Types;
 import java.time.LocalDate;
@@ -20,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "action")
+public class ActionEntity {
 
     @Id
     @EqualsAndHashCode.Include
@@ -34,20 +31,19 @@ public class UserEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(unique = true, nullable = false)
-    private String pseudo;
-
-    @Column(name = "token", updatable = false, nullable = false)
+    @Column(name = "game_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID token;
+    private UUID gameId;
 
-    @Column(name = "token_date", nullable = false)
+    @Column(name = "user_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private LocalDate tokenDate;
+    private UUID userId;
+
+    @Column(name = "action_time", updatable = false, nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private LocalDate actionTime;
+
+    @Column(name = "action", nullable = false)
+    private String action;
+
 }

@@ -3,11 +3,8 @@ package fr.esgi.gameforgeapi.server.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.TypeAlias;
 
 import java.sql.Types;
 import java.time.LocalDate;
@@ -20,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "message")
+public class MessageEntity {
 
     @Id
     @EqualsAndHashCode.Include
@@ -34,20 +31,19 @@ public class UserEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(unique = true, nullable = false)
-    private String pseudo;
-
-    @Column(name = "token", updatable = false, nullable = false)
+    @Column(name = "sender_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID token;
+    private UUID senderId;
 
-    @Column(name = "token_date", nullable = false)
+    @Column(name = "channel_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private LocalDate tokenDate;
+    private UUID channelId;
+
+    @Column(name = "message", nullable = false)
+    private String message;
+
+    @Column(name = "send_date", updatable = false, nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private LocalDate sendDate;
+
 }

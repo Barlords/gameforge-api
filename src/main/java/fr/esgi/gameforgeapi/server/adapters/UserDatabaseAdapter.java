@@ -2,6 +2,7 @@ package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
+import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
 import io.vavr.control.Option;
@@ -22,8 +23,7 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     @Override
     @Transactional
     public User save(User o) {
-        val entity = UserEntityMapper.fromDomain(o);
-        return UserEntityMapper.toDomain(repository.save(entity));
+        return UserEntityMapper.toDomain(repository.save(UserEntityMapper.fromDomain(o)));
     }
 
     @Override
@@ -37,4 +37,17 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     public Option<User> findById(UUID id) {
         return repository.findUserEntityById(id).map(UserEntityMapper::toDomain);
     }
+
+    @Override
+    @Transactional
+    public Option<User> findUserByEmailAndPassword(String email, String password) {
+        return repository.findUserEntityByEmailAndPassword(email, password).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Option<User> findUserByPseudoAndPassword(String pseudo, String password) {
+        return repository.findUserEntityByPseudoAndPassword(pseudo, password).map(UserEntityMapper::toDomain);
+    }
+
 }

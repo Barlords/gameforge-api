@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.domain.functional.services.UserCreatorService;
-import fr.esgi.gameforgeapi.domain.functional.services.UserFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.user.UserCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.user.UserFinderService;
 import fr.esgi.gameforgeapi.domain.ports.client.UserCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.UserFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EntityScan(basePackages = {"fr.esgi.gameforgeapi.server.entities"})
