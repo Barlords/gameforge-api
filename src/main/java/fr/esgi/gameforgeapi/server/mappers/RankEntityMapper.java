@@ -1,8 +1,6 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
-import fr.esgi.gameforgeapi.domain.functional.models.Message;
 import fr.esgi.gameforgeapi.domain.functional.models.Rank;
-import fr.esgi.gameforgeapi.server.entities.MessageEntity;
 import fr.esgi.gameforgeapi.server.entities.RankEntity;
 
 public interface RankEntityMapper {
@@ -13,7 +11,7 @@ public interface RankEntityMapper {
                 .gameId(entity.getGameId())
                 .userId(entity.getUserId())
                 .playedGame(entity.getPlayedGame())
-                .winGame(entity.getWinGame())
+                .winedGame(entity.getWinedGame())
                 .build();
     }
 
@@ -23,7 +21,7 @@ public interface RankEntityMapper {
                 .gameId(domain.getGameId())
                 .userId(domain.getUserId())
                 .playedGame(domain.getPlayedGame())
-                .winGame(domain.getWinGame())
+                .winedGame(domain.getWinedGame())
                 .build();
     }
 

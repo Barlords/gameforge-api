@@ -27,6 +27,6 @@ public class Lobby {
     boolean finished;
 
     @With
-    UUID winner;
+    UUID winnerId;
 
 }

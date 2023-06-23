@@ -34,13 +34,13 @@ public class UserEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "pseudo", unique = true, nullable = false)
     private String pseudo;
 
     @Column(name = "token", updatable = false, nullable = false)
