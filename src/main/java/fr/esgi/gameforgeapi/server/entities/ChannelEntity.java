@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 
+import java.io.Serializable;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -18,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "channel")
-public class ChannelEntity {
+public class ChannelEntity implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include

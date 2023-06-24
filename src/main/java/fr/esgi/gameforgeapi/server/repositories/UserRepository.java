@@ -12,11 +12,7 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface UserRepository extends JpaRepository<UserEntity, UUID> {
-
-    List<UserEntity> findAll();
-
-    Option<UserEntity> findUserEntityById(UUID id);
+public interface UserRepository extends GenericRepository<UserEntity, UUID> {
 
     Option<UserEntity> findUserEntityByEmailAndPassword(String email, String password);
 

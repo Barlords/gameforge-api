@@ -14,10 +14,6 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface ActionRepository extends JpaRepository<ActionEntity, UUID> {
-
-    List<ActionEntity> findAll();
-
-    Option<ActionEntity> findActionEntityById(UUID id);
+public interface ActionRepository extends GenericRepository<ActionEntity, UUID> {
 
 }

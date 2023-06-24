@@ -16,8 +16,4 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface LobbyRepository extends JpaRepository<LobbyEntity, UUID> {
 
-    List<LobbyEntity> findAll();
-
-    Option<LobbyEntity> findLobbyEntityById(UUID id);
-
 }

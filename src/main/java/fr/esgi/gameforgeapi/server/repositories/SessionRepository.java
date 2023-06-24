@@ -15,9 +15,4 @@ import java.util.UUID;
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
-
-    List<SessionEntity> findAll();
-
-    Option<SessionEntity> findSessionEntityById(UUID id);
-
 }

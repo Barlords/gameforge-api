@@ -16,8 +16,4 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
 
-    List<ChannelEntity> findAll();
-
-    Option<ChannelEntity> findChannelEntityById(UUID id);
-
 }

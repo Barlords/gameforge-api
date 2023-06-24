@@ -33,7 +33,8 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
     @Override
     @Transactional
     public Option<Session> findById(UUID id) {
-        return repository.findSessionEntityById(id).map(SessionEntityMapper::toDomain);
+        //return repository.findSessionEntityById(id).map(SessionEntityMapper::toDomain);
+        return null;
     }
 
 

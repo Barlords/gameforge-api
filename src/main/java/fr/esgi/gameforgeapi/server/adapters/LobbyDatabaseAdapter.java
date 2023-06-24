@@ -2,8 +2,10 @@ package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.ports.server.LobbyPersistenceSpi;
+import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
 import fr.esgi.gameforgeapi.server.mappers.LobbyEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.LobbyRepository;
+import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,24 +18,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class LobbyDatabaseAdapter implements LobbyPersistenceSpi {
 
-    private final LobbyRepository repository;
+    private IGenericDao<LobbyEntity> dao;
 
     @Override
     @Transactional
     public Lobby save(Lobby o) {
-        return LobbyEntityMapper.toDomain(repository.save(LobbyEntityMapper.fromDomain(o)));
+        return LobbyEntityMapper.toDomain(dao.save(LobbyEntityMapper.fromDomain(o)));
     }
 
     @Override
     @Transactional
     public List<Lobby> findAll() {
-        return repository.findAll().stream().map(LobbyEntityMapper::toDomain).toList();
+        return dao.findAll().stream().map(LobbyEntityMapper::toDomain).toList();
     }
 
     @Override
     @Transactional
     public Option<Lobby> findById(UUID id) {
-        return repository.findLobbyEntityById(id).map(LobbyEntityMapper::toDomain);
+        return Option.of(LobbyEntityMapper.toDomain(dao.findOne(id)));
     }
 
 

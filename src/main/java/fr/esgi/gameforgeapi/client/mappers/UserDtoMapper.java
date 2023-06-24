@@ -3,6 +3,7 @@ package fr.esgi.gameforgeapi.client.mappers;
 import fr.esgi.gameforgeapi.client.dto.UserCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.UserDto;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
+import fr.esgi.gameforgeapi.server.entities.UserEntity;
 
 public interface UserDtoMapper {
 
@@ -20,6 +21,14 @@ public interface UserDtoMapper {
                 .email(request.email())
                 .password(request.password())
                 .pseudo(request.pseudo())
+                .build();
+    }
+
+    static User userCreationRequest(UserEntity entity) {
+        return User.builder()
+                .email(entity.getEmail())
+                .password(entity.getPassword())
+                .pseudo(entity.getPseudo())
                 .build();
     }
 

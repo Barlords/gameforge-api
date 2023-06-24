@@ -16,8 +16,4 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface GameRepository extends JpaRepository<GameEntity, UUID> {
 
-    List<GameEntity> findAll();
-
-    Option<GameEntity> findGameEntityById(UUID id);
-
 }
