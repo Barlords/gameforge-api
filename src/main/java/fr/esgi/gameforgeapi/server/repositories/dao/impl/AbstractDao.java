@@ -55,10 +55,12 @@ public abstract class AbstractDao<T extends Serializable> {
         Preconditions.checkState(entity != null);
         delete(entity);
     }
-    
+
+    @Autowired
+    private EntityManager entityManager;
 
     public void flush() {
-        session.flush();
+        entityManager.flush();
     }
 
 }
