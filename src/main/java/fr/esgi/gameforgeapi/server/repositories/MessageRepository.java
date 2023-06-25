@@ -14,5 +14,5 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
+public interface MessageRepository extends GenericRepository<MessageEntity, UUID> {
 }

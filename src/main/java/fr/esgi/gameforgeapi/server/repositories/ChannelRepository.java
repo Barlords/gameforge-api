@@ -14,6 +14,6 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
+public interface ChannelRepository extends GenericRepository<ChannelEntity, UUID> {
 
 }

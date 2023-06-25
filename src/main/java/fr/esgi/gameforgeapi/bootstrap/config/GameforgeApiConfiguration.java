@@ -8,10 +8,14 @@ import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.adapters.UserDatabaseAdapter;
 import fr.esgi.gameforgeapi.server.repositories.LobbyRepository;
 import io.vavr.jackson.datatype.VavrModule;
+import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.SessionFactory;
+import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
 @Configuration
 @Import(DomainConfiguration.class)

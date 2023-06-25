@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.server.repositories.dao.impl;
 
 import com.tngtech.archunit.thirdparty.com.google.common.base.Preconditions;
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,8 @@ import java.util.UUID;
 public abstract class AbstractDao<T extends Serializable> {
     private Class<T> clazz;
 
-    protected SessionFactory sessionFactory;
+    @Autowired
+    private  EntityManagerFactory entityManagerFactory;
 
     public void setClazz(final Class<T> clazzToSet) {
         clazz = Preconditions.checkNotNull(clazzToSet);
@@ -48,7 +50,11 @@ public abstract class AbstractDao<T extends Serializable> {
         delete(entity);
     }
 
-    protected Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
+    public Session getCurrentSession() {
+        if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
+            throw new NullPointerException("factory is not a hibernate factory");
+        }
+        return entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
     }
+
 }

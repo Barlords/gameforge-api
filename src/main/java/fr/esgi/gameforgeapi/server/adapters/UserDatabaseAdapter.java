@@ -4,13 +4,9 @@ import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.UserRepository;
 import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
-import fr.esgi.gameforgeapi.server.repositories.dao.UserDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

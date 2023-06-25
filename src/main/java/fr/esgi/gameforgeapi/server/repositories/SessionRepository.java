@@ -14,5 +14,5 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
+public interface SessionRepository extends GenericRepository<SessionEntity, UUID> {
 }

@@ -14,6 +14,6 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface GameRepository extends JpaRepository<GameEntity, UUID> {
+public interface GameRepository extends GenericRepository<GameEntity, UUID> {
 
 }

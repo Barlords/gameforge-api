@@ -1,11 +1,13 @@
-package fr.esgi.gameforgeapi.server.repositories.dao;
+package fr.esgi.gameforgeapi.server.repositories.dao.impl;
 
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
+import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import fr.esgi.gameforgeapi.server.repositories.dao.impl.GenericDao;
 import io.vavr.control.Option;
 import jakarta.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

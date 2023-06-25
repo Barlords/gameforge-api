@@ -14,6 +14,6 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface LobbyRepository extends JpaRepository<LobbyEntity, UUID> {
+public interface LobbyRepository extends GenericRepository<LobbyEntity, UUID> {
 
 }

@@ -14,5 +14,5 @@ import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface RankRepository extends JpaRepository<RankEntity, UUID> {
+public interface RankRepository extends GenericRepository<RankEntity, UUID> {
 }
