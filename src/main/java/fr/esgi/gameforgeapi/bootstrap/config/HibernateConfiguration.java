@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "fr.esgi.gameforgeapi.server.repositories.dao.impl")
+@EnableJpaRepositories(basePackages = "fr.esgi.gameforgeapi.server.repositories.dao")
 @EntityScan(basePackages = "fr.esgi.gameforgeapi.server.entities")
 public class HibernateConfiguration {
 

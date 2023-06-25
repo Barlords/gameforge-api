@@ -17,7 +17,9 @@ public abstract class AbstractDao<T extends Serializable> {
     private  EntityManagerFactory entityManagerFactory;
 
     public void setClazz(final Class<T> clazzToSet) {
+
         clazz = Preconditions.checkNotNull(clazzToSet);
+        System.out.println(clazz.getName());
     }
 
     public T findOne(final UUID id) {
@@ -54,7 +56,7 @@ public abstract class AbstractDao<T extends Serializable> {
         if (entityManagerFactory.unwrap(SessionFactory.class) == null) {
             throw new NullPointerException("factory is not a hibernate factory");
         }
-        return entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
+        return entityManagerFactory.unwrap(SessionFactory.class).openSession();
     }
 
 }

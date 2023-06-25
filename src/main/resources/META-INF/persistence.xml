@@ -9,6 +9,7 @@
 
         <!-- Other configuration settings -->
         <properties>
+            <property name="hibernate.current_session_context_class" value="thread"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <!-- Other Hibernate properties -->

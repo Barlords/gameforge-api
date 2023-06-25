@@ -19,6 +19,7 @@ public class testUserDao {
     @Test
     public void testGetAll() {
         List<UserEntity> list = dao.findAll();
+        System.out.println(list);
 
     }
 }
