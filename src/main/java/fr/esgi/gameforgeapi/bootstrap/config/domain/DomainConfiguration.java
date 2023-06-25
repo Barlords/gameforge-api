@@ -37,7 +37,7 @@ public class DomainConfiguration {
     public UserLoggerApi userLoggerApi(UserPersistenceSpi spi) {return new UserLoggerService(spi);}
 
     @Bean
-    public org.hibernate.Session sessionFactory() {
+    public org.hibernate.Session session() {
         Session s = entityManagerFactory.unwrap(SessionFactory.class).openSession();
         s.beginTransaction();
         return s;

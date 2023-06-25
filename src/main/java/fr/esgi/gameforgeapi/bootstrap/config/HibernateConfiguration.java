@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -74,6 +75,8 @@ public class HibernateConfiguration {
 
         return em;
     }
+
+
 
     
 

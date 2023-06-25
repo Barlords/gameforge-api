@@ -15,22 +15,14 @@ import java.util.UUID;
 @Transactional
 public abstract class AbstractDao<T extends Serializable> {
 
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
     private Class<T> clazz;
     
     @Autowired
     private Session session;
 
-    @Autowired
-    private  EntityManagerFactory entityManagerFactory;
-    
-    public void setClazz(final Class<T> clazzToSet) {
 
+    public void setClazz(final Class<T> clazzToSet) {
         clazz = Preconditions.checkNotNull(clazzToSet);
-        System.out.println(clazz.getName());
     }
 
     public T findOne(final UUID id) {
@@ -44,6 +36,7 @@ public abstract class AbstractDao<T extends Serializable> {
     public T save(final T entity) {
         Preconditions.checkNotNull(entity);
         session.persist(entity);
+        session.getTransaction().commit();
         return entity;
     }
 
@@ -65,7 +58,7 @@ public abstract class AbstractDao<T extends Serializable> {
     
 
     public void flush() {
-        entityManager.flush();
+        session.flush();
     }
 
 }
