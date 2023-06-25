@@ -5,8 +5,10 @@ import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
+import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +17,16 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserDatabaseAdapter implements UserPersistenceSpi {
 
-    private IGenericDao<UserEntity> dao;
+    @Autowired
+    private IUserDao dao;
 
     @Override
     @Transactional
     public User save(User o) {
         UserEntity u = dao.save(UserEntityMapper.fromDomain(o));
-        dao.flush();
         return UserEntityMapper.toDomain(u);
     }
 

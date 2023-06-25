@@ -29,10 +29,12 @@ public abstract class AbstractDao<T extends Serializable> {
         return (T) session.get(clazz, id);
     }
 
+    @Transactional
     public List<T> findAll() {
         return session.createQuery("from " + clazz.getName()).list();
     }
 
+    @Transactional
     public T save(final T entity) {
         Preconditions.checkNotNull(entity);
         session.persist(entity);
@@ -56,11 +58,8 @@ public abstract class AbstractDao<T extends Serializable> {
         delete(entity);
     }
 
-    @Autowired
-    private EntityManager entityManager;
-
     public void flush() {
-        entityManager.flush();
+        session.flush();
     }
 
 }
