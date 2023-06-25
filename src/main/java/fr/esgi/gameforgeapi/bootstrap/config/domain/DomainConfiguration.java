@@ -8,6 +8,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.UserFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.UserLoggerApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -22,6 +23,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"fr.esgi.gameforgeapi.server.adapters"})
 public class DomainConfiguration {
 
+
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
@@ -34,5 +36,11 @@ public class DomainConfiguration {
     @Bean
     public UserLoggerApi userLoggerApi(UserPersistenceSpi spi) {return new UserLoggerService(spi);}
 
+    @Bean
+    public org.hibernate.Session sessionFactory() {
+        Session s = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        s.beginTransaction();
+        return s;
+    }
 
 }

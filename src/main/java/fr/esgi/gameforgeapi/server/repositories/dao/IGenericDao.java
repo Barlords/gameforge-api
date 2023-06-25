@@ -1,5 +1,7 @@
 package fr.esgi.gameforgeapi.server.repositories.dao;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -18,4 +20,6 @@ public interface IGenericDao<T extends Serializable> {
     void delete(final T entity);
 
     void deleteById(final UUID entityId);
+
+    void flush();
 }

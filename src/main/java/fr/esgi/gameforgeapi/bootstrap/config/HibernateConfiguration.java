@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -25,13 +26,11 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories(basePackages = "fr.esgi.gameforgeapi.server.repositories.dao")
 @EntityScan(basePackages = "fr.esgi.gameforgeapi.server.entities")
+@EnableTransactionManagement
 public class HibernateConfiguration {
 
     @Autowired
     ConfigProperties configProp;
-
-
-
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

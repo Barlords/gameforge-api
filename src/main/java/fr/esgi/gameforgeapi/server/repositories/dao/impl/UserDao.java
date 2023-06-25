@@ -10,10 +10,12 @@ import jakarta.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Repository
+@Transactional
 public class UserDao extends GenericDao<UserEntity> implements IUserDao {
     @PostConstruct
     public void init(){

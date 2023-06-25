@@ -11,8 +11,9 @@ import java.util.UUID;
 @Value
 @Builder
 public class User {
-    @Builder.Default
-    UUID id = UUID.randomUUID();
+
+    @With
+    UUID id;
 
     @With
     String email;

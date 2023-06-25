@@ -44,11 +44,23 @@ public class UserEntity implements Serializable {
     @Column(name = "pseudo", unique = true, nullable = false)
     private String pseudo;
 
-    @Column(name = "token", updatable = false, nullable = false)
+    @Column(name = "token", updatable = false)
     @JdbcTypeCode(Types.VARCHAR)
     private UUID token;
 
-    @Column(name = "token_date", nullable = false)
+    @Column(name = "token_date")
     @JdbcTypeCode(Types.VARCHAR)
     private LocalDate tokenDate;
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", token=" + token +
+                ", tokenDate=" + tokenDate +
+                '}';
+    }
 }
