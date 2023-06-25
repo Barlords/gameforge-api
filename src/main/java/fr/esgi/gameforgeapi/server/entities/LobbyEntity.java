@@ -46,7 +46,7 @@ public class LobbyEntity implements Serializable {
     @Column(name = "finished", nullable = false)
     private boolean finished;
 
-    @Column(name = "winner", nullable = false)
+    @Column(name = "winner_id", nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID winner;
+    private UUID winnerId;
 }

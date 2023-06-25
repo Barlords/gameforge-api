@@ -8,7 +8,6 @@ import org.hibernate.annotations.JdbcTypeCode;
 
 import java.io.Serializable;
 import java.sql.Types;
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -43,7 +42,7 @@ public class RankEntity implements Serializable {
     @Column(name = "played_game", nullable = false)
     private int playedGame;
 
-    @Column(name = "win_game", updatable = false, nullable = false)
-    private int winGame;
+    @Column(name = "wined_game", updatable = false, nullable = false)
+    private int winedGame;
 
 }

@@ -3,22 +3,15 @@ volumes:
 
 services:
   database:
+    image:  mysql/mysql-server:5.6
     container_name: gameforge-db
-    image: mariadb:latest
-    restart: always
     environment:
       MYSQL_DATABASE: gameforge
       MYSQL_USER: gameforge
       MYSQL_PASSWORD: gameforge
       MYSQL_ROOT_PASSWORD: gameforge
-    volumes:
-      - data:/var/lib/mysql
+      MYSQL_ROOT_HOST: "%"
     expose:
       - "3306"
     ports:
       - 3306:3306
-    networks:
-      - res
-
-networks:
-  res:

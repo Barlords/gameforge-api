@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Value
@@ -24,6 +23,6 @@ public class Rank {
     int playedGame;
 
     @With
-    int winGame;
+    int winedGame;
 
 }

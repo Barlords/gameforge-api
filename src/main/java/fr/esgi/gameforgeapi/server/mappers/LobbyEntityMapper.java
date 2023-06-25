@@ -1,9 +1,7 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 
 public interface LobbyEntityMapper {
 
@@ -14,7 +12,7 @@ public interface LobbyEntityMapper {
                 .creationDate(entity.getCreationDate())
                 .startDate(entity.getStartDate())
                 .finished(entity.isFinished())
-                .winner(entity.getWinner())
+                .winnerId(entity.getWinnerId())
                 .build();
     }
 
@@ -25,7 +23,7 @@ public interface LobbyEntityMapper {
                 .creationDate(domain.getCreationDate())
                 .startDate(domain.getStartDate())
                 .finished(domain.isFinished())
-                .winner(domain.getWinner())
+                .winnerId(domain.getWinnerId())
                 .build();
     }
 

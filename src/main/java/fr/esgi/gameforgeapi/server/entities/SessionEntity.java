@@ -32,6 +32,10 @@ public class SessionEntity implements Serializable {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
+    @Column(name = "user_id", updatable = false, nullable = false)
+    @JdbcTypeCode(Types.VARCHAR)
+    private UUID userId;
+
     @Column(name = "lobby_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
     private UUID lobbyId;

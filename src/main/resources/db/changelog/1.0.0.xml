@@ -1,0 +1,309 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- TABLES -->
+    <changeSet id="create-action-1.0.0" author="barlords">
+        <createTable tableName="action">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="game_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action_time" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="action" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-channel-1.0.0" author="barlords">
+        <createTable tableName="channel">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="friend1_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend2_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-game-1.0.0" author="barlords">
+        <createTable tableName="game">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-lobby-1.0.0" author="barlords">
+        <createTable tableName="lobby">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="game_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="finished" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner_id" type="BINARY(16)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-message-1.0.0" author="barlords">
+        <createTable tableName="message">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="sender_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="channel_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="send_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-rank-1.0.0" author="barlords">
+        <createTable tableName="rank">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="game_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="played_game" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="wined_game" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-session-1.0.0" author="barlords">
+        <createTable tableName="session">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lobby_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="join_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quit_date" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-user-1.0.0" author="barlords">
+        <createTable tableName="user">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="email" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pseudo" type="VARCHAR(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <!-- FOREIGNKEYS -->
+    <changeSet id="add-fks-action-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_game"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="action"
+                                 constraintName="fk_action_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-channel-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="friend1_id"
+                                 baseTableName="channel"
+                                 constraintName="fk_channel_user1"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="friend2_id"
+                                 baseTableName="channel"
+                                 constraintName="fk_channel_user2"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-lobby-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_game"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="winner_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-message-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="sender_id"
+                                 baseTableName="message"
+                                 constraintName="fk_message_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="channel_id"
+                                 baseTableName="message"
+                                 constraintName="fk_message_channel"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="channel"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-rank-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="rank"
+                                 constraintName="fk_rank_game"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="rank"
+                                 constraintName="fk_rank_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-session-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+
+        <addForeignKeyConstraint baseColumnNames="lobby_id"
+                                 baseTableName="session"
+                                 constraintName="fk_session_lobby"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lobby"
+                                 validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
