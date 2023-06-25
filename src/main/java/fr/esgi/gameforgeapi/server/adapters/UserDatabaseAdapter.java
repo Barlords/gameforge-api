@@ -22,7 +22,9 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     @Override
     @Transactional
     public User save(User o) {
-        return UserEntityMapper.toDomain(dao.save(UserEntityMapper.fromDomain(o)));
+        UserEntity u = dao.save(UserEntityMapper.fromDomain(o));
+        dao.flush();
+        return UserEntityMapper.toDomain(u);
     }
 
     @Override
