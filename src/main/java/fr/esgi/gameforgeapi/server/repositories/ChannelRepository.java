@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
 
-    List<ChannelEntity> findAll();
-
-    Option<ChannelEntity> findChannelEntityById(UUID id);
+    Optional<ChannelEntity> findChannelEntityById(UUID id);
 
 }

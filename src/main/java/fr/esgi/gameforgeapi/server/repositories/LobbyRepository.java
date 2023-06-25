@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface LobbyRepository extends JpaRepository<LobbyEntity, UUID> {
 
-    List<LobbyEntity> findAll();
-
-    Option<LobbyEntity> findLobbyEntityById(UUID id);
+    Optional<LobbyEntity> findLobbyEntityById(UUID id);
 
 }

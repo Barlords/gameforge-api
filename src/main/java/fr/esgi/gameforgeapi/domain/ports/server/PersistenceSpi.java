@@ -1,8 +1,7 @@
 package fr.esgi.gameforgeapi.domain.ports.server;
 
-import io.vavr.control.Option;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PersistenceSpi<T, ID> {
@@ -11,6 +10,8 @@ public interface PersistenceSpi<T, ID> {
 
     List<T> findAll();
 
-    Option<T> findById(ID id);
+    Optional<T> findById(ID id);
+
+    void deleteById(UUID id);
 
 }

@@ -1,10 +1,11 @@
 package fr.esgi.gameforgeapi.domain.ports.client;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
-import io.vavr.control.Option;
+
+import java.util.Optional;
 
 public interface UserLoggerApi {
 
-    Option<User> login(String login, String password);
+    Optional<User> login(String login, String password);
 
 }

@@ -4,6 +4,8 @@ import fr.esgi.gameforgeapi.client.dto.UserCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.UserDto;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 
+import java.util.UUID;
+
 public interface UserDtoMapper {
 
     static UserDto toDto(User domain) {
@@ -15,8 +17,9 @@ public interface UserDtoMapper {
         );
     }
 
-    static User userCreationRequest(UserCreationRequest request) {
+    static User creationRequestToDomain(UserCreationRequest request) {
         return User.builder()
+                .id(UUID.randomUUID())
                 .email(request.email())
                 .password(request.password())
                 .pseudo(request.pseudo())

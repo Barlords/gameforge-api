@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface ActionRepository extends JpaRepository<ActionEntity, UUID> {
 
-    List<ActionEntity> findAll();
-
-    Option<ActionEntity> findActionEntityById(UUID id);
+    Optional<ActionEntity> findActionEntityById(UUID id);
 
 }

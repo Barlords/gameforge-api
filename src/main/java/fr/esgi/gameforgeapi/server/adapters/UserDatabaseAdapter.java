@@ -2,16 +2,15 @@ package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -34,20 +33,50 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
 
     @Override
     @Transactional
-    public Option<User> findById(UUID id) {
-        return repository.findUserEntityById(id).map(UserEntityMapper::toDomain);
+    public Optional<User> findById(UUID id) {
+        return repository.findById(id).map(UserEntityMapper::toDomain);
     }
 
     @Override
     @Transactional
-    public Option<User> findUserByEmailAndPassword(String email, String password) {
-        return repository.findUserEntityByEmailAndPassword(email, password).map(UserEntityMapper::toDomain);
+    public Optional<User> findByToken(UUID token) {
+        return repository.findByToken(token);
     }
 
     @Override
     @Transactional
-    public Option<User> findUserByPseudoAndPassword(String pseudo, String password) {
-        return repository.findUserEntityByPseudoAndPassword(pseudo, password).map(UserEntityMapper::toDomain);
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findByPseudo(String pseudo) {
+        return repository.findByPseudo(pseudo);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findUserByPseudoAndPassword(String pseudo, String password) {
+        return repository.findByPseudoAndPassword(pseudo, password).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByToken(UUID token) {
+        repository.deleteByToken(token);
     }
 
 }

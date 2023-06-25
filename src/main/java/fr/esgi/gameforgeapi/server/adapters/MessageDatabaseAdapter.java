@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,8 +33,13 @@ public class MessageDatabaseAdapter implements MessagePersistenceSpi {
 
     @Override
     @Transactional
-    public Option<Message> findById(UUID id) {
+    public Optional<Message> findById(UUID id) {
         return repository.findMessageEntityById(id).map(MessageEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 
 

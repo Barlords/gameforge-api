@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,8 +33,13 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
 
     @Override
     @Transactional
-    public Option<Session> findById(UUID id) {
+    public Optional<Session> findById(UUID id) {
         return repository.findSessionEntityById(id).map(SessionEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 
 

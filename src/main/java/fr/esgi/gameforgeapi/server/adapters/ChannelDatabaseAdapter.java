@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -36,8 +37,13 @@ public class ChannelDatabaseAdapter implements ChannelPersistenceSpi {
 
     @Override
     @Transactional
-    public Option<Channel> findById(UUID id) {
+    public Optional<Channel> findById(UUID id) {
         return repository.findChannelEntityById(id).map(ChannelEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 
 

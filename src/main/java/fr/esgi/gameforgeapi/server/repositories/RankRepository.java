@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface RankRepository extends JpaRepository<RankEntity, UUID> {
 
-    List<RankEntity> findAll();
-
-    Option<RankEntity> findRankEntityById(UUID id);
+    Optional<RankEntity> findRankEntityById(UUID id);
 
 }

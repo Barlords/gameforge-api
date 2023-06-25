@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,8 +33,13 @@ public class RankDatabaseAdapter implements RankPersistenceSpi {
 
     @Override
     @Transactional
-    public Option<Rank> findById(UUID id) {
+    public Optional<Rank> findById(UUID id) {
         return repository.findRankEntityById(id).map(RankEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 
 

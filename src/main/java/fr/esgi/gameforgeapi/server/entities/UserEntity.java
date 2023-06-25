@@ -24,14 +24,7 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @EqualsAndHashCode.Include
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy =  "org.hibernate.id.UUIDGenerator"
-    )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
     @Column(name = "email", unique = true, nullable = false)
@@ -43,11 +36,9 @@ public class UserEntity {
     @Column(name = "pseudo", unique = true, nullable = false)
     private String pseudo;
 
-    @Column(name = "token", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "token", nullable = false)
     private UUID token;
 
     @Column(name = "token_date", nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate tokenDate;
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -36,8 +37,13 @@ public class ActionDatabaseAdapter implements ActionPersistenceSpi {
 
     @Override
     @Transactional
-    public Option<Action> findById(UUID id) {
+    public Optional<Action> findById(UUID id) {
         return repository.findActionEntityById(id).map(ActionEntityMapper::toDomain);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
     }
 
 

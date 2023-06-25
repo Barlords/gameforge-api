@@ -10,14 +10,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface GameRepository extends JpaRepository<GameEntity, UUID> {
 
-    List<GameEntity> findAll();
-
-    Option<GameEntity> findGameEntityById(UUID id);
+    Optional<GameEntity> findGameEntityById(UUID id);
 
 }

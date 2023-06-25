@@ -12,6 +12,7 @@ import java.util.UUID;
 public class User {
 
     @Builder.Default
+    @With
     UUID id = UUID.randomUUID();
 
     @With
