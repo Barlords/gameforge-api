@@ -4,7 +4,6 @@ import fr.esgi.gameforgeapi.domain.functional.models.Rank;
 import fr.esgi.gameforgeapi.domain.ports.server.RankPersistenceSpi;
 import fr.esgi.gameforgeapi.server.entities.RankEntity;
 import fr.esgi.gameforgeapi.server.mappers.RankEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.RankRepository;
 import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;

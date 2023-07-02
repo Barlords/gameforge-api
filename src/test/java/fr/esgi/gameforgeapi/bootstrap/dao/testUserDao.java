@@ -35,7 +35,6 @@ public class testUserDao {
                             .build()
             )
         );
-        dao.flush();
         List<UserEntity> list = dao.findAll();
         System.out.println(list);
         dao.save(

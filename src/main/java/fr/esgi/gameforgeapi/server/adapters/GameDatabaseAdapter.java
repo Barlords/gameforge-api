@@ -1,13 +1,9 @@
 package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Game;
-import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.ports.server.GamePersistenceSpi;
 import fr.esgi.gameforgeapi.server.entities.GameEntity;
-import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
 import fr.esgi.gameforgeapi.server.mappers.GameEntityMapper;
-import fr.esgi.gameforgeapi.server.mappers.LobbyEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.GameRepository;
 import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;

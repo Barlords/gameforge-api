@@ -4,7 +4,6 @@ import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.ports.server.LobbyPersistenceSpi;
 import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
 import fr.esgi.gameforgeapi.server.mappers.LobbyEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.LobbyRepository;
 import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;

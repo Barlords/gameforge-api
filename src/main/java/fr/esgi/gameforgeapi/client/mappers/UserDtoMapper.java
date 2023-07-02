@@ -24,12 +24,5 @@ public interface UserDtoMapper {
                 .build();
     }
 
-    static User userCreationRequest(UserEntity entity) {
-        return User.builder()
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .pseudo(entity.getPseudo())
-                .build();
-    }
 
 }

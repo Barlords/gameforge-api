@@ -2,9 +2,10 @@ package fr.esgi.gameforgeapi.server.repositories.dao.impl;
 
 import com.tngtech.archunit.thirdparty.com.google.common.base.Preconditions;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +13,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
 public abstract class AbstractDao<T extends Serializable> {
 
     private Class<T> clazz;
-    
+
     @Autowired
     private Session session;
 
@@ -25,41 +25,61 @@ public abstract class AbstractDao<T extends Serializable> {
         clazz = Preconditions.checkNotNull(clazzToSet);
     }
 
+    @Transactional
+
     public T findOne(final UUID id) {
-        return (T) session.get(clazz, id);
+        return (T) getCurrentSession().get(clazz, id);
     }
 
     @Transactional
-    public List<T> findAll() {
-        return session.createQuery("from " + clazz.getName()).list();
+    public List findAll() {
+        return getCurrentSession().createQuery("from " + clazz.getName()).list();
     }
 
     @Transactional
     public T save(final T entity) {
         Preconditions.checkNotNull(entity);
-        session.persist(entity);
-        session.getTransaction().commit();
-        return entity;
+        try {
+            getCurrentSession().beginTransaction();
+            getCurrentSession().persist(entity);
+            getCurrentSession().getTransaction().commit();
+            return entity;
+        } catch (Exception e) {
+            getCurrentSession().getTransaction().rollback();
+            return null;
+        }
     }
+
+    @Transactional
 
     public T update(final T entity) {
         Preconditions.checkNotNull(entity);
-        return (T) session.merge(entity);
+        return (T) getCurrentSession().merge(entity);
     }
+
+    @Transactional
 
     public void delete(final T entity) {
         Preconditions.checkNotNull(entity);
-        session.delete(entity);
+        getCurrentSession().delete(entity);
     }
 
+    @Transactional
     public void deleteById(final UUID entityId) {
         final T entity = findOne(entityId);
         Preconditions.checkState(entity != null);
         delete(entity);
     }
 
+    @Transactional
     public void flush() {
-        session.flush();
+        getCurrentSession().flush();
     }
+
+    @Transactional
+    public Session getCurrentSession() {
+        return session;
+    }
+
 
 }
