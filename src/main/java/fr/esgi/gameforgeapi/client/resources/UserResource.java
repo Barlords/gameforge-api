@@ -1,14 +1,12 @@
 package fr.esgi.gameforgeapi.client.resources;
 
-import fr.esgi.gameforgeapi.client.dto.UserCreationRequest;
-import fr.esgi.gameforgeapi.client.dto.UserDto;
-import fr.esgi.gameforgeapi.client.dto.UserLogRequest;
+import fr.esgi.gameforgeapi.client.dto.user.UserCreationRequest;
+import fr.esgi.gameforgeapi.client.dto.user.UserDto;
+import fr.esgi.gameforgeapi.client.dto.user.UserLogRequest;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
 import fr.esgi.gameforgeapi.client.mappers.UserDtoMapper;
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
-import fr.esgi.gameforgeapi.domain.functional.services.user.UserUpdaterService;
-import fr.esgi.gameforgeapi.domain.ports.client.*;
+import fr.esgi.gameforgeapi.domain.ports.client.user.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package fr.esgi.gameforgeapi.domain.ports.client;
+package fr.esgi.gameforgeapi.domain.ports.client.user;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 

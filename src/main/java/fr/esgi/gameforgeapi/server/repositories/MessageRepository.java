@@ -19,4 +19,8 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
 
     Optional<MessageEntity> findMessageEntityById(UUID id);
 
+    List<MessageEntity> findMessageEntitiesBySenderId(UUID senderId);
+
+    List<MessageEntity> findMessageEntitiesByChannelId(UUID channelId);
+
 }

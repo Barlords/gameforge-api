@@ -21,7 +21,7 @@ public class Message {
     UUID channelId;
 
     @With
-    String message;
+    String content;
 
     @With
     LocalDate sendDate;

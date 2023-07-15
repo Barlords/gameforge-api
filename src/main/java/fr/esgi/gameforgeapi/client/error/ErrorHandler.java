@@ -14,7 +14,7 @@ public class ErrorHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundUserException.class)
-    public ErrorDto handleNotFoundRentalCarException(NotFoundUserException notFoundUserException) {
+    public ErrorDto handleNotFoundUserException(NotFoundUserException notFoundUserException) {
         return new ErrorDto(notFoundUserException.getMessage());
     }
 

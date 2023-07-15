@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.client.mappers;
 
-import fr.esgi.gameforgeapi.client.dto.UserCreationRequest;
-import fr.esgi.gameforgeapi.client.dto.UserDto;
+import fr.esgi.gameforgeapi.client.dto.user.UserCreationRequest;
+import fr.esgi.gameforgeapi.client.dto.user.UserDto;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 
 import java.util.UUID;

@@ -10,7 +10,7 @@ public interface MessageEntityMapper {
                 .id(entity.getId())
                 .channelId(entity.getChannelId())
                 .senderId(entity.getSenderId())
-                .message(entity.getMessage())
+                .content(entity.getContent())
                 .sendDate(entity.getSendDate())
                 .build();
     }
@@ -20,7 +20,7 @@ public interface MessageEntityMapper {
                 .id(domain.getId())
                 .channelId(domain.getChannelId())
                 .senderId(domain.getSenderId())
-                .message(domain.getMessage())
+                .content(domain.getContent())
                 .sendDate(domain.getSendDate())
                 .build();
     }

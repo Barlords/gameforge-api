@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "message")
+@Table(name = "content")
 public class MessageEntity {
 
     @Id
@@ -31,16 +31,16 @@ public class MessageEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(name = "sender_id", updatable = false, nullable = false)
+    @Column(name = "senderId", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
     private UUID senderId;
 
-    @Column(name = "channel_id", updatable = false, nullable = false)
+    @Column(name = "channelId", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
     private UUID channelId;
 
-    @Column(name = "message", nullable = false)
-    private String message;
+    @Column(name = "content", nullable = false)
+    private String content;
 
     @Column(name = "send_date", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)

@@ -1,4 +1,4 @@
-package fr.esgi.gameforgeapi.client.dto;
+package fr.esgi.gameforgeapi.client.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;

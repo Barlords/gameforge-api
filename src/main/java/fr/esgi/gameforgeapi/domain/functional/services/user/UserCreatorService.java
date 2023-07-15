@@ -3,7 +3,7 @@ package fr.esgi.gameforgeapi.domain.functional.services.user;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.EmailAlreadyUsedException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.PseudoAlreadyUsedException;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
-import fr.esgi.gameforgeapi.domain.ports.client.UserCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.user.UserCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

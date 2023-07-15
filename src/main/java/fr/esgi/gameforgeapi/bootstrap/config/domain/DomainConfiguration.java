@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
-import fr.esgi.gameforgeapi.domain.ports.client.*;
+import fr.esgi.gameforgeapi.domain.ports.client.user.*;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;

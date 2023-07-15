@@ -1,6 +1,6 @@
 package fr.esgi.gameforgeapi.domain.functional.services.user;
 
-import fr.esgi.gameforgeapi.domain.ports.client.UserDeleterApi;
+import fr.esgi.gameforgeapi.domain.ports.client.user.UserDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
