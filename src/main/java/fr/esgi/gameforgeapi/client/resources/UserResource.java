@@ -111,9 +111,9 @@ public class UserResource {
     }
 
 
-    @GetMapping(path = "/log")
-    public UserDto login(@RequestBody UserLogRequest request) {
-        return userLoggerApi.login(request.login(), request.password())
+    @PostMapping(path = "/log")
+    public UserDto login(@RequestBody UserLogRequest log) {
+        return userLoggerApi.login(log.login(), log.password())
                 .map(UserDtoMapper::toDto)
                 .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au login fournit"));
     }
