@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record MessageDto(
-        UUID messageId,
+        UUID id,
         UUID senderId,
         UUID channelId,
         String content,

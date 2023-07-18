@@ -41,4 +41,5 @@ public class UserEntity {
 
     @Column(name = "token_date", nullable = false)
     private LocalDate tokenDate;
+
 }

@@ -165,6 +165,23 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create-friend-1.0.0" author="barlords">
+        <createTable tableName="friend">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="friend_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 
     <!-- FOREIGNKEYS -->
     <changeSet id="add-fks-action-1.0.3" author="barlords">
@@ -303,6 +320,30 @@
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
                                  referencedTableName="lobby"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-friend-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="friend"
+                                 constraintName="fk_friend_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+
+        <addForeignKeyConstraint baseColumnNames="friend_id"
+                                 baseTableName="friend"
+                                 constraintName="fk_friend_user2"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
                                  validate="true"/>
     </changeSet>
 

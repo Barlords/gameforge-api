@@ -23,25 +23,21 @@ public class UserFinderService implements UserFinderApi {
 
     @Override
     public Optional<User> findById(UUID id) {
-
         return spi.findById(id);
     }
 
     @Override
     public Optional<User> findByToken(UUID token) {
-
         return spi.findByToken(token);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-
         return spi.findByEmail(email);
     }
 
     @Override
     public Optional<User> findByPseudo(String pseudo) {
-
         return spi.findByPseudo(pseudo);
     }
 }

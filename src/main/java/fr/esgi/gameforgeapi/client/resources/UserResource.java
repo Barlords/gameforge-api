@@ -50,6 +50,14 @@ public class UserResource {
                 .orElseThrow(() -> new NotFoundUserException("L'utilisateur " + id + " est introuvable"));
     }
 
+    @GetMapping("/{token}")
+    @ResponseStatus(OK)
+    public UserDto getUserByToken(@PathVariable String token) {
+        return userFinderApi.findByToken(UUID.fromString(token))
+                .map(UserDtoMapper::toDto)
+                .orElseThrow(() -> new NotFoundUserException("L'utilisateur avec le token" + token + " est introuvable"));
+    }
+
     @GetMapping("/{email}")
     @ResponseStatus(OK)
     public UserDto getUserByEmail(@PathVariable String email) {

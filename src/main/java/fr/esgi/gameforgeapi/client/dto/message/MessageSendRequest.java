@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record MessageSendRequest(
-        @NotNull @JsonProperty("user_token")    UUID userToken,
-        @NotNull @JsonProperty("channelId")    UUID channelId,
+        @NotNull @JsonProperty("sender_id")    UUID senderId,
+        @NotNull @JsonProperty("channel_id")    UUID channelId,
         @NotNull @JsonProperty("content")       String content,
         @NotNull @JsonProperty("sendDate") LocalDate sendDate
 ) {

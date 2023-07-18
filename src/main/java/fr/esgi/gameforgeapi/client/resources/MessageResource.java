@@ -16,21 +16,9 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @RequestMapping(path = "/messages")
 public class MessageResource {
-
+/*
     private final MessageCreatorApi messageCreatorApi;
 
     private final MessageFinderApi messageFinderApi;
-
-    private
-
-    @GetMapping("/{user_token}")
-    @ResponseStatus(OK)
-    public List<MessageDto> getMessagesOfUser(@PathVariable("user_token") String userToken) {
-        return messageFinderApi.findBySenderId()
-                .stream()
-                .map(UserDtoMapper::toDto)
-                .toList();
-    }
-
-
+*/
 }

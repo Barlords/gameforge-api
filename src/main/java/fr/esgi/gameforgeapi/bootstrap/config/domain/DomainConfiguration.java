@@ -1,7 +1,12 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
+import fr.esgi.gameforgeapi.domain.ports.server.FriendPersistenceSpi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +21,23 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class DomainConfiguration {
 
     @Bean
-    public UserCreatorApi userCreatorApi(UserPersistenceSpi spi, UserModifierService userModifierService) {return new UserCreatorService(spi, userModifierService);}
+    public FriendFinderApi friendFinderApi(FriendPersistenceSpi spi, UserFinderApi userFinderApi) {
+        return new FriendFinderService(spi, userFinderApi);
+    }
 
     @Bean
-    public UserUpdaterApi userUpdaterApi(UserPersistenceSpi spi, UserModifierService userModifierService) {return new UserUpdaterService(spi, userModifierService);}
+    public FriendCreatorApi friendCreatorApi(FriendPersistenceSpi spi, UserFinderApi userFinderApi) {
+        return new FriendCreatorService(spi, userFinderApi);
+    }
+
+
+    @Bean
+    public UserCreatorApi userCreatorApi(UserPersistenceSpi spi, UserModifierService userModifierService) {
+        return new UserCreatorService(spi, userModifierService);}
+
+    @Bean
+    public UserUpdaterApi userUpdaterApi(UserPersistenceSpi spi, UserModifierService userModifierService) {
+        return new UserUpdaterService(spi, userModifierService);}
 
     @Bean
     public UserDeleterApi userDeleterApi(UserPersistenceSpi spi) {return new UserDeleterService(spi);}
