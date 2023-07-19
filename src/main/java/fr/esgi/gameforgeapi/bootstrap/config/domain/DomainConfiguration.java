@@ -6,14 +6,19 @@ import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorServi
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
 import fr.esgi.gameforgeapi.domain.ports.server.FriendPersistenceSpi;
 import fr.esgi.gameforgeapi.domain.ports.server.MessagePersistenceSpi;
+import fr.esgi.gameforgeapi.domain.ports.server.RatingPersistenceSpi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +31,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"fr.esgi.gameforgeapi.server.repositories"})
 @ComponentScan(basePackages = {"fr.esgi.gameforgeapi.server.adapters"})
 public class DomainConfiguration {
+
+    @Bean
+    public RatingCreatorApi ratingCreatorApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new RatingCreatorService(spi, tokenControllerService);
+    }
+
+    @Bean
+    public RatingFinderApi ratingFinderApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new RatingFinderService(spi, tokenControllerService);
+    }
+
 
     @Bean
     public MessageCreatorApi messageCreatorApi(MessagePersistenceSpi spi, TokenControllerService tokenControllerService) {
