@@ -19,4 +19,6 @@ public class GameforgeApiConfiguration {
                 .registerModule(new JavaTimeModule());
     }
 
+
+
 }

@@ -72,6 +72,4 @@ public class DomainConfiguration {
 
     @Bean
     public UserModifierService userModifierService() {return new UserModifierService();}
-
-
 }
