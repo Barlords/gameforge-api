@@ -1,9 +1,6 @@
 package fr.esgi.gameforgeapi.server.repositories;
 
-import fr.esgi.gameforgeapi.server.entities.GameEntity;
 import fr.esgi.gameforgeapi.server.entities.MessageEntity;
-import fr.esgi.gameforgeapi.server.entities.RankEntity;
-import io.vavr.control.Option;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,8 +16,11 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
 
     Optional<MessageEntity> findMessageEntityById(UUID id);
 
-    List<MessageEntity> findMessageEntitiesBySenderId(UUID senderId);
+    List<MessageEntity> findMessageEntitiesBySenderIdOrReceiverId(UUID senderId, UUID receiverId);
 
-    List<MessageEntity> findMessageEntitiesByChannelId(UUID channelId);
+    List<MessageEntity> findMessageEntitiesBySenderIdOrderByReceiverId(UUID senderId);
+
+    List<MessageEntity> findMessageEntitiesByReceiverIdOrderBySenderId(UUID receiverId);
+
 
 }

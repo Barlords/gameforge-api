@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public record MessageSendRequest(
-        @NotNull @JsonProperty("sender_id")    UUID senderId,
-        @NotNull @JsonProperty("channel_id")    UUID channelId,
+public record MessageCreationRequest(
+        @NotNull @JsonProperty("user_token")    String userToken,
+        @NotNull @JsonProperty("receiver_id")   String receiverId,
         @NotNull @JsonProperty("content")       String content,
-        @NotNull @JsonProperty("sendDate") LocalDate sendDate
+        @NotNull @JsonProperty("send_date")     LocalDate sendDate
 ) {
 }

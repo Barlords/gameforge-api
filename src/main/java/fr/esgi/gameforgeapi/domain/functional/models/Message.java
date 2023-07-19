@@ -18,7 +18,7 @@ public class Message {
     UUID senderId;
 
     @With
-    UUID channelId;
+    UUID receiverId;
 
     @With
     String content;

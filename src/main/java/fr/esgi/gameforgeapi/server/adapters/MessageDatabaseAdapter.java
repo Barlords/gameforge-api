@@ -38,18 +38,30 @@ public class MessageDatabaseAdapter implements MessagePersistenceSpi {
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
 
-
     @Override
-    public List<Message> findBySenderId(UUID senderId) {
-        return repository.findMessageEntitiesBySenderId(senderId).stream().map(MessageEntityMapper::toDomain).toList();
+    @Transactional
+    public List<Message> findDiscussionWith(UUID userId, UUID friendId) {
+        return repository.findMessageEntitiesBySenderIdOrReceiverId(userId, userId).stream()
+                .map(MessageEntityMapper::toDomain)
+                .filter(message -> (message.getSenderId().equals(userId) && message.getReceiverId().equals(friendId))
+                        || (message.getSenderId().equals(friendId) && message.getReceiverId().equals(userId)))
+                .toList();
     }
 
     @Override
-    public List<Message> findByChannelId(UUID channelId) {
-        return repository.findMessageEntitiesByChannelId(channelId).stream().map(MessageEntityMapper::toDomain).toList();
+    @Transactional
+    public List<Message> findBySenderId(UUID senderId) {
+        return repository.findMessageEntitiesBySenderIdOrderByReceiverId(senderId).stream().map(MessageEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    @Transactional
+    public List<Message> findByReceiverId(UUID receiverId) {
+        return repository.findMessageEntitiesByReceiverIdOrderBySenderId(receiverId).stream().map(MessageEntityMapper::toDomain).toList();
     }
 }

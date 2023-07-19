@@ -15,15 +15,9 @@ public class Channel {
     UUID id = UUID.randomUUID();
 
     @With
-    UUID friendId1;
-
-    @With
-    UUID friendId2;
+    UUID creatorId;
 
     @With
     LocalDate creationDate;
-
-    @With
-    UUID token;
 
 }

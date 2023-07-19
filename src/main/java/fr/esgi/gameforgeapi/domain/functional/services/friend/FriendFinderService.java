@@ -4,6 +4,7 @@ import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.TokenNotValidException;
 import fr.esgi.gameforgeapi.domain.functional.models.Friend;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
+import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.UserFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.server.FriendPersistenceSpi;
@@ -20,12 +21,13 @@ public class FriendFinderService implements FriendFinderApi {
 
     private final FriendPersistenceSpi spi;
 
+    private final TokenControllerService tokenControllerService;
+
     private final UserFinderApi userFinderApi;
 
     @Override
     public List<User> findFriendOf(UUID userToken) {
-        User user = userFinderApi.findByToken(userToken)
-                .orElseThrow(() -> new TokenNotValidException(userToken.toString()));
+        User user = tokenControllerService.getUser(userToken);
 
         List<Friend> friends = spi.findFriendsOf(user.getId());
 

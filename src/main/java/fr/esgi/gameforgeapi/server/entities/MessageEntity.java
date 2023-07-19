@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table(name = "content")
+@Table(name = "message")
 public class MessageEntity {
 
     @Id
@@ -28,22 +28,18 @@ public class MessageEntity {
             strategy =  "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(name = "senderId", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "sender_id", updatable = false, nullable = false)
     private UUID senderId;
 
-    @Column(name = "channelId", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
-    private UUID channelId;
+    @Column(name = "receiver_id", updatable = false, nullable = false)
+    private UUID receiverId;
 
     @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "send_date", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate sendDate;
 
 }

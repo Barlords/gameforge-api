@@ -25,21 +25,15 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-channel-1.0.0" author="barlords">
+    <changeSet id="create-channel-1.0.1" author="barlords">
         <createTable tableName="channel">
             <column name="id" type="BINARY(16)">
                 <constraints primaryKey="true" />
             </column>
-            <column name="friend1_id" type="BINARY(16)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="friend2_id" type="BINARY(16)">
+            <column name="creator_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
             <column name="creation_date" type="DATE">
-                <constraints nullable="false"/>
-            </column>
-            <column name="token" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -90,10 +84,10 @@
             <column name="sender_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="channel_id" type="BINARY(16)">
+            <column name="receiver_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="message" type="VARCHAR(256)">
+            <column name="content" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>
             <column name="send_date" type="DATE">
@@ -182,8 +176,48 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="create-rating-1.0.0" author="barlords">
+        <createTable tableName="rating">
+            <column name="id" type="BINARY(16)">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="user_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="game_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 
     <!-- FOREIGNKEYS -->
+    <changeSet id="add-fks-rating-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="rating"
+                                 constraintName="fk_rating_user"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="rating"
+                                 constraintName="fk_rating_game"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"
+                                 validate="true"/>
+    </changeSet>
+
     <changeSet id="add-fks-action-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="game_id"
                                  baseTableName="action"
@@ -208,19 +242,9 @@
     </changeSet>
 
     <changeSet id="add-fks-channel-1.0.3" author="barlords">
-        <addForeignKeyConstraint baseColumnNames="friend1_id"
+        <addForeignKeyConstraint baseColumnNames="creator_id"
                                  baseTableName="channel"
-                                 constraintName="fk_channel_user1"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="RESTRICT"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="id"
-                                 referencedTableName="user"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="friend2_id"
-                                 baseTableName="channel"
-                                 constraintName="fk_channel_user2"
+                                 constraintName="fk_channel_user"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
@@ -256,7 +280,7 @@
     <changeSet id="add-fks-message-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="sender_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_user"
+                                 constraintName="fk_message_user_sender"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
@@ -264,15 +288,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"
                                  validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="channel_id"
+        <addForeignKeyConstraint baseColumnNames="receiver_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_channel"
+                                 constraintName="fk_message_user_receiver"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="channel"
+                                 referencedTableName="user"
                                  validate="true"/>
     </changeSet>
 
