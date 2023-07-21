@@ -84,7 +84,7 @@ public class DomainConfiguration {
     public UserFinderApi userFinderApi(UserPersistenceSpi spi) {return new UserFinderService(spi);}
 
     @Bean
-    public UserLoggerApi userLoggerApi(UserPersistenceSpi spi) {return new UserLoggerService(spi);}
+    public UserLoggerApi userLoggerApi(UserPersistenceSpi spi, TokenControllerService tokenControllerService) {return new UserLoggerService(spi, tokenControllerService);}
 
     @Bean
     public UserModifierService userModifierService() {return new UserModifierService();}
