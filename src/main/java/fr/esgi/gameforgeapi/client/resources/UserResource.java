@@ -112,6 +112,7 @@ public class UserResource {
 
 
     @PostMapping(path = "/log")
+    @ResponseStatus(OK)
     public UserDto login(@RequestBody UserLogRequest log) {
         return userLoggerApi.login(log.login(), log.password())
                 .map(UserDtoMapper::toDto)
