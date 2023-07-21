@@ -23,7 +23,7 @@ public class UserLoggerService implements UserLoggerApi {
         return spi.save(
                 tokenControllerService.updateToken(
                         spi.findUserByPseudoAndPassword(pseudo, password)
-                                .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au login fournit"))
+                                .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au pseudo et password fournit"))
                 )
         );
 
