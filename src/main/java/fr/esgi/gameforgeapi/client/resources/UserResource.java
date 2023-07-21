@@ -112,11 +112,9 @@ public class UserResource {
 
 
     @PostMapping(path = "/log")
-    @ResponseStatus(OK)
+    @ResponseStatus(CREATED)
     public UserDto login(@RequestBody UserLogRequest log) {
-        return userLoggerApi.login(log.login(), log.password())
-                .map(UserDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au login fournit"));
+        return UserDtoMapper.toDto(userLoggerApi.login(log.login(), log.password()));
     }
 
 }

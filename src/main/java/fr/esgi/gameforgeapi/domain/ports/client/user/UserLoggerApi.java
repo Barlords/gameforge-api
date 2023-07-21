@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface UserLoggerApi {
 
-    Optional<User> login(String login, String password);
+    User login(String pseudo, String password);
 
 }

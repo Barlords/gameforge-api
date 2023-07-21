@@ -7,6 +7,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.user.UserFinderApi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Slf4j
@@ -18,6 +19,10 @@ public class TokenControllerService {
     public User getUser(UUID token) {
         return userFinderApi.findByToken(token)
                 .orElseThrow(() -> new TokenNotValidException(token.toString()));
+    }
+
+    public User updateToken(User user) {
+        return user.withToken(UUID.randomUUID()).withTokenDate(LocalDate.now());
     }
 
 }
