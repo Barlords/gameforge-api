@@ -3,6 +3,7 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyDto;
 import fr.esgi.gameforgeapi.client.mappers.LobbyDtoMapper;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import jakarta.validation.Valid;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -30,6 +32,14 @@ public class LobbyResource {
                 .stream()
                 .map(LobbyDtoMapper::toDto)
                 .toList();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(OK)
+    public LobbyDto getLobbyById(@PathVariable String id) {
+        return lobbyFinderApi.findById(UUID.fromString(id))
+                .map(LobbyDtoMapper::toDto)
+                .orElseThrow(() -> new NotFoundUserException("Le jeu : " + id + " est introuvable"));
     }
 
     @PostMapping
