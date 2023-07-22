@@ -18,6 +18,9 @@ public class Game {
     String name;
 
     @With
+    String SrcPath;
+
+    @With
     LocalDate creationDate;
 
 }

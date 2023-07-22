@@ -12,6 +12,8 @@ public record GameDto(
 
         String name,
 
+        String SrcPath,
+
         LocalDate creationDate
 
 ) {
