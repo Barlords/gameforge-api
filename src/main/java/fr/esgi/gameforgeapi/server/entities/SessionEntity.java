@@ -1,12 +1,12 @@
 package fr.esgi.gameforgeapi.server.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -21,30 +21,19 @@ import java.util.UUID;
 public class SessionEntity {
 
     @Id
-    @EqualsAndHashCode.Include
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy =  "org.hibernate.id.UUIDGenerator"
-    )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
     @Column(name = "user_id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID userId;
 
     @Column(name = "lobby_id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID lobbyId;
 
     @Column(name = "join_date", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate joinDate;
 
     @Column(name = "quit_date", updatable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate quitDate;
 
 }

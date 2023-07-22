@@ -53,4 +53,10 @@ public class ErrorHandler {
         return new ErrorDto("C'est déjà votre amie");
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserHasAlreadyASessionException.class)
+    public ErrorDto handleUserHasAlreadyASessionException() {
+        return new ErrorDto("Vous avez deja une Session d'ouverte");
+    }
+
 }

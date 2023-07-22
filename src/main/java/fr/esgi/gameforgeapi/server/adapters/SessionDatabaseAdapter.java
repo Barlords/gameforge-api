@@ -2,9 +2,9 @@ package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import fr.esgi.gameforgeapi.domain.ports.server.SessionPersistenceSpi;
+import fr.esgi.gameforgeapi.server.entities.SessionEntity;
 import fr.esgi.gameforgeapi.server.mappers.SessionEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.SessionRepository;
-import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +35,14 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
     @Transactional
     public Optional<Session> findById(UUID id) {
         return repository.findSessionEntityById(id).map(SessionEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Session> findLastByUserId(UUID userId) {
+        Optional<SessionEntity> sessionEntityOptional = repository.findLastByUserIdAndQuitTimeIsNull(userId);
+
+        return sessionEntityOptional.map(SessionEntityMapper::toDomain);
     }
 
     @Override
