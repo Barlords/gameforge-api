@@ -25,5 +25,4 @@ public interface UserDtoMapper {
                 .pseudo(request.pseudo())
                 .build();
     }
-
 }

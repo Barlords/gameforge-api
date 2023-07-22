@@ -158,14 +158,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+
 
     </dependencies>
 
@@ -214,7 +207,7 @@
                     <changeLogFile>db/changelog.xml</changeLogFile>
                     <outputChangeLogFile>${project.basedir}/src/main/resources/liquibase-outputChangeLog.xml
                     </outputChangeLogFile>
-                    <url>jdbc:mysql://localhost:3306/gameforge</url>
+                    <url>jdbc:mysql://localhost:3307/gameforge</url>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
                     <username>root</username>
                     <password>gameforge</password>
