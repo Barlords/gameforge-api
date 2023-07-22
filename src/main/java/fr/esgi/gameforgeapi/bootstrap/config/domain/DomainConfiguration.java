@@ -1,9 +1,12 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.client.dto.message.MessageCreationRequest;
+import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
@@ -11,15 +14,16 @@ import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderServic
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
-import fr.esgi.gameforgeapi.domain.ports.server.FriendPersistenceSpi;
-import fr.esgi.gameforgeapi.domain.ports.server.MessagePersistenceSpi;
-import fr.esgi.gameforgeapi.domain.ports.server.RatingPersistenceSpi;
-import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
+import fr.esgi.gameforgeapi.domain.ports.server.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -68,7 +72,6 @@ public class DomainConfiguration {
         return new FriendCreatorService(spi, userFinderApi);
     }
 
-
     @Bean
     public UserCreatorApi userCreatorApi(UserPersistenceSpi spi, UserModifierService userModifierService) {
         return new UserCreatorService(spi, userModifierService);}
@@ -88,4 +91,18 @@ public class DomainConfiguration {
 
     @Bean
     public UserModifierService userModifierService() {return new UserModifierService();}
+
+    @Bean
+    public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi) {
+        return new LobbyCreatorService(spi);}
+
+    @Bean
+    public LobbyFinderApi lobbyFinderApi(LobbyPersistenceSpi spi) {return new LobbyFinderService(spi);}
+
+    @Bean
+    public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi) {
+        return new GameCreatorService(spi);}
+
+    @Bean
+    public GameFinderApi gameFinderApi(GamePersistenceSpi spi) {return new GameFinderService(spi);}
 }
