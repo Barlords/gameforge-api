@@ -3,7 +3,7 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyDto;
 import fr.esgi.gameforgeapi.client.mappers.LobbyDtoMapper;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import jakarta.validation.Valid;
@@ -39,7 +39,7 @@ public class LobbyResource {
     public LobbyDto getLobbyById(@PathVariable String id) {
         return lobbyFinderApi.findById(UUID.fromString(id))
                 .map(LobbyDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("Le jeu : " + id + " est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
     }
 
     @PostMapping

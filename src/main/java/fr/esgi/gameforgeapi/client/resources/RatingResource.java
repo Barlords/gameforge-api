@@ -1,15 +1,9 @@
 package fr.esgi.gameforgeapi.client.resources;
 
-import fr.esgi.gameforgeapi.client.dto.friend.FriendCreationRequest;
-import fr.esgi.gameforgeapi.client.dto.friend.FriendDto;
 import fr.esgi.gameforgeapi.client.dto.rating.RatingCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.rating.RatingDto;
-import fr.esgi.gameforgeapi.client.mappers.FriendDtoMapper;
 import fr.esgi.gameforgeapi.client.mappers.RatingDtoMapper;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
-import fr.esgi.gameforgeapi.domain.functional.models.Rating;
-import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
-import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +34,7 @@ public class RatingResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void createFriend(@RequestBody RatingCreationRequest request) {
+    public void createRating(@RequestBody RatingCreationRequest request) {
         ratingCreatorApi.create(UuidValidator.validate(request.userToken()), RatingDtoMapper.creationRequestToDomain(request));
     }
 

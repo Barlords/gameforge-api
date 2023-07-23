@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundUserException.class)
-    public ErrorDto handleNotFoundUserException(NotFoundUserException notFoundUserException) {
-        return new ErrorDto(notFoundUserException.getMessage());
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ErrorDto handleNotFoundUserException(ResourceNotFoundException resourceNotFoundException) {
+        return new ErrorDto(resourceNotFoundException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

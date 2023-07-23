@@ -2,7 +2,7 @@ package fr.esgi.gameforgeapi.domain.functional.services.friend;
 
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ApplicationErrorException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.FriendAlreadyExistException;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.TokenNotValidException;
 import fr.esgi.gameforgeapi.domain.functional.models.Friend;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
@@ -43,7 +43,7 @@ public class FriendCreatorService implements FriendCreatorApi {
         }
 
         User friend = userFinderApi.findByPseudo(friendPseudo)
-                .orElseThrow(() -> new NotFoundUserException("L'utilisateur " + friendPseudo + "n'existe pas"));
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur " + friendPseudo + "n'existe pas"));
 
         System.out.println(user.getId().toString());
         System.out.println(friend.getId().toString());

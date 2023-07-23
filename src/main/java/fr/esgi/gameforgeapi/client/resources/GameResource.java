@@ -3,7 +3,7 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.game.GameCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.game.GameDto;
 import fr.esgi.gameforgeapi.client.mappers.GameDtoMapper;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
 import jakarta.validation.Valid;
@@ -39,7 +39,7 @@ public class GameResource {
     public GameDto getGameById(@PathVariable String id) {
         return gameFinderApi.findById(UUID.fromString(id))
                 .map(GameDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("Le jeu : " + id + " est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
     }
 
     @PostMapping
