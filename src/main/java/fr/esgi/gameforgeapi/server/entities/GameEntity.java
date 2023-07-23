@@ -27,8 +27,8 @@ public class GameEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "src_path", nullable = false)
-    private String srcPath;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;

@@ -55,4 +55,9 @@ public class RatingDatabaseAdapter implements RatingPersistenceSpi {
                 .map(RatingEntityMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Optional<Rating> findByUserIdAndGameId(UUID userId, UUID gameId) {
+        return repository.findRatingEntityByUserIdAndGameId(userId, gameId).map(RatingEntityMapper::toDomain);
+    }
 }

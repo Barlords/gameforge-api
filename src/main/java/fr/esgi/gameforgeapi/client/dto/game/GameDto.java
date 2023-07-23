@@ -12,7 +12,7 @@ public record GameDto(
 
         String name,
 
-        String SrcPath,
+        String description,
 
         LocalDate creationDate
 

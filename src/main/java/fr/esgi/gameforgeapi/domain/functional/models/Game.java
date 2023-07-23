@@ -18,7 +18,7 @@ public class Game {
     String name;
 
     @With
-    String SrcPath;
+    String description;
 
     @With
     LocalDate creationDate;

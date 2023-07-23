@@ -13,7 +13,7 @@ public interface GameDtoMapper {
         return new GameDto(
                 domain.getId(),
                 domain.getName(),
-                domain.getSrcPath(),
+                domain.getDescription(),
                 domain.getCreationDate()
         );
     }
@@ -21,7 +21,7 @@ public interface GameDtoMapper {
         return Game.builder()
                 .id(UUID.randomUUID())
                 .name(request.name())
-                .SrcPath(request.srcPath())
+                .description(request.description())
                 .creationDate(LocalDate.now())
                 .build();
     }
