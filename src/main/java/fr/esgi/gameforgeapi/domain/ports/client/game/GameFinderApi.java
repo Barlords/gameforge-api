@@ -12,4 +12,6 @@ public interface GameFinderApi {
 
     Optional<Game> findById(UUID id);
 
+    Optional<Game> findByName(String name);
+
 }

@@ -1,6 +1,5 @@
 package fr.esgi.gameforgeapi.server.repositories;
 
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,11 +13,11 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
-    Optional<User> findByToken(UUID token);
+    Optional<UserEntity> findByToken(UUID token);
 
-    Optional<User> findByEmail(String email);
+    Optional<UserEntity> findByEmail(String email);
 
-    Optional<User> findByPseudo(String pseudo);
+    Optional<UserEntity> findByPseudo(String pseudo);
 
     Optional<UserEntity> findByEmailAndPassword(String email, String password);
 
