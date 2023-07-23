@@ -12,7 +12,7 @@ public class ErrorHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ErrorDto handleNotFoundUserException(ResourceNotFoundException resourceNotFoundException) {
+    public ErrorDto handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
         return new ErrorDto(resourceNotFoundException.getMessage());
     }
 
