@@ -43,4 +43,8 @@ public class GameDatabaseAdapter implements GamePersistenceSpi {
     }
 
 
+    @Override
+    public Optional<Game> findByName(String name) {
+        return repository.findGameEntityByName(name).map(GameEntityMapper::toDomain);
+    }
 }

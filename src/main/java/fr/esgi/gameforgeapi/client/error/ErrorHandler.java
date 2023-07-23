@@ -36,6 +36,13 @@ public class ErrorHandler {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(NameAlreadyUsedException.class)
+    public ErrorDto handleNameAlreadyUsedException() {
+        return new ErrorDto("Le nom du jeu est déjà utilisé");
+    }
+
+
+    @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(EmailAlreadyUsedException.class)
     public ErrorDto handleEmailAlreadyUsedException() {
         return new ErrorDto("L'email est déjà utilisé");
