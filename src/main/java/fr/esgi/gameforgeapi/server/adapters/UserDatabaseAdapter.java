@@ -40,19 +40,19 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     @Override
     @Transactional
     public Optional<User> findByToken(UUID token) {
-        return repository.findByToken(token);
+        return repository.findByToken(token).map(UserEntityMapper::toDomain);
     }
 
     @Override
     @Transactional
     public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
+        return repository.findByEmail(email).map(UserEntityMapper::toDomain);
     }
 
     @Override
     @Transactional
     public Optional<User> findByPseudo(String pseudo) {
-        return repository.findByPseudo(pseudo);
+        return repository.findByPseudo(pseudo).map(UserEntityMapper::toDomain);
     }
 
     @Override

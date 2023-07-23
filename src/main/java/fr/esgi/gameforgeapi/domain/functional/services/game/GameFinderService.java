@@ -26,4 +26,9 @@ public class GameFinderService implements GameFinderApi {
         return spi.findById(id);
     }
 
+    @Override
+    public Optional<Game> findByName(String name) {
+        return spi.findByName(name);
+    }
+
 }
