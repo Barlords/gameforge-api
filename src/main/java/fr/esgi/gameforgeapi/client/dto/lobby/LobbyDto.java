@@ -16,6 +16,8 @@ public record LobbyDto(
 
         String name,
 
+        String password,
+
         LocalDate creationDate,
 
         LocalDate startDate,

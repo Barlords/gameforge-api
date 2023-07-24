@@ -16,6 +16,7 @@ public interface LobbyDtoMapper {
                 domain.getGameId(),
                 domain.getCreatorId(),
                 domain.getName(),
+                domain.getPassword(),
                 domain.getCreationDate(),
                 domain.getStartDate(),
                 domain.isFinished(),

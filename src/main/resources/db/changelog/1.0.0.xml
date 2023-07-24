@@ -73,10 +73,10 @@
             <column name="creator_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(64)">
+            <column name="name" type="VARCHAR(32)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="VARCHAR(64)">
+            <column name="password" type="VARCHAR(32)">
                 <constraints nullable="true"/>
             </column>
             <column name="creation_date" type="DATE">
