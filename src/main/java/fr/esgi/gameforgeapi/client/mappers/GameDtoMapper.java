@@ -21,7 +21,7 @@ public interface GameDtoMapper {
         return Game.builder()
                 .id(UUID.randomUUID())
                 .name(request.name())
-                .SrcPath(request.srcPath())
+                .srcPath(request.srcPath())
                 .creationDate(LocalDate.now())
                 .build();
     }

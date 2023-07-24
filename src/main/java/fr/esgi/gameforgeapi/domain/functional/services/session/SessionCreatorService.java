@@ -21,7 +21,7 @@ public class SessionCreatorService implements SessionCreatorApi {
     @Override
     public Session create(Session session) {
 
-        Optional<Session> userHasAlreadyASession = sessionFinderService.findLastByUserId(session.getUserId());
+        Optional<Session> userHasAlreadyASession = sessionFinderService.findLastByUserIdAndQuitTimeIsNull(session.getUserId());
 
         if(userHasAlreadyASession.isPresent()) {
             throw new UserHasAlreadyASessionException("l'utilisateur a déja une session active");

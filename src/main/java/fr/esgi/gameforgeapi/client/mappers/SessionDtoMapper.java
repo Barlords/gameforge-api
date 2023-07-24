@@ -27,4 +27,10 @@ public interface SessionDtoMapper {
                 .joinDate(LocalDate.now())
                 .build();
     }
+
+    static Session closeRequestToDomain(SessionCreationRequest request) {
+        return Session.builder()
+                .quitDate(LocalDate.now())
+                .build();
+    }
 }

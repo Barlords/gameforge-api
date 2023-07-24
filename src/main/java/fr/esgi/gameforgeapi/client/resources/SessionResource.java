@@ -6,6 +6,7 @@ import fr.esgi.gameforgeapi.client.mappers.SessionDtoMapper;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class SessionResource {
     private final SessionCreatorApi sessionCreatorApi;
 
     private final SessionFinderApi sessionFinderApi;
+
+    private final SessionUpdaterApi sessionUpdaterApi;
+
 
     @GetMapping
     @ResponseStatus(OK)
@@ -50,5 +54,11 @@ public class SessionResource {
                         SessionDtoMapper.creationRequestToDomain(request)
                 )
         );
+    }
+
+    @PatchMapping("/{user_token}")
+    @ResponseStatus(OK)
+    public void updateSession(@PathVariable String user_token) {
+        sessionUpdaterApi.closeAllUserSessions(UUID.fromString(user_token));
     }
 }

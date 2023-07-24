@@ -13,6 +13,7 @@ import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorServi
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
@@ -26,6 +27,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
 import fr.esgi.gameforgeapi.domain.ports.server.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -122,5 +124,7 @@ public class DomainConfiguration {
     public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService) {
         return new SessionCreatorService(spi,sessionFinderService);}
 
-
+    @Bean
+    public SessionUpdaterApi sessionUpdaterApi(SessionPersistenceSpi spi,UserPersistenceSpi userPersistenceSpi ) {
+        return new SessionUpdaterService(spi,userPersistenceSpi);}
 }

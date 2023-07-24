@@ -1,9 +1,7 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Game;
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.GameEntity;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 
 public interface GameEntityMapper {
 
@@ -11,6 +9,7 @@ public interface GameEntityMapper {
         return Game.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .srcPath(entity.getSrcPath())
                 .creationDate(entity.getCreationDate())
                 .build();
     }
@@ -19,6 +18,7 @@ public interface GameEntityMapper {
         return GameEntity.builder()
                 .id(domain.getId())
                 .name(domain.getName())
+                .srcPath(domain.getSrcPath())
                 .creationDate(domain.getCreationDate())
                 .build();
     }
