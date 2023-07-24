@@ -12,18 +12,12 @@ import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.service.spi.InjectService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -59,12 +53,18 @@ public class GameResource {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ResponseStatus(CREATED)
     public GameDto createGame(
-            @Valid @RequestPart("picture_presentation") MultipartFile file,
+            @Valid @RequestPart("picture_presentation") MultipartFile pictureFile,
+            @Valid @RequestPart("source_file") MultipartFile sourceFile,
+            @Valid @RequestPart("config_file") MultipartFile configFile,
             @Valid @RequestPart("game_creation_request") GameCreationRequest request
     ) {
-        String path = request.name()+"/"+file.getOriginalFilename();
+        String picturePath = request.name()+"/"+pictureFile.getOriginalFilename();
+        String sourcePath = request.name()+"/"+sourceFile.getOriginalFilename();
+        String configPath = request.name()+"/"+configFile.getOriginalFilename();
         try {
-            minioService.upload(path, file.getInputStream(), file.getContentType());
+            minioService.upload(picturePath, pictureFile.getInputStream(), pictureFile.getContentType());
+            minioService.upload(sourcePath, sourceFile.getInputStream(), sourceFile.getContentType());
+            minioService.upload(configPath, configFile.getInputStream(), configFile.getContentType());
         } catch (MinioException e) {
             throw new IllegalStateException("The file cannot be upload on the internal storage. Please retry later", e);
         } catch (IOException e) {
@@ -74,7 +74,10 @@ public class GameResource {
         return GameDtoMapper.toDto(
                 gameCreatorApi.create(
                         UuidValidator.validate(request.userToken()),
-                        GameDtoMapper.creationRequestToDomain(request).withPicturePresentation(path)
+                        GameDtoMapper.creationRequestToDomain(request)
+                                .withPicturePresentation(picturePath)
+                                .withSourceFile(sourcePath)
+                                .withConfigFile(configPath)
                 )
         );
     }

@@ -33,6 +33,12 @@ public class GameEntity {
     @Column(name = "picture_presentation", nullable = false)
     private String picturePresentation;
 
+    @Column(name = "source_file", nullable = false)
+    private String sourceFile;
+
+    @Column(name = "config_file", nullable = false)
+    private String configFile;
+
     @Column(name = "creator_id", updatable = false, nullable = false)
     private UUID creatorId;
 

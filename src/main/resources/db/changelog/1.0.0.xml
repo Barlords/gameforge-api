@@ -50,7 +50,13 @@
             <column name="description" type="VARCHAR(500)">
                 <constraints nullable="false"/>
             </column>
-            <column name="picture_presentation" type="VARCHAR(500)">
+            <column name="picture_presentation" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source_file" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="config_file" type="VARCHAR(128)">
                 <constraints nullable="false"/>
             </column>
             <column name="creator_id" type="BINARY(16)">

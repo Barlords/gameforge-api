@@ -24,6 +24,12 @@ public class Game {
     String picturePresentation;
 
     @With
+    String sourceFile;
+
+    @With
+    String configFile;
+
+    @With
     UUID creatorId;
 
     @With
