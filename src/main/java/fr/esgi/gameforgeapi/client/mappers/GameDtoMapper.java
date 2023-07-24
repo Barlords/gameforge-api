@@ -14,6 +14,9 @@ public interface GameDtoMapper {
                 domain.getId(),
                 domain.getName(),
                 domain.getSrcPath(),
+                domain.getDescription(),
+                domain.getPicturePresentation(),
+                domain.getCreatorId(),
                 domain.getCreationDate()
         );
     }
@@ -22,6 +25,7 @@ public interface GameDtoMapper {
                 .id(UUID.randomUUID())
                 .name(request.name())
                 .srcPath(request.srcPath())
+                .description(request.description())
                 .creationDate(LocalDate.now())
                 .build();
     }

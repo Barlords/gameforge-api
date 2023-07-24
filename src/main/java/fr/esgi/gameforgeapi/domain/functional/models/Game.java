@@ -18,6 +18,15 @@ public class Game {
     String name;
 
     @With
+    String description;
+
+    @With
+    String picturePresentation;
+
+    @With
+    UUID creatorId;
+
+    @With
     String srcPath;
 
     @With

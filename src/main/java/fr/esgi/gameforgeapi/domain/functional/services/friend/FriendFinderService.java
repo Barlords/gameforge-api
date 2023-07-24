@@ -1,7 +1,6 @@
 package fr.esgi.gameforgeapi.domain.functional.services.friend;
 
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.TokenNotValidException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.models.Friend;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
@@ -40,7 +39,7 @@ public class FriendFinderService implements FriendFinderApi {
                     else {
                         userFriend = userFinderApi.findById(f.getUserId());
                     }
-                    return userFriend.orElseThrow(() -> new NotFoundUserException("error"));
+                    return userFriend.orElseThrow(() -> new ResourceNotFoundException("error"));
                 })
                 .toList();
     }

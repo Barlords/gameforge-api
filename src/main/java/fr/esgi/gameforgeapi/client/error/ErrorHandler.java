@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ErrorHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundUserException.class)
-    public ErrorDto handleNotFoundUserException(NotFoundUserException notFoundUserException) {
-        return new ErrorDto(notFoundUserException.getMessage());
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ErrorDto handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {
+        return new ErrorDto(resourceNotFoundException.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -34,6 +34,13 @@ public class ErrorHandler {
     public ErrorDto handleTokenNotValidException() {
         return new ErrorDto("Le token fourni est invalide");
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(NameAlreadyUsedException.class)
+    public ErrorDto handleNameAlreadyUsedException() {
+        return new ErrorDto("Le nom du jeu est déjà utilisé");
+    }
+
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(EmailAlreadyUsedException.class)

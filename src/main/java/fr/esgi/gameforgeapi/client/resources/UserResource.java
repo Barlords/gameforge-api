@@ -3,7 +3,8 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.user.UserCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.user.UserDto;
 import fr.esgi.gameforgeapi.client.dto.user.UserLogRequest;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.client.validator.UuidValidator;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.client.mappers.UserDtoMapper;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
@@ -45,17 +46,17 @@ public class UserResource {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     public UserDto getUserById(@PathVariable String id) {
-        return userFinderApi.findById(UUID.fromString(id))
+        return userFinderApi.findById(UuidValidator.validate(id))
                 .map(UserDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("L'utilisateur " + id + " est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur " + id + " est introuvable"));
     }
 
     @GetMapping("/{token}")
     @ResponseStatus(OK)
     public UserDto getUserByToken(@PathVariable String token) {
-        return userFinderApi.findByToken(UUID.fromString(token))
+        return userFinderApi.findByToken(UuidValidator.validate(token))
                 .map(UserDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("L'utilisateur avec le token" + token + " est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec le token" + token + " est introuvable"));
     }
 
     @GetMapping("/{email}")
@@ -63,7 +64,7 @@ public class UserResource {
     public UserDto getUserByEmail(@PathVariable String email) {
         return userFinderApi.findByEmail(email)
                 .map(UserDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("L'utilisateur avec l'email \"" + email + "\" est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec l'email \"" + email + "\" est introuvable"));
     }
 
     @GetMapping("/{pseudo}")
@@ -71,7 +72,7 @@ public class UserResource {
     public UserDto getUserByPseudo(@PathVariable String pseudo) {
         return userFinderApi.findByPseudo(pseudo)
                 .map(UserDtoMapper::toDto)
-                .orElseThrow(() -> new NotFoundUserException("L'utilisateur avec le pseudo \"" + pseudo + "\" est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec le pseudo \"" + pseudo + "\" est introuvable"));
     }
 
     @PostMapping
@@ -107,7 +108,7 @@ public class UserResource {
     @DeleteMapping("/{token}")
     @ResponseStatus(NO_CONTENT)
     public void deleteUserByToken(@PathVariable String token) {
-        userDeleterApi.deleteByToken(UUID.fromString(token));
+        userDeleterApi.deleteByToken(UuidValidator.validate(token));
     }
 
 

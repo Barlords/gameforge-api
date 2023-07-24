@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.domain.functional.services.user;
 
 import fr.esgi.gameforgeapi.domain.functional.exceptions.EmailAlreadyUsedException;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.PseudoAlreadyUsedException;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.client.user.UserUpdaterApi;
@@ -23,7 +23,7 @@ public class UserUpdaterService implements UserUpdaterApi {
     public User update(User user) {
 
         User previousUser = spi.findByToken(user.getToken())
-                .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au token fournit"));
+                .orElseThrow(() -> new ResourceNotFoundException("Aucun utilisateur ne correspond au token fournit"));
 
         Optional<User> userWithSameEmail = spi.findByEmail(user.getEmail());
         Optional<User> userWithSamePseudo = spi.findByPseudo(user.getPseudo());
