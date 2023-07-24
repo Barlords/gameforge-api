@@ -21,6 +21,12 @@ public class Game {
     String description;
 
     @With
+    String picturePresentation;
+
+    @With
+    UUID creatorId;
+
+    @With
     LocalDate creationDate;
 
 }

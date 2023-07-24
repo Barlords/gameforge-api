@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyCreatorService;
-import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
@@ -11,8 +11,10 @@ import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorSer
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingPatcherService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
@@ -24,8 +26,10 @@ import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingPatcherApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
 import fr.esgi.gameforgeapi.domain.ports.server.*;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -39,6 +43,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"fr.esgi.gameforgeapi.server.repositories"})
 @ComponentScan(basePackages = {"fr.esgi.gameforgeapi.server.adapters"})
 public class DomainConfiguration {
+
+    @Bean
+    public RatingPatcherApi ratingPatcherApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new RatingPatcherService(spi, tokenControllerService);
+    }
 
     @Bean
     public RatingCreatorApi ratingCreatorApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
@@ -97,15 +106,16 @@ public class DomainConfiguration {
     public UserModifierService userModifierService() {return new UserModifierService();}
 
     @Bean
-    public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi) {
-        return new LobbyCreatorService(spi);}
+    public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new LobbyCreatorService(spi, tokenControllerService);}
 
     @Bean
     public LobbyFinderApi lobbyFinderApi(LobbyPersistenceSpi spi) {return new LobbyFinderService(spi);}
 
     @Bean
-    public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi) {
-        return new GameCreatorService(spi);}
+    public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new GameCreatorService(spi, tokenControllerService);
+    }
 
     @Bean
     public GameFinderApi gameFinderApi(GamePersistenceSpi spi) {return new GameFinderService(spi);}
@@ -122,5 +132,7 @@ public class DomainConfiguration {
     public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService) {
         return new SessionCreatorService(spi,sessionFinderService);}
 
-
+    @Bean
+    public SessionUpdaterApi sessionUpdaterApi(SessionPersistenceSpi spi,UserPersistenceSpi userPersistenceSpi ) {
+        return new SessionUpdaterService(spi,userPersistenceSpi);}
 }

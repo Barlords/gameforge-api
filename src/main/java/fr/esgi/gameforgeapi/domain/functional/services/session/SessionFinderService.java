@@ -16,6 +16,8 @@ public class SessionFinderService implements SessionFinderApi {
 
     private final SessionPersistenceSpi spi;
 
+
+
     @Override
     public List<Session> findAll() {
         return spi.findAll();
@@ -27,8 +29,8 @@ public class SessionFinderService implements SessionFinderApi {
     }
 
     @Override
-    public Optional<Session> findLastByUserId(UUID userId) {
-        return spi.findLastByUserId(userId);
+    public Optional<Session> findLastByUserIdAndQuitTimeIsNull(UUID userId) {
+        return spi.findLastByUserIdAndQuitTimeIsNull(userId);
     }
 
 }

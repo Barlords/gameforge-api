@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,10 +40,16 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
 
     @Override
     @Transactional
-    public Optional<Session> findLastByUserId(UUID userId) {
+    public Optional<Session> findLastByUserIdAndQuitTimeIsNull(UUID userId) {
         Optional<SessionEntity> sessionEntityOptional = repository.findLastByUserIdAndQuitTimeIsNull(userId);
 
         return sessionEntityOptional.map(SessionEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public void closeAllUserSessions(LocalDate quitDate, UUID userId) {
+        repository.closeAllUserSessions(quitDate,userId);
     }
 
     @Override

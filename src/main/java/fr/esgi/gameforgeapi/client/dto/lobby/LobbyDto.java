@@ -12,13 +12,19 @@ public record LobbyDto(
 
         UUID gameId,
 
+        UUID creatorId,
+
+        String name,
+
+        String password,
+
         LocalDate creationDate,
 
-        LocalDate start_Date,
+        LocalDate startDate,
 
         Boolean finished,
 
-        UUID winner_id
+        UUID winnerId
 ) {
 
 }

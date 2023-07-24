@@ -2,6 +2,7 @@ package fr.esgi.gameforgeapi.client.mappers;
 
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyDto;
+import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 
 import java.time.LocalDate;
@@ -13,6 +14,9 @@ public interface LobbyDtoMapper {
         return new LobbyDto(
                 domain.getId(),
                 domain.getGameId(),
+                domain.getCreatorId(),
+                domain.getName(),
+                domain.getPassword(),
                 domain.getCreationDate(),
                 domain.getStartDate(),
                 domain.isFinished(),
@@ -23,7 +27,9 @@ public interface LobbyDtoMapper {
     static Lobby creationRequestToDomain(LobbyCreationRequest request) {
         return Lobby.builder()
                 .id(UUID.randomUUID())
-                .gameId(request.gameId())
+                .gameId(UuidValidator.validate(request.gameId()))
+                .name(request.name())
+                .password(request.password())
                 .creationDate(LocalDate.now())
                 .build();
     }

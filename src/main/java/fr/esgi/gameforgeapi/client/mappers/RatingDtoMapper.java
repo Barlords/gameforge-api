@@ -4,6 +4,7 @@ import fr.esgi.gameforgeapi.client.dto.message.MessageCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.message.MessageDto;
 import fr.esgi.gameforgeapi.client.dto.rating.RatingCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.rating.RatingDto;
+import fr.esgi.gameforgeapi.client.dto.rating.RatingPatchRequest;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.models.Message;
 import fr.esgi.gameforgeapi.domain.functional.models.Rating;
@@ -25,6 +26,12 @@ public interface RatingDtoMapper {
         return Rating.builder()
                 .id(UUID.randomUUID())
                 .gameId(UuidValidator.validate(request.gameId()))
+                .rate(request.rate())
+                .build();
+    }
+
+    static Rating patchRequestToDomain(RatingPatchRequest request) {
+        return Rating.builder()
                 .rate(request.rate())
                 .build();
     }

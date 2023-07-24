@@ -38,9 +38,15 @@ public class LobbyDatabaseAdapter implements LobbyPersistenceSpi {
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
 
 
+    @Override
+    @Transactional
+    public List<Lobby> findByGame(UUID gameId) {
+        return repository.findLobbyEntitiesByGameId(gameId);
+    }
 }

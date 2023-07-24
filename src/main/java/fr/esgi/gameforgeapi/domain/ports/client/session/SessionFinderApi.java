@@ -12,5 +12,6 @@ public interface SessionFinderApi {
 
     Optional<Session> findById(UUID id);
 
-    Optional<Session> findLastByUserId(UUID userId);
+
+    Optional<Session> findLastByUserIdAndQuitTimeIsNull(UUID userId);
 }

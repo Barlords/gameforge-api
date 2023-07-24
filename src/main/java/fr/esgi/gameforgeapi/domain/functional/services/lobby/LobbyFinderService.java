@@ -1,4 +1,4 @@
-package fr.esgi.gameforgeapi.domain.functional.services.Lobby;
+package fr.esgi.gameforgeapi.domain.functional.services.lobby;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
@@ -24,6 +24,11 @@ public class LobbyFinderService implements LobbyFinderApi {
     @Override
     public Optional<Lobby> findById(UUID id) {
         return spi.findById(id);
+    }
+
+    @Override
+    public List<Lobby> findByGameId(UUID gameId) {
+        return spi.findByGame(gameId);
     }
 
 }

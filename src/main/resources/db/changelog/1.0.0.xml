@@ -50,6 +50,12 @@
             <column name="description" type="VARCHAR(500)">
                 <constraints nullable="false"/>
             </column>
+            <column name="picture_presentation" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
             <column name="creation_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
@@ -63,6 +69,15 @@
             </column>
             <column name="game_id" type="BINARY(16)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="creator_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(32)">
+                <constraints nullable="true"/>
             </column>
             <column name="creation_date" type="DATE">
                 <constraints nullable="false"/>
@@ -268,9 +283,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="game"
                                  validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="creator_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_creator"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
         <addForeignKeyConstraint baseColumnNames="winner_id"
                                  baseTableName="lobby"
-                                 constraintName="fk_lobby_user"
+                                 constraintName="fk_lobby_winner"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
@@ -372,6 +397,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"
                                  validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-game-1.0.0" author="barlords">
+    <addForeignKeyConstraint baseColumnNames="creator_id"
+                             baseTableName="game"
+                             constraintName="fk_game_user"
+                             deferrable="false"
+                             initiallyDeferred="false"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"
+                             referencedColumnNames="id"
+                             referencedTableName="user"
+                             validate="true"/>
     </changeSet>
 
 </databaseChangeLog>

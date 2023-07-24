@@ -27,6 +27,15 @@ public class LobbyEntity {
     @Column(name = "game_id", nullable = false)
     private UUID gameId;
 
+    @Column(name = "creator_id", nullable = false)
+    private UUID creatorId;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;
 
