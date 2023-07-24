@@ -236,6 +236,39 @@
                                  validate="true"/>
     </changeSet>
 
+    <changeSet id="add-fks-lobby-1.0.3" author="barlords">
+        <addForeignKeyConstraint baseColumnNames="game_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_game"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="game"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="creator_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_creator"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="winner_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_winner"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
+    </changeSet>
+
     <changeSet id="add-fks-action-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="lobby_id"
                                  baseTableName="action"
@@ -272,38 +305,6 @@
                                  validate="true"/>
     </changeSet>
 
-    <changeSet id="add-fks-lobby-1.0.3" author="barlords">
-        <addForeignKeyConstraint baseColumnNames="game_id"
-                                 baseTableName="lobby"
-                                 constraintName="fk_lobby_game"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="RESTRICT"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="id"
-                                 referencedTableName="game"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="creator_id"
-                                 baseTableName="lobby"
-                                 constraintName="fk_lobby_creator"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="RESTRICT"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="id"
-                                 referencedTableName="user"
-                                 validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="winner_id"
-                                 baseTableName="lobby"
-                                 constraintName="fk_lobby_winner"
-                                 deferrable="false"
-                                 initiallyDeferred="false"
-                                 onDelete="RESTRICT"
-                                 onUpdate="RESTRICT"
-                                 referencedColumnNames="id"
-                                 referencedTableName="user"
-                                 validate="true"/>
-    </changeSet>
 
     <changeSet id="add-fks-message-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="sender_id"
