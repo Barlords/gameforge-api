@@ -11,6 +11,7 @@ import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorSer
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingPatcherService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
@@ -24,6 +25,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingPatcherApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
@@ -32,6 +34,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
@@ -39,6 +42,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"fr.esgi.gameforgeapi.server.repositories"})
 @ComponentScan(basePackages = {"fr.esgi.gameforgeapi.server.adapters"})
 public class DomainConfiguration {
+
+    @Bean
+    public RatingPatcherApi ratingPatcherApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new RatingPatcherService(spi, tokenControllerService);
+    }
 
     @Bean
     public RatingCreatorApi ratingCreatorApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
@@ -104,8 +112,9 @@ public class DomainConfiguration {
     public LobbyFinderApi lobbyFinderApi(LobbyPersistenceSpi spi) {return new LobbyFinderService(spi);}
 
     @Bean
-    public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi) {
-        return new GameCreatorService(spi);}
+    public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new GameCreatorService(spi, tokenControllerService);
+    }
 
     @Bean
     public GameFinderApi gameFinderApi(GamePersistenceSpi spi) {return new GameFinderService(spi);}

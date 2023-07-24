@@ -14,6 +14,8 @@ public interface GameDtoMapper {
                 domain.getId(),
                 domain.getName(),
                 domain.getDescription(),
+                domain.getPicturePresentation(),
+                domain.getCreatorId(),
                 domain.getCreationDate()
         );
     }

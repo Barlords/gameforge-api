@@ -30,6 +30,12 @@ public class GameEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "picture_presentation", nullable = false)
+    private String picturePresentation;
+
+    @Column(name = "creator_id", updatable = false, nullable = false)
+    private UUID creatorId;
+
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;
 

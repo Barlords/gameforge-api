@@ -12,6 +12,7 @@ import java.util.UUID;
 public class Rating {
 
     @Builder.Default
+    @With
     UUID id = UUID.randomUUID();
 
     @With

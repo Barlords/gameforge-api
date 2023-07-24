@@ -3,6 +3,7 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.session.SessionCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.session.SessionDto;
 import fr.esgi.gameforgeapi.client.mappers.SessionDtoMapper;
+import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
@@ -37,7 +38,7 @@ public class SessionResource {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     public SessionDto getSessionById(@PathVariable String id) {
-        return sessionFinderApi.findById(UUID.fromString(id))
+        return sessionFinderApi.findById(UuidValidator.validate(id))
                 .map(SessionDtoMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
     }

@@ -14,6 +14,10 @@ public record GameDto(
 
         String description,
 
+        String picturePresentation,
+
+        UUID creatorId,
+
         LocalDate creationDate
 
 ) {

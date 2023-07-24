@@ -50,6 +50,12 @@
             <column name="description" type="VARCHAR(500)">
                 <constraints nullable="false"/>
             </column>
+            <column name="picture_presentation" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
             <column name="creation_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
@@ -372,6 +378,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"
                                  validate="true"/>
+    </changeSet>
+
+    <changeSet id="add-fks-game-1.0.0" author="barlords">
+    <addForeignKeyConstraint baseColumnNames="creator_id"
+                             baseTableName="game"
+                             constraintName="fk_game_user"
+                             deferrable="false"
+                             initiallyDeferred="false"
+                             onDelete="RESTRICT"
+                             onUpdate="RESTRICT"
+                             referencedColumnNames="id"
+                             referencedTableName="user"
+                             validate="true"/>
     </changeSet>
 
 </databaseChangeLog>

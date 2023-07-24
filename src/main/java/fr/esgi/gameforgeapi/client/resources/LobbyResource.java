@@ -3,6 +3,7 @@ package fr.esgi.gameforgeapi.client.resources;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.lobby.LobbyDto;
 import fr.esgi.gameforgeapi.client.mappers.LobbyDtoMapper;
+import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
@@ -37,7 +38,7 @@ public class LobbyResource {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     public LobbyDto getLobbyById(@PathVariable String id) {
-        return lobbyFinderApi.findById(UUID.fromString(id))
+        return lobbyFinderApi.findById(UuidValidator.validate(id))
                 .map(LobbyDtoMapper::toDto)
                 .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
     }

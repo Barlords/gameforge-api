@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  fr.esgi.gameforgeapi.bootstrap.config.client.MinioConfiguration,\
+  fr.esgi.gameforgeapi.bootstrap.config.client.MinioNotificationConfiguration,\
+  fr.esgi.gameforgeapi.bootstrap.config.client.MinioMetricConfiguration

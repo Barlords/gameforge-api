@@ -10,6 +10,8 @@ public interface GameEntityMapper {
                 .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
+                .picturePresentation(entity.getPicturePresentation())
+                .creatorId(entity.getCreatorId())
                 .creationDate(entity.getCreationDate())
                 .build();
     }
@@ -19,6 +21,8 @@ public interface GameEntityMapper {
                 .id(domain.getId())
                 .name(domain.getName())
                 .description(domain.getDescription())
+                .picturePresentation(domain.getPicturePresentation())
+                .creatorId(domain.getCreatorId())
                 .creationDate(domain.getCreationDate())
                 .build();
     }
