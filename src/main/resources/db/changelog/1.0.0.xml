@@ -245,7 +245,7 @@
                                  onDelete="RESTRICT"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="game"
+                                 referencedTableName="lobby"
                                  validate="true"/>
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="action"
