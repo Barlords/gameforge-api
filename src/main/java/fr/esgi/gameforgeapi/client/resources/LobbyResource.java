@@ -43,11 +43,21 @@ public class LobbyResource {
                 .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
     }
 
+    @GetMapping("/getByGame/{game_id}")
+    @ResponseStatus(OK)
+    public List<LobbyDto> getLobbiesByGame(@PathVariable("game_id") String gameId) {
+        return lobbyFinderApi.findByGameId(UuidValidator.validate(gameId))
+                .stream()
+                .map(LobbyDtoMapper::toDto)
+                .toList();
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     public LobbyDto createLobby(@Valid @RequestBody LobbyCreationRequest request) {
         return LobbyDtoMapper.toDto(
                 lobbyCreatorApi.create(
+                        UuidValidator.validate(request.userToken()),
                         LobbyDtoMapper.creationRequestToDomain(request)
                 )
         );

@@ -1,7 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyCreatorService;
-import fr.esgi.gameforgeapi.domain.functional.services.Lobby.LobbyFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
@@ -36,7 +36,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
@@ -107,8 +106,8 @@ public class DomainConfiguration {
     public UserModifierService userModifierService() {return new UserModifierService();}
 
     @Bean
-    public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi) {
-        return new LobbyCreatorService(spi);}
+    public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new LobbyCreatorService(spi, tokenControllerService);}
 
     @Bean
     public LobbyFinderApi lobbyFinderApi(LobbyPersistenceSpi spi) {return new LobbyFinderService(spi);}

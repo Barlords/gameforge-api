@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 public record GameCreationRequest(
         @NotNull @JsonProperty("user_token") String userToken,
         @NotNull @JsonProperty("name") String name,
-        @NotNull @JsonProperty("src_path") String srcPath,
         @NotNull @JsonProperty("description") String description
         ) {
 }

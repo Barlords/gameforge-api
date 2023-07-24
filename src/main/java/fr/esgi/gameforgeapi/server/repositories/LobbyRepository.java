@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.server.repositories;
 
+import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
 import fr.esgi.gameforgeapi.server.entities.MessageEntity;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
@@ -18,5 +19,7 @@ import java.util.UUID;
 public interface LobbyRepository extends JpaRepository<LobbyEntity, UUID> {
 
     Optional<LobbyEntity> findLobbyEntityById(UUID id);
+
+    List<Lobby> findLobbyEntitiesByGameId(UUID gameId);
 
 }

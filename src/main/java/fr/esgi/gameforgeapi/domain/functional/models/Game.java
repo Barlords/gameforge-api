@@ -27,9 +27,6 @@ public class Game {
     UUID creatorId;
 
     @With
-    String srcPath;
-
-    @With
     LocalDate creationDate;
 
 }

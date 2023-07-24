@@ -70,6 +70,15 @@
             <column name="game_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
+            <column name="creator_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(64)">
+                <constraints nullable="true"/>
+            </column>
             <column name="creation_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
@@ -274,9 +283,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="game"
                                  validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="creator_id"
+                                 baseTableName="lobby"
+                                 constraintName="fk_lobby_creator"
+                                 deferrable="false"
+                                 initiallyDeferred="false"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user"
+                                 validate="true"/>
         <addForeignKeyConstraint baseColumnNames="winner_id"
                                  baseTableName="lobby"
-                                 constraintName="fk_lobby_user"
+                                 constraintName="fk_lobby_winner"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"

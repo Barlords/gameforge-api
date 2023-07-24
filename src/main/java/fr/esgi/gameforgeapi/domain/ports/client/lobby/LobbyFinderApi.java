@@ -12,4 +12,6 @@ public interface LobbyFinderApi {
 
     Optional<Lobby> findById(UUID id);
 
+    List<Lobby> findByGameId(UUID gameId);
+
 }

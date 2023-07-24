@@ -8,6 +8,10 @@ import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record LobbyCreationRequest(
-        @NotNull @JsonProperty("game_id") UUID gameId
+        @NotNull @JsonProperty("user_token") String userToken,
+        @NotNull @JsonProperty("game_id") String gameId,
+        @NotNull @JsonProperty("name") String name,
+        @NotNull @JsonProperty("password") String password
+
 ) {
 }

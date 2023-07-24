@@ -18,6 +18,15 @@ public class Lobby {
     UUID gameId;
 
     @With
+    UUID creatorId;
+
+    @With
+    String name;
+
+    @With
+    String password;
+
+    @With
     LocalDate creationDate;
 
     @With
