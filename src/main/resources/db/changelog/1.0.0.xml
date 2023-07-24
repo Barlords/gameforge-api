@@ -238,7 +238,7 @@
 
     <changeSet id="add-fks-action-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="lobby_id"
-                                 baseTableName="lobby"
+                                 baseTableName="action"
                                  constraintName="fk_action_lobby"
                                  deferrable="false"
                                  initiallyDeferred="false"
