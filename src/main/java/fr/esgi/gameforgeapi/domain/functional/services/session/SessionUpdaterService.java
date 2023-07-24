@@ -1,6 +1,6 @@
 package fr.esgi.gameforgeapi.domain.functional.services.session;
 
-import fr.esgi.gameforgeapi.domain.functional.exceptions.NotFoundUserException;
+import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
@@ -28,7 +28,7 @@ public class SessionUpdaterService implements SessionUpdaterApi {
     @Override
     public void closeAllUserSessions(UUID userToken) {
         User user = userPersistenceSpi.findByToken(userToken)
-                .orElseThrow(() -> new NotFoundUserException("Aucun utilisateur ne correspond au token fournit"));
+                .orElseThrow(() -> new ResourceNotFoundException("Aucun utilisateur ne correspond au token fournit"));
         spi.closeAllUserSessions(LocalDate.now(),user.getId());
     }
 
