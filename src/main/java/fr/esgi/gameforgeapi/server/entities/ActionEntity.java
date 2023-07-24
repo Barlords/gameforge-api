@@ -31,13 +31,15 @@ public class ActionEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(name = "game_id", updatable = false, nullable = false)
+    @Column(name = "lobby_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID gameId;
+    private UUID lobbyId;
 
     @Column(name = "user_id", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)
     private UUID userId;
+
+
 
     @Column(name = "action_time", updatable = false, nullable = false)
     @JdbcTypeCode(Types.VARCHAR)

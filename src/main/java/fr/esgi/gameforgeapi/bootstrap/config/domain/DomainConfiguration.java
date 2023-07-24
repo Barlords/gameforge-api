@@ -1,12 +1,12 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
-import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;

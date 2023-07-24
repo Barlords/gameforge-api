@@ -1,14 +1,9 @@
 package fr.esgi.gameforgeapi.server.adapters;
 
-import fr.esgi.gameforgeapi.domain.functional.models.Action;
 import fr.esgi.gameforgeapi.domain.functional.models.Channel;
-import fr.esgi.gameforgeapi.domain.ports.server.ActionPersistenceSpi;
 import fr.esgi.gameforgeapi.domain.ports.server.ChannelPersistenceSpi;
-import fr.esgi.gameforgeapi.server.mappers.ActionEntityMapper;
 import fr.esgi.gameforgeapi.server.mappers.ChannelEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.ActionRepository;
 import fr.esgi.gameforgeapi.server.repositories.ChannelRepository;
-import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

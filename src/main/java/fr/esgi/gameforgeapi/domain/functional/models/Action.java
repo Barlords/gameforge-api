@@ -15,7 +15,7 @@ public class Action {
     UUID id = UUID.randomUUID();
 
     @With
-    UUID gameId;
+    UUID lobbyId;
 
     @With
     UUID userId;
