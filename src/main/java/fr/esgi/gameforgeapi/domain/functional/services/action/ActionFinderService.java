@@ -15,6 +15,7 @@ import java.util.UUID;
 public class ActionFinderService implements ActionFinderApi {
 
     private final ActionPersistenceSpi spi;
+
     @Override
     public List<Action> findAll() {
         return spi.findAll();
