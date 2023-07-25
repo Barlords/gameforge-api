@@ -31,4 +31,5 @@ public class LobbyFinderService implements LobbyFinderApi {
         return spi.findByGame(gameId);
     }
 
+
 }

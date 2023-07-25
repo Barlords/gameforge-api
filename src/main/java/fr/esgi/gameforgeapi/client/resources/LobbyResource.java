@@ -6,6 +6,7 @@ import fr.esgi.gameforgeapi.client.mappers.LobbyDtoMapper;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +25,8 @@ public class LobbyResource {
     private final LobbyCreatorApi lobbyCreatorApi;
 
     private final LobbyFinderApi lobbyFinderApi;
+
+    private final LobbyDeleterApi lobbyDeleterApi;
 
     @GetMapping
     @ResponseStatus(OK)
@@ -60,6 +62,15 @@ public class LobbyResource {
                         UuidValidator.validate(request.userToken()),
                         LobbyDtoMapper.creationRequestToDomain(request)
                 )
+        );
+    }
+
+    @DeleteMapping("/{user_token}/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteLobby(@PathVariable("user_token") String userToken, @PathVariable("id") String id) {
+        lobbyDeleterApi.delete(
+                UuidValidator.validate(userToken),
+                UuidValidator.validate(id)
         );
     }
 }

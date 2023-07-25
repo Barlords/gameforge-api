@@ -8,6 +8,7 @@ import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderServic
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
@@ -24,6 +25,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
@@ -114,6 +116,12 @@ public class DomainConfiguration {
 
     @Bean
     public LobbyFinderApi lobbyFinderApi(LobbyPersistenceSpi spi) {return new LobbyFinderService(spi);}
+
+    @Bean
+    public LobbyDeleterApi lobbyDeleterApi(LobbyPersistenceSpi spi, TokenControllerService tokenControllerService) {
+        return new LobbyDeleterService(spi, tokenControllerService);
+    }
+
 
     @Bean
     public GameCreatorApi gameCreatorApi(GamePersistenceSpi spi, TokenControllerService tokenControllerService) {
