@@ -9,6 +9,7 @@ import fr.esgi.gameforgeapi.client.minio.MinioService;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.game.GameDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +32,8 @@ public class GameResource {
     private final GameCreatorApi gameCreatorApi;
 
     private final GameFinderApi gameFinderApi;
+
+    private final GameDeleterApi gameDeleterApi;
 
     @GetMapping
     @ResponseStatus(OK)
@@ -80,5 +82,15 @@ public class GameResource {
                                 .withConfigFile(configPath)
                 )
         );
+    }
+
+    @DeleteMapping("/{user_token}/{id}")
+    @ResponseStatus(NO_CONTENT)
+    public void getGameById(@PathVariable("user_token") String userToken, @PathVariable("id") String id) {
+        System.out.println("YAAAAAA");
+        gameDeleterApi.delete(
+                UuidValidator.validate(userToken),
+                UuidValidator.validate(id)
+                );
     }
 }
