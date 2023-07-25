@@ -67,7 +67,7 @@ public class UserResource {
                 .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec l'email \"" + email + "\" est introuvable"));
     }
 
-    @GetMapping("/{pseudo}")
+    @GetMapping("/pseudo/{pseudo}")
     @ResponseStatus(OK)
     public UserDto getUserByPseudo(@PathVariable String pseudo) {
         return userFinderApi.findByPseudo(pseudo)
