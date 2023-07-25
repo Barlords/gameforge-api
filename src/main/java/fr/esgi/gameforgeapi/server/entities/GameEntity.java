@@ -27,6 +27,9 @@ public class GameEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "src_path", nullable = false, unique = true)
+    private String srcPath;
+
     @Column(name = "description", nullable = false)
     private String description;
 

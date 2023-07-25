@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record SessionCreationRequest(
-        @NotNull @JsonProperty("user_id") UUID userId,
+        @NotNull @JsonProperty("user_token") UUID userToken,
         @NotNull @JsonProperty("lobby_id") UUID lobbyId
 ) {
 }

@@ -1,14 +1,9 @@
 package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Action;
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.ActionPersistenceSpi;
-import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.mappers.ActionEntityMapper;
-import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.ActionRepository;
-import fr.esgi.gameforgeapi.server.repositories.UserRepository;
-import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +34,12 @@ public class ActionDatabaseAdapter implements ActionPersistenceSpi {
     @Transactional
     public Optional<Action> findById(UUID id) {
         return repository.findActionEntityById(id).map(ActionEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public List<Action> findByLobbyId(UUID lobbyId) {
+        return repository.findActionEntityByLobbyId(lobbyId).stream().map(ActionEntityMapper::toDomain).toList();
     }
 
     @Override

@@ -1,12 +1,14 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
-import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
+import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
@@ -16,6 +18,7 @@ import fr.esgi.gameforgeapi.domain.functional.services.session.SessionCreatorSer
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
+import fr.esgi.gameforgeapi.domain.ports.client.action.ActionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
@@ -129,10 +132,18 @@ public class DomainConfiguration {
         return new SessionFinderService(spi);
     }
     @Bean
-    public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService) {
-        return new SessionCreatorService(spi,sessionFinderService);}
+    public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService,TokenControllerService tokenControllerService) {
+        return new SessionCreatorService(spi,sessionFinderService,tokenControllerService);}
 
     @Bean
     public SessionUpdaterApi sessionUpdaterApi(SessionPersistenceSpi spi,UserPersistenceSpi userPersistenceSpi ) {
         return new SessionUpdaterService(spi,userPersistenceSpi);}
+
+    @Bean
+    public ActionFinderService actionFinderService(ActionPersistenceSpi spi) {
+        return new ActionFinderService(spi);
+    }
+    @Bean
+    public ActionCreatorApi actionCreatorApi(ActionPersistenceSpi spi,TokenControllerService tokenControllerService) {
+        return new ActionCreatorService(spi,tokenControllerService);}
 }
