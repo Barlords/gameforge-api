@@ -4,7 +4,6 @@ import fr.esgi.gameforgeapi.client.dto.action.ActionCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.action.ActionDto;
 import fr.esgi.gameforgeapi.client.mappers.ActionDtoMapper;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
-import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.ports.client.action.ActionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.action.ActionFinderApi;
 import jakarta.validation.Valid;
@@ -25,14 +24,7 @@ public class ActionResource {
 
     private final ActionFinderApi actionFinderApi;
 
-    @GetMapping("/{id}")
-    @ResponseStatus(OK)
-    public ActionDto getActionById(@PathVariable String id) {
-        return actionFinderApi.findById(UuidValidator.validate(id))
-                .map(ActionDtoMapper::toDto)
-                .orElseThrow(() -> new ResourceNotFoundException("L'action " + id + " est introuvable"));
-    }
-    @GetMapping("/{lobby_id}")
+    @GetMapping("/lobby_id/{lobby_id}")
     @ResponseStatus(OK)
     public List<ActionDto> getLobbyActions(@PathVariable String lobby_id) {
         return actionFinderApi.findByLobbyId(UuidValidator.validate(lobby_id))
