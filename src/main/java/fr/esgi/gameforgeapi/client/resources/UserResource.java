@@ -43,7 +43,7 @@ public class UserResource {
                 .toList();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     @ResponseStatus(OK)
     public UserDto getUserById(@PathVariable String id) {
         return userFinderApi.findById(UuidValidator.validate(id))
@@ -51,7 +51,7 @@ public class UserResource {
                 .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur " + id + " est introuvable"));
     }
 
-    @GetMapping("/{token}")
+    @GetMapping("/getByToken/{token}")
     @ResponseStatus(OK)
     public UserDto getUserByToken(@PathVariable String token) {
         return userFinderApi.findByToken(UuidValidator.validate(token))
@@ -59,7 +59,7 @@ public class UserResource {
                 .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec le token" + token + " est introuvable"));
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/getByEmail/{email}")
     @ResponseStatus(OK)
     public UserDto getUserByEmail(@PathVariable String email) {
         return userFinderApi.findByEmail(email)

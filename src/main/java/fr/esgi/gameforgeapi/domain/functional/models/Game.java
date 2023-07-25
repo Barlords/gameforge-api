@@ -18,9 +18,6 @@ public class Game {
     String name;
 
     @With
-    String srcPath;
-
-    @With
     String description;
 
     @With
