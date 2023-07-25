@@ -34,7 +34,7 @@ public class ActionResource {
     }
     @GetMapping("/{lobby_id}")
     @ResponseStatus(OK)
-    public List<ActionDto> getUserByPseudo(@PathVariable String lobby_id) {
+    public List<ActionDto> getLobbyActions(@PathVariable String lobby_id) {
         return actionFinderApi.findByLobbyId(UuidValidator.validate(lobby_id))
                 .stream()
                 .map(ActionDtoMapper::toDto)
@@ -43,7 +43,7 @@ public class ActionResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ActionDto createUser(@Valid @RequestBody ActionCreationRequest request) {
+    public ActionDto createAction(@Valid @RequestBody ActionCreationRequest request) {
         return ActionDtoMapper.toDto(
                 actionCreatorApi.create(
                         ActionDtoMapper.creationRequestToDomain(request)

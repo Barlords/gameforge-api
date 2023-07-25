@@ -9,6 +9,7 @@ public interface ActionEntityMapper {
         return Action.builder()
                 .id(entity.getId())
                 .userId(entity.getUserId())
+                .lobbyId(entity.getLobbyId())
                 .actionTime(entity.getActionTime())
                 .action(entity.getAction())
                 .build();
@@ -18,6 +19,7 @@ public interface ActionEntityMapper {
         return ActionEntity.builder()
                 .id(domain.getId())
                 .userId(domain.getUserId())
+                .lobbyId(domain.getLobbyId())
                 .actionTime(domain.getActionTime())
                 .action(domain.getAction())
                 .build();

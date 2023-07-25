@@ -44,7 +44,7 @@ public class SessionResource {
     public SessionDto getSessionById(@PathVariable String id) {
         return sessionFinderApi.findById(UuidValidator.validate(id))
                 .map(SessionDtoMapper::toDto)
-                .orElseThrow(() -> new ResourceNotFoundException("Le jeu : " + id + " est introuvable"));
+                .orElseThrow(() -> new ResourceNotFoundException("La session : " + id + " est introuvable"));
     }
 
     @PostMapping

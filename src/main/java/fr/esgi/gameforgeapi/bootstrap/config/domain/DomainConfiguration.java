@@ -132,8 +132,8 @@ public class DomainConfiguration {
         return new SessionFinderService(spi);
     }
     @Bean
-    public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService) {
-        return new SessionCreatorService(spi,sessionFinderService);}
+    public SessionCreatorApi sessionCreatorApi(SessionPersistenceSpi spi,SessionFinderService sessionFinderService,TokenControllerService tokenControllerService) {
+        return new SessionCreatorService(spi,sessionFinderService,tokenControllerService);}
 
     @Bean
     public SessionUpdaterApi sessionUpdaterApi(SessionPersistenceSpi spi,UserPersistenceSpi userPersistenceSpi ) {
@@ -144,6 +144,6 @@ public class DomainConfiguration {
         return new ActionFinderService(spi);
     }
     @Bean
-    public ActionCreatorApi actionCreatorApi(ActionPersistenceSpi spi) {
-        return new ActionCreatorService(spi);}
+    public ActionCreatorApi actionCreatorApi(ActionPersistenceSpi spi,TokenControllerService tokenControllerService) {
+        return new ActionCreatorService(spi,tokenControllerService);}
 }

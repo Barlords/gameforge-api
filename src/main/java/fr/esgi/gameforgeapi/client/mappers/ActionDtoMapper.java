@@ -24,7 +24,7 @@ public interface ActionDtoMapper {
         return Action.builder()
                 .id(UUID.randomUUID())
                 .lobbyId(UuidValidator.validate(request.lobbyId()))
-                .userId(UuidValidator.validate(request.userId()))
+                .userId(UuidValidator.validate(request.userToken()))
                 .actionTime(LocalDate.now())
                 .action(request.action())
                 .build();

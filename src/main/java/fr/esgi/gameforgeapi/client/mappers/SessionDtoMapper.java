@@ -23,7 +23,7 @@ public interface SessionDtoMapper {
         return Session.builder()
                 .id(UUID.randomUUID())
                 .lobbyId(request.lobbyId())
-                .userId(request.userId())
+                .userId(request.userToken())
                 .joinDate(LocalDate.now())
                 .build();
     }

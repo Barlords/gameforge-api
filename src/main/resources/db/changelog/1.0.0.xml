@@ -47,6 +47,9 @@
             <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="src_path" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
             <column name="description" type="VARCHAR(500)">
                 <constraints nullable="false"/>
             </column>
