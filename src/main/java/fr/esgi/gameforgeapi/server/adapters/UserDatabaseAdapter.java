@@ -4,8 +4,10 @@ import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
+import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,16 +21,19 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
 
     private final UserRepository repository;
 
+    @Autowired
+    private IUserDao userDao;
+
     @Override
     @Transactional
     public User save(User o) {
-        return UserEntityMapper.toDomain(repository.save(UserEntityMapper.fromDomain(o)));
+        return UserEntityMapper.toDomain(userDao.save(UserEntityMapper.fromDomain(o)));
     }
 
     @Override
     @Transactional
     public List<User> findAll() {
-        return repository.findAll().stream().map(UserEntityMapper::toDomain).toList();
+        return userDao.findAll().stream().map(UserEntityMapper::toDomain).toList();
     }
 
     @Override

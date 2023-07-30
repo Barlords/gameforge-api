@@ -9,6 +9,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.TypeAlias;
 
+import java.io.Serializable;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -21,7 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)

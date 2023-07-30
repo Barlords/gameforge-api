@@ -18,7 +18,7 @@ public abstract class AbstractDao<T extends Serializable> {
     private Class<T> clazz;
 
     @Autowired
-    private Session session;
+    private SessionFactory sessionFactory;
 
 
     public void setClazz(final Class<T> clazzToSet) {
@@ -78,7 +78,7 @@ public abstract class AbstractDao<T extends Serializable> {
 
     @Transactional
     public Session getCurrentSession() {
-        return session;
+        return sessionFactory.getCurrentSession();
     }
 
 
