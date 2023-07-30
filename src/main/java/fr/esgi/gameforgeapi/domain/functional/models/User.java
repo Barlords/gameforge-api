@@ -1,6 +1,5 @@
 package fr.esgi.gameforgeapi.domain.functional.models;
 
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
@@ -12,8 +11,9 @@ import java.util.UUID;
 @Builder
 public class User {
 
+    @Builder.Default
     @With
-    UUID id;
+    UUID id = UUID.randomUUID();
 
     @With
     String email;

@@ -2,67 +2,81 @@ package fr.esgi.gameforgeapi.server.adapters;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.dao.IGenericDao;
-import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
+import fr.esgi.gameforgeapi.server.repositories.UserRepository;
 import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class UserDatabaseAdapter implements UserPersistenceSpi {
 
-    @Autowired
-    private IUserDao dao;
+    private final UserRepository repository;
 
     @Override
     @Transactional
     public User save(User o) {
-        UserEntity u = dao.save(UserEntityMapper.fromDomain(o));
-        return UserEntityMapper.toDomain(u);
+        return UserEntityMapper.toDomain(repository.save(UserEntityMapper.fromDomain(o)));
     }
 
     @Override
     @Transactional
     public List<User> findAll() {
-        return dao.findAll().stream().map(UserEntityMapper::toDomain).toList();
+        return repository.findAll().stream().map(UserEntityMapper::toDomain).toList();
     }
 
     @Override
     @Transactional
-    public Option<User> findById(UUID id) {
-
-        return Option.of(UserEntityMapper.toDomain(dao.findOne(id)));
-    }
-
-    @Override
-    public Option<User> findUserByEmailAndPassword(String email, String password) {
-        return null;
-    }
-
-    @Override
-    public Option<User> findUserByPseudoAndPassword(String pseudo, String password) {
-        return null;
-    }
-
-    /*@Override
-    @Transactional
-    public Option<User> findUserByEmailAndPassword(String email, String password) {
-        return dao.findUserEntityByEmailAndPassword(email, password).map(UserEntityMapper::toDomain);
+    public Optional<User> findById(UUID id) {
+        return repository.findById(id).map(UserEntityMapper::toDomain);
     }
 
     @Override
     @Transactional
-    public Option<User> findUserByPseudoAndPassword(String pseudo, String password) {
-        return repository.findUserEntityByPseudoAndPassword(pseudo, password).map(UserEntityMapper::toDomain);
-    }*/
+    public Optional<User> findByToken(UUID token) {
+        return repository.findByToken(token).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findByEmail(String email) {
+        return repository.findByEmail(email).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findByPseudo(String pseudo) {
+        return repository.findByPseudo(pseudo).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        return repository.findByEmailAndPassword(email, password).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public Optional<User> findUserByPseudoAndPassword(String pseudo, String password) {
+        return repository.findByPseudoAndPassword(pseudo, password).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(UUID id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByToken(UUID token) {
+        repository.deleteByToken(token);
+    }
 
 }

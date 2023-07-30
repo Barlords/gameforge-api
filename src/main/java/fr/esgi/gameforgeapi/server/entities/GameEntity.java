@@ -1,13 +1,12 @@
 package fr.esgi.gameforgeapi.server.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.io.Serializable;
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -19,24 +18,31 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "game")
-public class GameEntity implements Serializable {
+public class GameEntity {
 
     @Id
-    @EqualsAndHashCode.Include
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy =  "org.hibernate.id.UUIDGenerator"
-    )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "picture_presentation", nullable = false)
+    private String picturePresentation;
+
+    @Column(name = "source_file", nullable = false)
+    private String sourceFile;
+
+    @Column(name = "config_file", nullable = false)
+    private String configFile;
+
+    @Column(name = "creator_id", updatable = false, nullable = false)
+    private UUID creatorId;
+
     @Column(name = "creation_date", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate creationDate;
 
 }

@@ -18,10 +18,10 @@ public class Message {
     UUID senderId;
 
     @With
-    UUID channelId;
+    UUID receiverId;
 
     @With
-    String message;
+    String content;
 
     @With
     LocalDate sendDate;

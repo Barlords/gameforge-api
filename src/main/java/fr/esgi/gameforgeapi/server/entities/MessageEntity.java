@@ -29,22 +29,18 @@ public class MessageEntity implements Serializable {
             strategy =  "org.hibernate.id.UUIDGenerator"
     )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
     @Column(name = "sender_id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID senderId;
 
-    @Column(name = "channel_id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
-    private UUID channelId;
+    @Column(name = "receiver_id", updatable = false, nullable = false)
+    private UUID receiverId;
 
-    @Column(name = "message", nullable = false)
-    private String message;
+    @Column(name = "content", nullable = false)
+    private String content;
 
     @Column(name = "send_date", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private LocalDate sendDate;
 
 }

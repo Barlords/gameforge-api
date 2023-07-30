@@ -11,6 +11,8 @@ public interface UserEntityMapper {
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .pseudo(entity.getPseudo())
+                .token(entity.getToken())
+                .tokenDate(entity.getTokenDate())
                 .build();
     }
 
@@ -20,6 +22,8 @@ public interface UserEntityMapper {
                 .email(domain.getEmail())
                 .password(domain.getPassword())
                 .pseudo(domain.getPseudo())
+                .token(domain.getToken())
+                .tokenDate(domain.getTokenDate())
                 .build();
     }
 

@@ -27,7 +27,7 @@ public class LayersDevelopmentRulesTest {
                     .whereLayer(DOMAIN_LAYER)
                     .mayOnlyBeAccessedByLayers(BOOTSTRAP_LAYER, CLIENT_LAYER, SERVER_LAYER)
                     .whereLayer(BOOTSTRAP_LAYER)
-                    .mayNotBeAccessedByAnyLayer()
+                    .mayOnlyBeAccessedByLayers(CLIENT_LAYER)
                     .whereLayer(CLIENT_LAYER)
                     .mayOnlyBeAccessedByLayers(BOOTSTRAP_LAYER)
                     .whereLayer(SERVER_LAYER)

@@ -9,7 +9,6 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.TypeAlias;
 
-import java.io.Serializable;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -22,17 +21,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "user")
-public class UserEntity implements Serializable {
+public class UserEntity {
 
     @Id
-    @EqualsAndHashCode.Include
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy =  "org.hibernate.id.UUIDGenerator"
-    )
     @Column(name = "id", updatable = false, nullable = false)
-    @JdbcTypeCode(Types.VARCHAR)
     private UUID id;
 
     @Column(name = "email", unique = true, nullable = false)
@@ -44,23 +36,10 @@ public class UserEntity implements Serializable {
     @Column(name = "pseudo", unique = true, nullable = false)
     private String pseudo;
 
-    @Column(name = "token", updatable = false)
-    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "token", nullable = false)
     private UUID token;
 
-    @Column(name = "token_date")
-    @JdbcTypeCode(Types.VARCHAR)
+    @Column(name = "token_date", nullable = false)
     private LocalDate tokenDate;
 
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", pseudo='" + pseudo + '\'' +
-                ", token=" + token +
-                ", tokenDate=" + tokenDate +
-                '}';
-    }
 }

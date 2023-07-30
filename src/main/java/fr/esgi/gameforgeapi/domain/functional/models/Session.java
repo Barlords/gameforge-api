@@ -18,6 +18,9 @@ public class Session {
     UUID lobbyId;
 
     @With
+    UUID userId;
+
+    @With
     LocalDate joinDate;
 
     @With

@@ -8,9 +8,9 @@ public interface MessageEntityMapper {
     static Message toDomain(MessageEntity entity) {
         return Message.builder()
                 .id(entity.getId())
-                .channelId(entity.getChannelId())
+                .receiverId(entity.getReceiverId())
                 .senderId(entity.getSenderId())
-                .message(entity.getMessage())
+                .content(entity.getContent())
                 .sendDate(entity.getSendDate())
                 .build();
     }
@@ -18,9 +18,9 @@ public interface MessageEntityMapper {
     static MessageEntity fromDomain(Message domain) {
         return MessageEntity.builder()
                 .id(domain.getId())
-                .channelId(domain.getChannelId())
+                .receiverId(domain.getReceiverId())
                 .senderId(domain.getSenderId())
-                .message(domain.getMessage())
+                .content(domain.getContent())
                 .sendDate(domain.getSendDate())
                 .build();
     }
