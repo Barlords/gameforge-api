@@ -9,7 +9,7 @@ import java.util.UUID;
 public record MessageDto(
         UUID id,
         UUID senderId,
-        UUID channelId,
+        UUID receiverId,
         String content,
         LocalDate sendDate
 ) {
