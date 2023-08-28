@@ -77,7 +77,7 @@ public abstract class AbstractDao<T extends Serializable> {
     }
 
     @Transactional
-    public Session getCurrentSession() {
+    protected Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 

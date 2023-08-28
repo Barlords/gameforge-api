@@ -33,7 +33,9 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     @Override
     @Transactional
     public List<User> findAll() {
+        userDao.print();
         return userDao.findAll().stream().map(UserEntityMapper::toDomain).toList();
+
     }
 
     @Override
