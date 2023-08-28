@@ -3,6 +3,7 @@ services:
   database:
     image:  mysql/mysql-server:5.6
     container_name: gameforge-db
+    command: --max_allowed_packet=32505856
     environment:
       MYSQL_DATABASE: gameforge
       MYSQL_USER: gameforge

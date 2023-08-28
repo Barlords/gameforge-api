@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 
+import java.io.Serializable;
 import java.sql.Types;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "rank")
-public class RankEntity {
+public class RankEntity implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
