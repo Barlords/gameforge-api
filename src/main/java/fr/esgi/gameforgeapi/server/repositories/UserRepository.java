@@ -6,12 +6,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface UserRepository extends JpaRepository<UserEntity, UUID> {
+
+    Optional<UserEntity> findByVerificationCode(String code);
+
+    List<UserEntity> findByNewsletterSubscribed(boolean newsletterSubscribed);
 
     Optional<UserEntity> findByToken(UUID token);
 

@@ -13,7 +13,8 @@ public interface UserDtoMapper {
                 domain.getEmail(),
                 domain.getPseudo(),
                 domain.getToken(),
-                domain.getTokenDate()
+                domain.getTokenDate(),
+                domain.isNewsletterSubscribed()
         );
     }
 
@@ -23,6 +24,7 @@ public interface UserDtoMapper {
                 .email(request.email())
                 .password(request.password())
                 .pseudo(request.pseudo())
+                .newsletterSubscribed(request.newsletterSubscription())
                 .build();
     }
 }

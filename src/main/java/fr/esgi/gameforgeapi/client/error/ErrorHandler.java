@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ErrorHandler {
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AccountNotValidatedException.class)
+    public ErrorDto handleResourceNotFoundException(AccountNotValidatedException accountNotValidatedException) {
+        return new ErrorDto(accountNotValidatedException.getMessage());
+    }
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     public ErrorDto handleResourceNotFoundException(ResourceNotFoundException resourceNotFoundException) {

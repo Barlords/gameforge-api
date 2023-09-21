@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.domain.functional.services.user;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
+import fr.esgi.gameforgeapi.domain.functional.services.RandomStringGenerator;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -45,5 +46,8 @@ public class UserModifierService {
         return user.withToken(UUID.randomUUID()).withTokenDate(LocalDate.now());
     }
 
+    public User updateVerificationCode(User user) {
+        return user.withVerificationCode(RandomStringGenerator.generateAlphanumericString(10));
+    }
 
 }

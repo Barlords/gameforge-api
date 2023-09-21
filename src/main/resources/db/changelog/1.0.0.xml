@@ -180,6 +180,15 @@
             <column name="token_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
+            <column name="newsletter_subscribed" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="verification_code" type="VARCHAR(256)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 

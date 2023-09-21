@@ -2,10 +2,15 @@ package fr.esgi.gameforgeapi.domain.ports.server;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface UserPersistenceSpi extends PersistenceSpi<User, UUID> {
+
+    Optional<User> findByVerificationCode(String code);
+
+    List<User> findByNewsletterSubscribed(boolean subscribed);
 
     Optional<User> findByToken(UUID token);
 

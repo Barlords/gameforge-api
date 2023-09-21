@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public record UserCreationRequest(
         @NotNull @JsonProperty("email")      String email,
         @NotNull @JsonProperty("password")   String password,
-        @NotNull @JsonProperty("pseudo")     String pseudo
+        @NotNull @JsonProperty("pseudo")     String pseudo,
+        @NotNull @JsonProperty("newsletterSubscription") boolean newsletterSubscription
 ) {
 }

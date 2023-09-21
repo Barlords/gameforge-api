@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.domain.functional.models;
 
+import fr.esgi.gameforgeapi.domain.functional.services.RandomStringGenerator;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
@@ -29,5 +30,17 @@ public class User {
 
     @With
     LocalDate tokenDate;
+
+    @Builder.Default
+    @With
+    boolean newsletterSubscribed = true;
+
+    @Builder.Default
+    @With
+    boolean enabled = false;
+
+    @Builder.Default
+    @With
+    String verificationCode = RandomStringGenerator.generateAlphanumericString(10);
 
 }

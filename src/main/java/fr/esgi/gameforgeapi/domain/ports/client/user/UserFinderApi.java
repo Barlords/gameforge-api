@@ -10,6 +10,8 @@ public interface UserFinderApi {
 
     List<User> findAll();
 
+    List<User> findByNewsletterSubscribed(boolean subscribed);
+
     Optional<User> findByToken(UUID token);
 
     Optional<User> findById(UUID id);

@@ -22,6 +22,11 @@ public class UserFinderService implements UserFinderApi {
     }
 
     @Override
+    public List<User> findByNewsletterSubscribed(boolean subscribed) {
+        return spi.findByNewsletterSubscribed(subscribed);
+    }
+
+    @Override
     public Optional<User> findById(UUID id) {
         return spi.findById(id);
     }
