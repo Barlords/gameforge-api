@@ -86,4 +86,6 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
         repository.deleteByToken(token);
     }
 
+
+
 }

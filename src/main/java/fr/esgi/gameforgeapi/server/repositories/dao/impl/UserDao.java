@@ -18,7 +18,6 @@ public class UserDao extends GenericDao<UserEntity> implements IUserDao {
     @Transactional
     public void print() {
         for(UserEntity u: getCurrentSession ().createQuery("from UserEntity", UserEntity.class).getResultList()) {
-            System.out.println("lalalala");
             System.out.println(u.getId());
         };
     }

@@ -7,6 +7,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.user.UserLoggerApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @RequiredArgsConstructor
