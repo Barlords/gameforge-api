@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
+import fr.esgi.gameforgeapi.client.services.EmailSenderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;
@@ -111,6 +112,11 @@ public class DomainConfiguration {
 
     @Bean
     public UserModifierService userModifierService() {return new UserModifierService();}
+
+    @Bean
+    public UserVerifierApi userVerifierApi(UserPersistenceSpi spi) {
+        return new UserVerifierService(spi);
+    }
 
     @Bean
     public LobbyCreatorApi lobbyCreatorApi(LobbyPersistenceSpi spi, TokenControllerService tokenControllerService) {

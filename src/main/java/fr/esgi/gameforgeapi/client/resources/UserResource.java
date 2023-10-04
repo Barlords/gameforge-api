@@ -4,14 +4,21 @@ import fr.esgi.gameforgeapi.client.dto.user.UserCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.user.UserDto;
 import fr.esgi.gameforgeapi.client.dto.user.UserLogRequest;
 import fr.esgi.gameforgeapi.client.mappers.UserDtoMapper;
+import fr.esgi.gameforgeapi.client.services.EmailSenderService;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
+import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
+import fr.esgi.gameforgeapi.domain.functional.services.user.UserVerifierService;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
@@ -32,6 +39,10 @@ public class UserResource {
     private final UserModifierService userModifierService;
 
     private final UserDeleterApi userDeleterApi;
+
+    private final UserVerifierApi userVerifierApi;
+
+    private final EmailSenderService emailSenderService;
 
     @GetMapping
     @ResponseStatus(OK)
@@ -76,12 +87,16 @@ public class UserResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public UserDto createUser(@Valid @RequestBody UserCreationRequest request) {
-        return UserDtoMapper.toDto(
-                userCreatorApi.create(
-                        UserDtoMapper.creationRequestToDomain(request)
-                )
-        );
+    public UserDto createUser(@Valid @RequestBody UserCreationRequest request, HttpServletRequest servletRequest) {
+        User user = userCreatorApi.create(UserDtoMapper.creationRequestToDomain(request));
+
+        try {
+            emailSenderService.sendAccountValidationMessage(user, getSiteURL(servletRequest));
+        } catch (Exception e) {
+            System.out.println("erreur lors de l'envoie de messsage (sendAccountValidationMessage)");
+        }
+
+        return UserDtoMapper.toDto(user);
     }
 
     @PutMapping("/{id}")
@@ -115,6 +130,16 @@ public class UserResource {
     @ResponseStatus(OK)
     public UserDto login(@RequestBody UserLogRequest log) {
         return UserDtoMapper.toDto(userLoggerApi.login(log.pseudo(), log.password()));
+    }
+
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        return userVerifierApi.verify(code) ? "verify_success" : "verify_fail";
+    }
+
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
 
 }

@@ -26,6 +26,18 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
 
     @Override
     @Transactional
+    public Optional<User> findByVerificationCode(String code) {
+        return repository.findByVerificationCode(code).map(UserEntityMapper::toDomain);
+    }
+
+    @Override
+    @Transactional
+    public List<User> findByNewsletterSubscribed(boolean subscribed) {
+        return repository.findByNewsletterSubscribed(subscribed).stream().map(UserEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    @Transactional
     public User save(User o) {
         return UserEntityMapper.toDomain(userDao.save(UserEntityMapper.fromDomain(o)));
     }

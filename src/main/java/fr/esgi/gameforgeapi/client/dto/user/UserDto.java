@@ -10,7 +10,8 @@ public record UserDto(
         String email,
         String pseudo,
         UUID token,
-        LocalDate tokenDate
+        LocalDate tokenDate,
+        boolean newsletterSubscribed
 ) {
 
 }

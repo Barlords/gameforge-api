@@ -3,14 +3,7 @@ package fr.esgi.gameforgeapi.server.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.TypeAlias;
 
-import java.io.Serializable;
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -22,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "user")
-public class UserEntity implements Serializable {
+public class UserEntity {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
@@ -42,5 +35,14 @@ public class UserEntity implements Serializable {
 
     @Column(name = "token_date", nullable = false)
     private LocalDate tokenDate;
+
+    @Column(name = "newsletter_subscribed", nullable = false)
+    private boolean newsletterSubscribed;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
+    @Column(name = "verification_code", nullable = false)
+    private String verificationCode;
 
 }

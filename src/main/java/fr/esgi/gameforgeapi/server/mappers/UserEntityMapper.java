@@ -13,6 +13,9 @@ public interface UserEntityMapper {
                 .pseudo(entity.getPseudo())
                 .token(entity.getToken())
                 .tokenDate(entity.getTokenDate())
+                .newsletterSubscribed(entity.isNewsletterSubscribed())
+                .enabled(entity.isEnabled())
+                .verificationCode(entity.getVerificationCode())
                 .build();
     }
 
@@ -24,6 +27,9 @@ public interface UserEntityMapper {
                 .pseudo(domain.getPseudo())
                 .token(domain.getToken())
                 .tokenDate(domain.getTokenDate())
+                .newsletterSubscribed(domain.isNewsletterSubscribed())
+                .enabled(domain.isEnabled())
+                .verificationCode(domain.getVerificationCode())
                 .build();
     }
 

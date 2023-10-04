@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.domain.functional.services.user;
 
+import fr.esgi.gameforgeapi.domain.functional.exceptions.AccountNotValidatedException;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
@@ -19,13 +20,14 @@ public class UserLoggerService implements UserLoggerApi {
 
     @Override
     public User login(String pseudo, String password) {
-        return spi.save(
-                tokenControllerService.updateToken(
-                        spi.findUserByPseudoAndPassword(pseudo, password)
-                                .orElseThrow(() -> new ResourceNotFoundException("Aucun utilisateur ne correspond au pseudo et password fournit"))
-                )
-        );
+        User user = spi.findUserByPseudoAndPassword(pseudo, password)
+                .orElseThrow(() -> new ResourceNotFoundException("Aucun utilisateur ne correspond au pseudo et password fournit"));
 
+        if(!user.isEnabled()) {
+           throw new AccountNotValidatedException("Le compte n'as pas été validé");
+        }
+
+        return spi.save(tokenControllerService.updateToken(user));
     }
 
 }
