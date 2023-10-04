@@ -5,7 +5,6 @@ import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
 import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
-import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,6 +97,10 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
         repository.deleteByToken(token);
     }
 
-
+    @Override
+    @Transactional
+    public User update(User o) {
+        return UserEntityMapper.toDomain(userDao.update(UserEntityMapper.fromDomain(o)));
+    }
 
 }

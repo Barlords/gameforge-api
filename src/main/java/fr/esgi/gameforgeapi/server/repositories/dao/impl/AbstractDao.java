@@ -41,7 +41,7 @@ public abstract class AbstractDao<T extends Serializable> {
         Preconditions.checkNotNull(entity);
         try {
             getCurrentSession().beginTransaction();
-            getCurrentSession().persist(entity);
+            getCurrentSession().merge(entity);
             getCurrentSession().getTransaction().commit();
             return entity;
         } catch (Exception e) {

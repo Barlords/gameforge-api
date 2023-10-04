@@ -27,7 +27,7 @@ public class UserLoggerService implements UserLoggerApi {
            throw new AccountNotValidatedException("Le compte n'as pas été validé");
         }
 
-        return spi.save(tokenControllerService.updateToken(user));
+        return spi.update(tokenControllerService.updateToken(user));
     }
 
 }

@@ -4,6 +4,7 @@ package fr.esgi.gameforgeapi.server.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
