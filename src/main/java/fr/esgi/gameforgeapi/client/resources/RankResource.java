@@ -30,15 +30,6 @@ public class RankResource {
 
     private final RankFinderApi rankFinderApi;
 
-    @GetMapping("")
-    @ResponseStatus(OK)
-    public List<RankDto> getGeneralRanks() {
-        return rankFinderApi.findGeneralRanks()
-                .stream()
-                .map(RankDtoMapper::toDto)
-                .toList();
-    }
-
     @GetMapping("/game/{gameId}")
     @ResponseStatus(OK)
     public List<RankDto> getRanksByGame(@PathVariable String gameId) {

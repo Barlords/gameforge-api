@@ -7,6 +7,7 @@ import java.util.UUID;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record RankDto(
         UUID id,
+        UUID gameId,
         UUID playerId,
         int playedGames,
         int wonGames

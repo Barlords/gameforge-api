@@ -25,11 +25,6 @@ public class RankFinderService implements RankFinderApi {
     }
 
     @Override
-    public List<Rank> findGeneralRanks() {
-        return null;
-    }
-
-    @Override
     public List<Rank> findByGame(UUID gameId) {
         return spi.findByGame(gameId);
     }

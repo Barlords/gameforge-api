@@ -16,6 +16,8 @@ public interface UserEntityMapper {
                 .newsletterSubscribed(entity.isNewsletterSubscribed())
                 .enabled(entity.isEnabled())
                 .verificationCode(entity.getVerificationCode())
+                .playedGames(entity.getPlayedGames())
+                .wonGames(entity.getWonGames())
                 .build();
     }
 
@@ -30,6 +32,8 @@ public interface UserEntityMapper {
                 .newsletterSubscribed(domain.isNewsletterSubscribed())
                 .enabled(domain.isEnabled())
                 .verificationCode(domain.getVerificationCode())
+                .playedGames(domain.getPlayedGames())
+                .wonGames(domain.getWonGames())
                 .build();
     }
 

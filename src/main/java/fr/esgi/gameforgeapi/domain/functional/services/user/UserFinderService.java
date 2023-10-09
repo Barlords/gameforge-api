@@ -45,4 +45,9 @@ public class UserFinderService implements UserFinderApi {
     public Optional<User> findByPseudo(String pseudo) {
         return spi.findByPseudo(pseudo);
     }
+
+    @Override
+    public List<User> findActiveUsers() {
+        return spi.findActiveUsers();
+    }
 }

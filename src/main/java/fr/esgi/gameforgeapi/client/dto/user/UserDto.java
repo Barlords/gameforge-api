@@ -11,7 +11,9 @@ public record UserDto(
         String pseudo,
         UUID token,
         LocalDate tokenDate,
-        boolean newsletterSubscribed
+        boolean newsletterSubscribed,
+        int playedGames,
+        int wonGames
 ) {
 
 }

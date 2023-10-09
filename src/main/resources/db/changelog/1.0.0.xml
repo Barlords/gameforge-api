@@ -189,6 +189,12 @@
             <column name="verification_code" type="VARCHAR(256)">
                 <constraints nullable="true"/>
             </column>
+            <column name="played_games" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="won_games" type="INT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

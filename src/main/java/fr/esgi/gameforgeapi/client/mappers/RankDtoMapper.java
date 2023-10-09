@@ -8,6 +8,7 @@ public interface RankDtoMapper {
     static RankDto toDto(Rank domain) {
         return new RankDto(
                 domain.getId(),
+                domain.getGameId(),
                 domain.getUserId(),
                 domain.getPlayedGames(),
                 domain.getWonGames()

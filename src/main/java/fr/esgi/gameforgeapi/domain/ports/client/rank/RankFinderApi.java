@@ -11,7 +11,5 @@ public interface RankFinderApi {
 
     List<Rank> findAll();
 
-    List<Rank> findGeneralRanks();
-
     List<Rank> findByGame(UUID gameId);
 }
