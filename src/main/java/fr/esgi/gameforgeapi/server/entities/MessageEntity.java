@@ -4,9 +4,7 @@ package fr.esgi.gameforgeapi.server.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -30,11 +28,11 @@ public class MessageEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(name = "channel_id", updatable = false, nullable = false)
+    private UUID channelId;
+
     @Column(name = "sender_id", updatable = false, nullable = false)
     private UUID senderId;
-
-    @Column(name = "receiver_id", updatable = false, nullable = false)
-    private UUID receiverId;
 
     @Column(name = "content", nullable = false)
     private String content;

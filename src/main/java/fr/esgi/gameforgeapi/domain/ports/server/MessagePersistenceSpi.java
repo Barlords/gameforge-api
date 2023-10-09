@@ -7,10 +7,8 @@ import java.util.UUID;
 
 public interface MessagePersistenceSpi extends PersistenceSpi<Message, UUID> {
 
-    List<Message> findDiscussionWith(UUID senderId, UUID friendId);
+    List<Message> findByChannelId(UUID receiverId);
 
     List<Message> findBySenderId(UUID senderId);
-
-    List<Message> findByReceiverId(UUID receiverId);
 
 }

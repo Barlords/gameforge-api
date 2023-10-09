@@ -12,8 +12,8 @@ public interface MessageDtoMapper {
     static MessageDto toDto(Message domain) {
         return new MessageDto(
                 domain.getId(),
+                domain.getChannelId(),
                 domain.getSenderId(),
-                domain.getReceiverId(),
                 domain.getContent(),
                 domain.getSendDate()
         );
@@ -22,7 +22,7 @@ public interface MessageDtoMapper {
     static Message creationRequestToDomain(MessageCreationRequest request) {
         return Message.builder()
                 .id(UUID.randomUUID())
-                .receiverId(UuidValidator.validate(request.receiverId()))
+                .channelId(UuidValidator.validate(request.channelId()))
                 .content(request.content())
                 .sendDate(request.sendDate())
                 .build();

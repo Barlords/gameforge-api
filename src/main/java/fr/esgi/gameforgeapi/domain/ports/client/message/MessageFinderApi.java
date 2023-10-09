@@ -9,6 +9,6 @@ public interface MessageFinderApi {
 
     List<Message> findBySenderId(UUID senderId);
 
-    List<Message> findDiscussionWith(UUID userToken, UUID receiverId);
+    List<Message> findByChannelId(UUID channelId);
 
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record MessageDto(
         UUID id,
+        UUID channelId,
         UUID senderId,
-        UUID receiverId,
         String content,
         LocalDate sendDate
 ) {

@@ -15,10 +15,10 @@ public class Message {
     UUID id = UUID.randomUUID();
 
     @With
-    UUID senderId;
+    UUID channelId;
 
     @With
-    UUID receiverId;
+    UUID senderId;
 
     @With
     String content;

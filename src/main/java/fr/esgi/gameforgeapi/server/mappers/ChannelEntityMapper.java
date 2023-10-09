@@ -9,7 +9,6 @@ public interface ChannelEntityMapper {
     static Channel toDomain(ChannelEntity entity) {
         return Channel.builder()
                 .id(entity.getId())
-                .creatorId(entity.getCreatorId())
                 .creationDate(entity.getCreationDate())
                 .build();
     }
@@ -17,7 +16,6 @@ public interface ChannelEntityMapper {
     static ChannelEntity fromDomain(Channel domain) {
         return ChannelEntity.builder()
                 .id(domain.getId())
-                .creatorId(domain.getCreatorId())
                 .creationDate(domain.getCreationDate())
                 .build();
     }

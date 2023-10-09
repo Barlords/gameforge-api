@@ -25,9 +25,9 @@ public class MessageFinderService implements MessageFinderApi {
     }
 
     @Override
-    public List<Message> findDiscussionWith(UUID userToken, UUID friendId) {
-        User user = tokenControllerService.getUser(userToken);
-
-        return spi.findDiscussionWith(user.getId(), friendId);
+    public List<Message> findByChannelId(UUID channelId) {
+        return spi.findByChannelId(channelId);
     }
+
+
 }
