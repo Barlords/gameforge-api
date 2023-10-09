@@ -19,4 +19,6 @@ public interface RankRepository extends JpaRepository<RankEntity, UUID> {
 
     Optional<RankEntity> findRankEntityById(UUID id);
 
+    List<RankEntity> findRankEntitiesByGameId(UUID gameId);
+
 }

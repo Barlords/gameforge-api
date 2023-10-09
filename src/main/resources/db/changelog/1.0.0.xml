@@ -134,7 +134,7 @@
             <column name="played_game" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="wined_game" type="INT">
+            <column name="won_game" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -38,10 +38,10 @@ public class RankEntity {
     @JdbcTypeCode(Types.VARCHAR)
     private UUID userId;
 
-    @Column(name = "played_game", nullable = false)
-    private int playedGame;
+    @Column(name = "played_games", nullable = false)
+    private int playedGames;
 
-    @Column(name = "wined_game", updatable = false, nullable = false)
-    private int winedGame;
+    @Column(name = "won_games", updatable = false, nullable = false)
+    private int wonGames;
 
 }
