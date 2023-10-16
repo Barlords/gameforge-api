@@ -29,7 +29,10 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
 
     Optional<UserEntity> findByPseudoAndPassword(String pseudo, String password);
 
-    @Query("SELECT u.*, u.wonGames/u.playedGames as winrate FROM user u WHERE played_games > 0 ORDER BY winrate")
+    @Query(
+            value = "SELECT u.*, u.won_games/u.played_games as winrate FROM user u WHERE played_games > 0 ORDER BY winrate",
+            nativeQuery = true
+    )
     List<UserEntity> findActiveUser();
 
     void deleteByToken(UUID token);

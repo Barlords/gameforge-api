@@ -330,7 +330,7 @@
     <changeSet id="add-fks-message-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="sender_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_user_sender"
+                                 constraintName="fk_message_sender"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
@@ -338,9 +338,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"
                                  validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="receiver_id"
+        <addForeignKeyConstraint baseColumnNames="channel_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_user_receiver"
+                                 constraintName="fk_message_channel"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"

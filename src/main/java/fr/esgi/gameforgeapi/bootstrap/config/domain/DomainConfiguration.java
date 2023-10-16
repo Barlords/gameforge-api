@@ -14,6 +14,7 @@ import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyDeleterService
 import fr.esgi.gameforgeapi.domain.functional.services.lobby.LobbyFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.message.MessageFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.rank.RankFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.rating.RatingPatcherService;
@@ -32,6 +33,7 @@ import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.rank.RankFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.rating.RatingPatcherApi;
@@ -51,6 +53,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = {"fr.esgi.gameforgeapi.server.repositories"})
 @ComponentScan(basePackages = {"fr.esgi.gameforgeapi.server.adapters"})
 public class DomainConfiguration {
+
+    @Bean
+    public RankFinderApi rankFinderApi(RankPersistenceSpi spi) {
+        return new RankFinderService(spi);
+    }
 
     @Bean
     public RatingPatcherApi ratingPatcherApi(RatingPersistenceSpi spi, TokenControllerService tokenControllerService) {
