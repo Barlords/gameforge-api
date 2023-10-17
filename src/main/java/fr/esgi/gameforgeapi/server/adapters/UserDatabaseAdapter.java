@@ -86,6 +86,11 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     }
 
     @Override
+    public List<User> findActiveUsers() {
+        return repository.findActiveUser().stream().map(UserEntityMapper::toDomain).toList();
+    }
+
+    @Override
     @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);

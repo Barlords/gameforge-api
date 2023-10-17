@@ -105,10 +105,10 @@
             <column name="id" type="BINARY(16)">
                 <constraints primaryKey="true" />
             </column>
-            <column name="sender_id" type="BINARY(16)">
+            <column name="channel_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
-            <column name="receiver_id" type="BINARY(16)">
+            <column name="sender_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
             <column name="content" type="VARCHAR(256)">
@@ -134,7 +134,7 @@
             <column name="played_game" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="wined_game" type="INT">
+            <column name="won_game" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -188,6 +188,12 @@
             </column>
             <column name="verification_code" type="VARCHAR(256)">
                 <constraints nullable="true"/>
+            </column>
+            <column name="played_games" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="won_games" type="INT">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
@@ -324,7 +330,7 @@
     <changeSet id="add-fks-message-1.0.3" author="barlords">
         <addForeignKeyConstraint baseColumnNames="sender_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_user_sender"
+                                 constraintName="fk_message_sender"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"
@@ -332,9 +338,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"
                                  validate="true"/>
-        <addForeignKeyConstraint baseColumnNames="receiver_id"
+        <addForeignKeyConstraint baseColumnNames="channel_id"
                                  baseTableName="message"
-                                 constraintName="fk_message_user_receiver"
+                                 constraintName="fk_message_channel"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  onDelete="RESTRICT"

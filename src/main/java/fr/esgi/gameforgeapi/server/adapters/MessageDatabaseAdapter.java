@@ -43,25 +43,14 @@ public class MessageDatabaseAdapter implements MessagePersistenceSpi {
         repository.deleteById(id);
     }
 
+
     @Override
-    @Transactional
-    public List<Message> findDiscussionWith(UUID userId, UUID friendId) {
-        return repository.findMessageEntitiesBySenderIdOrReceiverId(userId, userId).stream()
-                .map(MessageEntityMapper::toDomain)
-                .filter(message -> (message.getSenderId().equals(userId) && message.getReceiverId().equals(friendId))
-                        || (message.getSenderId().equals(friendId) && message.getReceiverId().equals(userId)))
-                .toList();
+    public List<Message> findByChannelId(UUID channelId) {
+        return repository.findMessageEntitiesByChannelIdOrderBySendDate(channelId).stream().map(MessageEntityMapper::toDomain).toList();
     }
 
     @Override
-    @Transactional
     public List<Message> findBySenderId(UUID senderId) {
-        return repository.findMessageEntitiesBySenderIdOrderByReceiverId(senderId).stream().map(MessageEntityMapper::toDomain).toList();
-    }
-
-    @Override
-    @Transactional
-    public List<Message> findByReceiverId(UUID receiverId) {
-        return repository.findMessageEntitiesByReceiverIdOrderBySenderId(receiverId).stream().map(MessageEntityMapper::toDomain).toList();
+        return repository.findMessageEntitiesBySenderIdOrderBySendDate(senderId).stream().map(MessageEntityMapper::toDomain).toList();
     }
 }

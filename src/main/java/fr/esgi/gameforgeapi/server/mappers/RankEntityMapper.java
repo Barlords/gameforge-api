@@ -10,8 +10,8 @@ public interface RankEntityMapper {
                 .id(entity.getId())
                 .gameId(entity.getGameId())
                 .userId(entity.getUserId())
-                .playedGame(entity.getPlayedGame())
-                .winedGame(entity.getWinedGame())
+                .playedGames(entity.getPlayedGames())
+                .wonGames(entity.getWonGames())
                 .build();
     }
 
@@ -20,8 +20,8 @@ public interface RankEntityMapper {
                 .id(domain.getId())
                 .gameId(domain.getGameId())
                 .userId(domain.getUserId())
-                .playedGame(domain.getPlayedGame())
-                .winedGame(domain.getWinedGame())
+                .playedGames(domain.getPlayedGames())
+                .wonGames(domain.getWonGames())
                 .build();
     }
 

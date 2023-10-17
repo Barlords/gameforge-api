@@ -85,6 +85,15 @@ public class UserResource {
                 .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur avec le pseudo \"" + pseudo + "\" est introuvable"));
     }
 
+    @GetMapping("/active")
+    @ResponseStatus(OK)
+    public List<UserDto> getActiveUsers() {
+        return userFinderApi.findActiveUsers()
+                .stream()
+                .map(UserDtoMapper::toDto)
+                .toList();
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     public UserDto createUser(@Valid @RequestBody UserCreationRequest request, HttpServletRequest servletRequest) {

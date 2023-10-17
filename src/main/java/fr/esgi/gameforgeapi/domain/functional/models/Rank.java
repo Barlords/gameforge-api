@@ -20,9 +20,9 @@ public class Rank {
     UUID userId;
 
     @With
-    int playedGame;
+    int playedGames;
 
     @With
-    int winedGame;
+    int wonGames;
 
 }

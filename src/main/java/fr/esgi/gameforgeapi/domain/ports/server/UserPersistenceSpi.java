@@ -23,6 +23,8 @@ public interface UserPersistenceSpi extends PersistenceSpi<User, UUID> {
 
     Optional<User> findUserByPseudoAndPassword(String pseudo, String password);
 
+    List<User> findActiveUsers();
+
     void deleteByToken(UUID token);
 
     @Transactional

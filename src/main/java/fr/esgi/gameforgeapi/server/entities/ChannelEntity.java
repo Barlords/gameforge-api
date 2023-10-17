@@ -29,9 +29,6 @@ public class ChannelEntity implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "creator_id", updatable = false, nullable = false)
-    private UUID creatorId;
-
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;
 

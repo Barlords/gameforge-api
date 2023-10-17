@@ -14,7 +14,9 @@ public interface UserDtoMapper {
                 domain.getPseudo(),
                 domain.getToken(),
                 domain.getTokenDate(),
-                domain.isNewsletterSubscribed()
+                domain.isNewsletterSubscribed(),
+                domain.getPlayedGames(),
+                domain.getWonGames()
         );
     }
 

@@ -43,4 +43,12 @@ public class User {
     @With
     String verificationCode = RandomStringGenerator.generateAlphanumericString(10);
 
+    @Builder.Default
+    @With
+    int playedGames = 0;
+
+    @Builder.Default
+    @With
+    int wonGames = 0;
+
 }

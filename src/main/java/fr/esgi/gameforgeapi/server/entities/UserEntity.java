@@ -46,4 +46,10 @@ public class UserEntity implements Serializable {
     @Column(name = "verification_code", nullable = false)
     private String verificationCode;
 
+    @Column(name = "played_games", nullable = false)
+    private int playedGames;
+
+    @Column(name = "won_games", nullable = false)
+    private int wonGames;
+
 }

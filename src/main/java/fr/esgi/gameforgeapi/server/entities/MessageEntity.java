@@ -31,11 +31,11 @@ public class MessageEntity implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(name = "channel_id", updatable = false, nullable = false)
+    private UUID channelId;
+
     @Column(name = "sender_id", updatable = false, nullable = false)
     private UUID senderId;
-
-    @Column(name = "receiver_id", updatable = false, nullable = false)
-    private UUID receiverId;
 
     @Column(name = "content", nullable = false)
     private String content;

@@ -43,4 +43,8 @@ public class RankDatabaseAdapter implements RankPersistenceSpi {
     }
 
 
+    @Override
+    public List<Rank> findByGame(UUID gameId) {
+        return repository.findRankEntitiesByGameId(gameId).stream().map(RankEntityMapper::toDomain).toList();
+    }
 }

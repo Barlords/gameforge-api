@@ -2,6 +2,7 @@ package fr.esgi.gameforgeapi.server.repositories;
 
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,12 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByEmailAndPassword(String email, String password);
 
     Optional<UserEntity> findByPseudoAndPassword(String pseudo, String password);
+
+    @Query(
+            value = "SELECT u.*, u.won_games/u.played_games as winrate FROM user u WHERE played_games > 0 ORDER BY winrate",
+            nativeQuery = true
+    )
+    List<UserEntity> findActiveUser();
 
     void deleteByToken(UUID token);
 

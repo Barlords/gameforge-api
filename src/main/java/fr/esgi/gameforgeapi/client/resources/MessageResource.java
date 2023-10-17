@@ -24,10 +24,10 @@ public class MessageResource {
 
     private final MessageFinderApi messageFinderApi;
 
-    @GetMapping("/{user_token}/{receiver_id}")
+    @GetMapping("/{channel_id}")
     @ResponseStatus(OK)
-    public List<MessageDto> getMessages(@PathVariable String user_token, @PathVariable String receiver_id) {
-        return messageFinderApi.findDiscussionWith(UuidValidator.validate(user_token), UuidValidator.validate(receiver_id))
+    public List<MessageDto> getMessagesByChannelId(@PathVariable String channel_id) {
+        return messageFinderApi.findByChannelId(UuidValidator.validate(channel_id))
                 .stream()
                 .map(MessageDtoMapper::toDto)
                 .toList();
