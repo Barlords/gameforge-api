@@ -7,6 +7,7 @@ import java.util.UUID;
 public interface UuidValidator {
 
     static UUID validate(String id) {
+        System.out.println("Checking string is UUID: " + id);
         try {
             return UUID.fromString(id);
         }

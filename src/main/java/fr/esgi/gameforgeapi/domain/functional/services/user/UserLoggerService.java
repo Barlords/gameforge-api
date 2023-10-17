@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+
 @Slf4j
 @RequiredArgsConstructor
 public class UserLoggerService implements UserLoggerApi {
@@ -26,8 +28,11 @@ public class UserLoggerService implements UserLoggerApi {
         if(!user.isEnabled()) {
            throw new AccountNotValidatedException("Le compte n'as pas été validé");
         }
-
-        return spi.update(tokenControllerService.updateToken(user));
+        if(!user.getTokenDate().atStartOfDay().isBefore((LocalDate.now()).atStartOfDay())) {
+            return spi.update(tokenControllerService.updateToken(user));
+        } else {
+            return user;
+        }
     }
 
 }
