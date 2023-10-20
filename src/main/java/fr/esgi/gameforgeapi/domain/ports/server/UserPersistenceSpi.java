@@ -24,6 +24,8 @@ public interface UserPersistenceSpi extends PersistenceSpi<User, UUID> {
 
     List<User> findActiveUsers();
 
+    List<User> findUsersByPseudo(String string_to_search);
+
     void deleteByToken(UUID token);
 
     User update(User o);

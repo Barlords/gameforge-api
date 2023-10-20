@@ -9,16 +9,13 @@ import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
-import fr.esgi.gameforgeapi.domain.functional.services.user.UserVerifierService;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
-import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
@@ -89,6 +86,15 @@ public class UserResource {
     @ResponseStatus(OK)
     public List<UserDto> getActiveUsers() {
         return userFinderApi.findActiveUsers()
+                .stream()
+                .map(UserDtoMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/search/{string_to_search}")
+    @ResponseStatus(OK)
+    public List<UserDto> getUsersByPseudo(@RequestParam String string_to_search) {
+        return userFinderApi.findUsersByPseudo(string_to_search)
                 .stream()
                 .map(UserDtoMapper::toDto)
                 .toList();
