@@ -1,11 +1,12 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
-import fr.esgi.gameforgeapi.client.services.EmailSenderService;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
@@ -24,7 +25,9 @@ import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterSer
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.action.ActionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
@@ -98,6 +101,16 @@ public class DomainConfiguration {
     @Bean
     public FriendCreatorApi friendCreatorApi(FriendPersistenceSpi spi, UserFinderApi userFinderApi) {
         return new FriendCreatorService(spi, userFinderApi);
+    }
+
+    @Bean
+    public FriendUpdaterApi friendUpdaterApi(FriendPersistenceSpi spi) {
+        return new FriendUpdaterService(spi);
+    }
+
+    @Bean
+    public FriendDeleterApi friendDeleterApi(FriendPersistenceSpi spi) {
+        return new FriendDeleterService(spi);
     }
 
     @Bean
