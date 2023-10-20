@@ -4,7 +4,6 @@ import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
-import io.vavr.control.Option;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,6 +81,12 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     @Override
     public List<User> findActiveUsers() {
         return repository.findActiveUser().stream().map(UserEntityMapper::toDomain).toList();
+    }
+
+    @Override
+    @Transactional()
+    public List<User> findUsersByPseudo(String string_to_search) {
+        return repository.findUsersByPseudo(string_to_search).stream().map(UserEntityMapper::toDomain).toList();
     }
 
     @Override

@@ -18,7 +18,9 @@ public interface UserFinderApi {
 
     Optional<User> findByEmail(String email);
 
-    Optional<User> findByPseudo(String pseudo);
+    Optional<User> findByPseudo(String string_to_search);
 
     List<User> findActiveUsers();
+
+    List<User> findUsersByPseudo(String pseudo);
 }

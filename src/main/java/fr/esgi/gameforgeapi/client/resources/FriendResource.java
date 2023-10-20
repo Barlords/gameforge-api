@@ -20,7 +20,6 @@ import static org.springframework.http.HttpStatus.OK;
 public class FriendResource {
 
     private final FriendCreatorApi friendCreatorApi;
-
     private final FriendFinderApi friendFinderApi;
 
     //private final FriendDeleterApi friendDeleterApi;
