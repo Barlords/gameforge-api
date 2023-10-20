@@ -1,13 +1,8 @@
 package fr.esgi.gameforgeapi.server.adapters;
 
-import fr.esgi.gameforgeapi.domain.functional.models.Message;
 import fr.esgi.gameforgeapi.domain.functional.models.Rating;
-import fr.esgi.gameforgeapi.domain.ports.server.MessagePersistenceSpi;
 import fr.esgi.gameforgeapi.domain.ports.server.RatingPersistenceSpi;
-import fr.esgi.gameforgeapi.server.mappers.FriendEntityMapper;
-import fr.esgi.gameforgeapi.server.mappers.MessageEntityMapper;
 import fr.esgi.gameforgeapi.server.mappers.RatingEntityMapper;
-import fr.esgi.gameforgeapi.server.repositories.MessageRepository;
 import fr.esgi.gameforgeapi.server.repositories.RatingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

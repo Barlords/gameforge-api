@@ -4,9 +4,7 @@ package fr.esgi.gameforgeapi.server.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
 
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -38,5 +36,8 @@ public class FriendEntity {
 
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;
+
+    @Column(name = "accepted", nullable = false)
+    private boolean accepted;
 
 }

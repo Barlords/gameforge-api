@@ -25,31 +25,24 @@ public class FriendCreatorService implements FriendCreatorApi {
     private final UserFinderApi userFinderApi;
 
     @Override
-    public void create(UUID userToken, String friendPseudo) {
+    public void create(UUID userToken, UUID friendId) {
 
         User user = userFinderApi.findByToken(userToken)
                 .orElseThrow(() -> new TokenNotValidException(userToken.toString()));
 
         List<Friend> friends = spi.findFriendsOf(user.getId());
-        
-        List<User> userFriends = friends.stream()
-                .map(f -> userFinderApi.findById(f.getFriendId())
-                        .orElseThrow(() ->new ApplicationErrorException("error")))
-                .filter(u -> u.getPseudo().equals(friendPseudo))
-                .toList();
 
-        if (!userFriends.isEmpty()) {
-            throw new FriendAlreadyExistException(friendPseudo);
+        for (Friend friend: friends) {
+            if ((friend.getUserId() == friendId && friend.getFriendId() == user.getId())
+                    || (friend.getUserId() == user.getId() && friend.getFriendId() == friendId)) {
+                throw new FriendAlreadyExistException(friendId.toString());
+            }
         }
 
-        User friend = userFinderApi.findByPseudo(friendPseudo)
-                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur " + friendPseudo + "n'existe pas"));
-
-        System.out.println(user.getId().toString());
-        System.out.println(friend.getId().toString());
+        User friend = userFinderApi.findById(friendId)
+                .orElseThrow(() -> new ResourceNotFoundException("L'utilisateur n'existe pas"));
 
         spi.save(Friend.builder().userId(user.getId()).friendId(friend.getId()).creationDate(LocalDate.now()).build());
-
     }
 
 

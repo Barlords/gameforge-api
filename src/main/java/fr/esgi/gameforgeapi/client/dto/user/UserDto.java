@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record UserDto(
+        UUID id,
         String email,
         String pseudo,
         UUID token,

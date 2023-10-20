@@ -13,8 +13,8 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface FriendRepository extends JpaRepository<FriendEntity, UUID> {
 
-    List<FriendEntity> findFriendEntitiesByUserIdEqualsOrFriendIdEquals(UUID userId, UUID friendId);
+    List<FriendEntity> findFriendEntitiesByAcceptedAndUserIdOrFriendId(boolean accepted, UUID userId, UUID friendId);
 
-    void deleteById(UUID friendId);
+    void deleteById(UUID id);
 
 }

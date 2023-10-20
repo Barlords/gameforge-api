@@ -23,4 +23,8 @@ public class Friend {
     @With
     LocalDate creationDate;
 
+    @With
+    @Builder.Default
+    boolean accepted = false;
+
 }

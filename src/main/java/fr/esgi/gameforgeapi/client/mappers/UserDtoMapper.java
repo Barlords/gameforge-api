@@ -10,6 +10,7 @@ public interface UserDtoMapper {
 
     static UserDto toDto(User domain) {
         return new UserDto(
+                domain.getId(),
                 domain.getEmail(),
                 domain.getPseudo(),
                 domain.getToken(),

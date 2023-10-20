@@ -2,7 +2,9 @@ package fr.esgi.gameforgeapi.client.resources;
 
 import fr.esgi.gameforgeapi.client.dto.friend.FriendCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.friend.FriendDto;
+import fr.esgi.gameforgeapi.client.dto.user.UserDto;
 import fr.esgi.gameforgeapi.client.mappers.FriendDtoMapper;
+import fr.esgi.gameforgeapi.client.mappers.UserDtoMapper;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
@@ -27,17 +29,17 @@ public class FriendResource {
 
     @GetMapping("/{user_token}")
     @ResponseStatus(OK)
-    public List<FriendDto> getFriends(@PathVariable String user_token) {
+    public List<UserDto> getFriends(@PathVariable String user_token) {
         return friendFinderApi.findFriendOf(UuidValidator.validate(user_token))
                 .stream()
-                .map(FriendDtoMapper::UserToFriendDto)
+                .map(UserDtoMapper::toDto)
                 .toList();
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
     public void createFriend(@RequestBody FriendCreationRequest request) {
-        friendCreatorApi.create(UuidValidator.validate(request.userToken()), request.friendPseudo());
+        friendCreatorApi.create(UuidValidator.validate(request.userToken()), UuidValidator.validate(request.friendId()));
     }
 
 }

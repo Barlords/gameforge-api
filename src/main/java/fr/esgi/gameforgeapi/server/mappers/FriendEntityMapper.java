@@ -1,9 +1,7 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Friend;
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.FriendEntity;
-import fr.esgi.gameforgeapi.server.entities.UserEntity;
 
 public interface FriendEntityMapper {
 

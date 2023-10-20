@@ -32,14 +32,14 @@ public class FriendFinderService implements FriendFinderApi {
 
         return friends.stream()
                 .map(f -> {
-                    Optional<User> userFriend = Optional.empty();
+                    Optional<User> userFriend;
                     if (f.getUserId().equals(user.getId())) {
                         userFriend = userFinderApi.findById(f.getFriendId());
                     }
                     else {
                         userFriend = userFinderApi.findById(f.getUserId());
                     }
-                    return userFriend.orElseThrow(() -> new ResourceNotFoundException("error"));
+                    return userFriend.orElseThrow(() -> new ResourceNotFoundException("error when map list of Friend"));
                 })
                 .toList();
     }
