@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.util.Base64;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,7 +25,7 @@ public class UserLoggerService implements UserLoggerApi {
 
     @Override
     public User login(String pseudo, String password) {
-        User user = spi.findUserByPseudoAndPassword(pseudo, password)
+        User user = spi.findUserByPseudoAndPassword(pseudo, hashPassword(password))
                 .orElseThrow(() -> new ResourceNotFoundException("Aucun utilisateur ne correspond au pseudo et password fournit"));
 
         if(!user.isEnabled()) {
@@ -32,6 +35,16 @@ public class UserLoggerService implements UserLoggerApi {
             return spi.update(tokenControllerService.updateToken(user));
         } else {
             return user;
+        }
+    }
+
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error occurred during hashing", e);
         }
     }
 

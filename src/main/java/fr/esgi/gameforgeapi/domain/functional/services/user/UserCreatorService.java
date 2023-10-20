@@ -8,6 +8,9 @@ import fr.esgi.gameforgeapi.domain.ports.client.user.UserCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.server.UserPersistenceSpi;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 import java.util.Optional;
 
@@ -44,9 +47,18 @@ public class UserCreatorService implements UserCreatorApi {
         }
 
         user = userModifierService.updateToken(user);
+        user = user.withPassword(hashPassword(user.getPassword()));
 
         return spi.save(user);
     }
 
-
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error occurred during hashing", e);
+        }
+    }
 }
