@@ -30,6 +30,21 @@ public class FriendDatabaseAdapter implements FriendPersistenceSpi {
 
     @Override
     @Transactional
+    public List<Friend> findFriendsRequestsOf(UUID userId) {
+        return repository.findFriendEntitiesByAcceptedAndUserIdOrFriendId(false, userId, userId)
+                .stream()
+                .map(FriendEntityMapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    @Transactional
+    public Boolean isFriendOfOrAsked(UUID userId, UUID otherUserId) {
+        return repository.isFriendOfOrAsked(userId,otherUserId);
+    }
+
+    @Override
+    @Transactional
     public Friend save(Friend o) {
         return FriendEntityMapper.toDomain(repository.save(FriendEntityMapper.fromDomain(o)));
     }
@@ -51,6 +66,8 @@ public class FriendDatabaseAdapter implements FriendPersistenceSpi {
     public void acceptFriend(UUID id) {
         repository.acceptFriend(id);
     }
+
+
 
     @Override
     @Transactional

@@ -21,6 +21,11 @@ public interface FriendRepository extends JpaRepository<FriendEntity, UUID> {
     @Modifying
     void acceptFriend(UUID id);
 
+
+    @Query("SELECT CASE WHEN COUNT(f) > 0 THEN TRUE ELSE FALSE END FROM FriendEntity f WHERE (f.userId = ?1 AND f.friendId = ?2) OR (f.userId = ?2 AND f.friendId = ?1)")
+    boolean isFriendOfOrAsked(UUID idUser, UUID idOtherUser);
+
+
     void deleteById(UUID id);
 
 }

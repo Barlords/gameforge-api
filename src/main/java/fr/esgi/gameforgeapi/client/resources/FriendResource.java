@@ -37,6 +37,24 @@ public class FriendResource {
                 .toList();
     }
 
+    @GetMapping("/asked_requests/{user_token}")
+    @ResponseStatus(OK)
+    public List<UserDto> getAskedRequests(@PathVariable String user_token) {
+        return friendFinderApi.getAskedRequests(UuidValidator.validate(user_token))
+                .stream()
+                .map(UserDtoMapper::toDto)
+                .toList();
+    }
+
+    @GetMapping("/sent_requests/{user_token}")
+    @ResponseStatus(OK)
+    public List<UserDto> getSentRequests(@PathVariable String user_token) {
+        return friendFinderApi.getSentRequests(UuidValidator.validate(user_token))
+                .stream()
+                .map(UserDtoMapper::toDto)
+                .toList();
+    }
+
     @PostMapping
     @ResponseStatus(CREATED)
     public void createFriend(@RequestBody FriendCreationRequest request) {

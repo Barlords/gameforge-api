@@ -2,6 +2,7 @@ package fr.esgi.gameforgeapi.client.resources;
 
 import fr.esgi.gameforgeapi.client.dto.user.UserCreationRequest;
 import fr.esgi.gameforgeapi.client.dto.user.UserDto;
+import fr.esgi.gameforgeapi.client.dto.user.UserFriendOrNotDto;
 import fr.esgi.gameforgeapi.client.dto.user.UserLogRequest;
 import fr.esgi.gameforgeapi.client.mappers.UserDtoMapper;
 import fr.esgi.gameforgeapi.client.services.EmailSenderService;
@@ -17,6 +18,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -94,10 +96,16 @@ public class UserResource {
     @GetMapping("/search/{string_to_search}")
     @ResponseStatus(OK)
     public List<UserDto> getUsersByPseudo(@RequestParam String string_to_search) {
-        return userFinderApi.findUsersByPseudo(string_to_search)
+        return userFinderApi.findUsersByString(string_to_search)
                 .stream()
                 .map(UserDtoMapper::toDto)
                 .toList();
+    }
+
+    @GetMapping("/search/friend_or_not")
+    @ResponseStatus(OK)
+    public List<UserFriendOrNotDto> getUsersFriendOrNotByPseudo(@RequestParam String string_to_search,@RequestParam String user_token) {
+        return userFinderApi.findUsersFriendOrNotByPseudo(string_to_search, UUID.fromString(user_token));
     }
 
     @PostMapping

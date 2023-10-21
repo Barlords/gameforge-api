@@ -125,7 +125,12 @@ public class DomainConfiguration {
     public UserDeleterApi userDeleterApi(UserPersistenceSpi spi) {return new UserDeleterService(spi);}
 
     @Bean
-    public UserFinderApi userFinderApi(UserPersistenceSpi spi) {return new UserFinderService(spi);}
+    public FriendFinderService friendFinderService( FriendPersistenceSpi spi,
+                                                    TokenControllerService tokenControllerService,
+                                                    UserFinderApi userFinderApi) {return new FriendFinderService(spi, tokenControllerService, userFinderApi);}
+
+    @Bean
+    public UserFinderApi userFinderApi(UserPersistenceSpi spi, FriendPersistenceSpi friendPersistenceSpi) {return new UserFinderService(spi,friendPersistenceSpi);}
 
     @Bean
     public UserLoggerApi userLoggerApi(UserPersistenceSpi spi, TokenControllerService tokenControllerService) {return new UserLoggerService(spi, tokenControllerService);}
