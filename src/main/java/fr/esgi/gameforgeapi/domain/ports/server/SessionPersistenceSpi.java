@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.domain.ports.server;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -13,4 +14,6 @@ public interface SessionPersistenceSpi extends PersistenceSpi<Session, UUID> {
 
     void closeAllUserSessions(LocalDate quitDate, UUID userId);
 
+    @Transactional
+    Optional<Session> findByLobbyId(UUID id);
 }

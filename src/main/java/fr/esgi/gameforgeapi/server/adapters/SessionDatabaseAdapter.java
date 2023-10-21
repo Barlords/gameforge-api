@@ -57,5 +57,10 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
         repository.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public Optional<Session> findByLobbyId(UUID id) {
+        return repository.findSessionEntityByLobbyId(id).map(SessionEntityMapper::toDomain);
+    }
 
 }

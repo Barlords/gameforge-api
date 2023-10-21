@@ -36,6 +36,12 @@
             <column name="creation_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
+            <column name="lobby_id" type="BINARY(16)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="friend_id" type="BINARY(16)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 

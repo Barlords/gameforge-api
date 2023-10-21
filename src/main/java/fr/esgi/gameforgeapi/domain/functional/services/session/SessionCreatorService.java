@@ -29,7 +29,7 @@ public class SessionCreatorService implements SessionCreatorApi {
         Optional<Session> userHasAlreadyASession = sessionFinderService.findLastByUserIdAndQuitTimeIsNull(user.getId());
 
         if(userHasAlreadyASession.isPresent()) {
-            throw new UserHasAlreadyASessionException("l'utilisateur a déja une session active");
+            throw new UserHasAlreadyASessionException("l'utilisateur avez déjà une partie en cours");
         }
 
         return spi.save(session.withUserId(user.getId()));
