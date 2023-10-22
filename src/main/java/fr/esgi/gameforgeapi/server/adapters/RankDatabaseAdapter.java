@@ -38,12 +38,14 @@ public class RankDatabaseAdapter implements RankPersistenceSpi {
     }
 
     @Override
+    @Transactional
     public void deleteById(UUID id) {
         repository.deleteById(id);
     }
 
 
     @Override
+    @Transactional
     public List<Rank> findByGame(UUID gameId) {
         return repository.findRankEntitiesByGameId(gameId).stream().map(RankEntityMapper::toDomain).toList();
     }

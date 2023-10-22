@@ -31,10 +31,10 @@ public interface UserRepository extends JpaRepository<UserEntity, UUID> {
     Optional<UserEntity> findByPseudoAndPassword(String pseudo, String password);
 
     @Query(
-            value = "SELECT u.*, u.won_games/u.played_games as winrate FROM user u WHERE played_games > 0 ORDER BY winrate",
+            value = "SELECT u.*, u.won_games/u.played_games as winrate FROM user u WHERE played_games > 0 ORDER BY winrate DESC, u.played_games DESC",
             nativeQuery = true
     )
-    List<UserEntity> findActiveUser();
+    List<UserEntity> findActiveUserOrderByWinrate();
 
     @Query(
             value = "SELECT u.* FROM user u WHERE u.pseudo LIKE CONCAT('%', :string_to_search, '%')",
