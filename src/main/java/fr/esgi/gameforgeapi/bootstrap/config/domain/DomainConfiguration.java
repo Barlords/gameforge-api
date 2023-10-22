@@ -1,5 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.config.domain;
 
+import fr.esgi.gameforgeapi.client.services.EmailSenderService;
+import fr.esgi.gameforgeapi.client.services.websocket.WebSocketHandler;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;

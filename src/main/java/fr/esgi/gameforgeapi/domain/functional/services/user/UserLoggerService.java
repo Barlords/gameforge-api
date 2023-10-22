@@ -31,7 +31,7 @@ public class UserLoggerService implements UserLoggerApi {
         if(!user.isEnabled()) {
            throw new AccountNotValidatedException("Le compte n'as pas été validé");
         }
-        if(!user.getTokenDate().atStartOfDay().isBefore((LocalDate.now()).atStartOfDay())) {
+        if(user.getTokenDate().atStartOfDay().isBefore((LocalDate.now()).atStartOfDay())) {
             return spi.update(tokenControllerService.updateToken(user));
         } else {
             return user;

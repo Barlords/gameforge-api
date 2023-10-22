@@ -17,7 +17,6 @@ public class SessionFinderService implements SessionFinderApi {
     private final SessionPersistenceSpi spi;
 
 
-
     @Override
     public List<Session> findAll() {
         return spi.findAll();

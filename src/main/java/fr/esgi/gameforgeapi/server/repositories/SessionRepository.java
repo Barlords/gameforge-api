@@ -26,4 +26,6 @@ public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
     @Modifying
     void closeAllUserSessions(LocalDate quitDate, UUID userId);
 
+    Optional<SessionEntity> findSessionEntityByLobbyId (UUID id);
+
 }

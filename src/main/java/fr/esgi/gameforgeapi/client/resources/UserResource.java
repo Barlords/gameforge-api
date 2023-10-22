@@ -11,9 +11,11 @@ import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundExcepti
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
+import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +44,9 @@ public class UserResource {
     private final UserVerifierApi userVerifierApi;
 
     private final EmailSenderService emailSenderService;
+
+    @Autowired
+    private IUserDao userDao;
 
     @GetMapping
     @ResponseStatus(OK)
@@ -163,6 +168,15 @@ public class UserResource {
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
         return siteURL.replace(request.getServletPath(), "");
+    }
+
+    @GetMapping("/lobby/{id}")
+    @ResponseStatus(OK)
+    public List<UserDto> getUsersByLobby(@PathVariable UUID id) {
+        return userDao.findUserByLobbyId(id)
+                .stream()
+                .map(UserDtoMapper::toDto)
+                .toList();
     }
 
 }

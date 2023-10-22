@@ -5,6 +5,7 @@ import fr.esgi.gameforgeapi.client.dto.session.SessionDto;
 import fr.esgi.gameforgeapi.client.mappers.SessionDtoMapper;
 import fr.esgi.gameforgeapi.client.validator.UuidValidator;
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
+import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
@@ -57,9 +58,24 @@ public class SessionResource {
         );
     }
 
+    @GetMapping("/user/{id}")
+    @ResponseStatus(OK)
+    public SessionDto getLastSession(@Valid @PathVariable UUID id) {
+        return sessionFinderApi.findLastByUserIdAndQuitTimeIsNull(id)
+                .map(SessionDtoMapper::toDto).orElse(null);
+    }
+
     @PatchMapping("/{user_token}")
     @ResponseStatus(OK)
     public void updateSession(@PathVariable String user_token) {
         sessionUpdaterApi.closeAllUserSessions(UUID.fromString(user_token));
+    }
+
+    @GetMapping("/lobby/{id}")
+    @ResponseStatus(OK)
+    public SessionDto getSessionByLobbyId(@PathVariable String id) {
+        return sessionFinderApi.findById(UuidValidator.validate(id))
+                .map(SessionDtoMapper::toDto)
+                .orElseThrow(() -> new ResourceNotFoundException("La session : " + id + " est introuvable"));
     }
 }
