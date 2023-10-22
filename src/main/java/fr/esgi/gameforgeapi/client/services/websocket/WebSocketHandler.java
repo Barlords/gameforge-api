@@ -28,8 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 
-    @Autowired
-    private SessionDatabaseAdapter sessionDatabaseAdapter;
+
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws IOException {
@@ -50,7 +49,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         List<String> tokenList = (List<String>) session.getAttributes().get("usertoken");
         String token = tokenList.get(0);
         sessions.remove(token);
-        sessionDatabaseAdapter.closeAllCurrentSessionIfNecessary(token);
+        //sessionDatabaseAdapter.closeAllCurrentSessionIfNecessary(token);
         super.afterConnectionClosed(session, status);
     }
 

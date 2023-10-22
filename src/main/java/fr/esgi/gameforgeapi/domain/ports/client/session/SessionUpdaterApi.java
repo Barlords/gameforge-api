@@ -3,6 +3,7 @@ package fr.esgi.gameforgeapi.domain.ports.client.session;
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.UUID;
 
 public interface SessionUpdaterApi {
@@ -11,5 +12,5 @@ public interface SessionUpdaterApi {
 
     void closeAllUserSessions(UUID userToken);
 
-    void closeCurrentSessionIfNecessary(String token);
+    void closeCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException;
 }

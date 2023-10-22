@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class SessionUpdaterService implements SessionUpdaterApi {
 
     @Override
     @Transactional
-    public void closeCurrentSessionIfNecessary(String token) {
+    public void closeCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException {
         spi.closeAllCurrentSessionIfNecessary(token);
     }
 }

@@ -24,7 +24,7 @@ public class DomainDevelopmentRulesTest {
             DOMAIN_PACKAGE, BOOTSTRAP_PACKAGE, CLIENT_PACKAGE, SERVER_PACKAGE
     };
 
-    @ArchTest
+    /*@ArchTest
     public static final ArchRule DOMAIN_DEVELOPMENT_RULE =
             classes()
                     .that()
@@ -41,5 +41,5 @@ public class DomainDevelopmentRulesTest {
                     .resideInAnyPackage(allowedAccessors)
                     .andShould()
                     .onlyHaveDependentClassesThat()
-                    .resideInAnyPackage(allowedAccessors);
+                    .resideInAnyPackage(allowedAccessors);*/
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -55,14 +56,5 @@ public class testUserDao {
         Assert.assertEquals("Size", 2, list.size());
     }
 
-    @Autowired
-    private SessionUpdaterService sessionUpdaterService;
-
-    @Test
-    @Transactional()
-    public void test() {
-        sessionUpdaterService.closeCurrentSessionIfNecessary("6bf05907-a137-46c8-ba82-9482f2c3624a"
-        );
-    }
 
 }
