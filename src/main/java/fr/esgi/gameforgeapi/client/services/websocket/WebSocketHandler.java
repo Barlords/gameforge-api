@@ -1,7 +1,18 @@
-package fr.esgi.gameforgeapi.websocket;
+package fr.esgi.gameforgeapi.client.services.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
+import fr.esgi.gameforgeapi.domain.ports.server.SessionPersistenceSpi;
+import fr.esgi.gameforgeapi.server.adapters.SessionDatabaseAdapter;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -10,11 +21,15 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
+@RequiredArgsConstructor
 public class WebSocketHandler extends TextWebSocketHandler {
     private final Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
+
+    @Autowired
+    private SessionDatabaseAdapter sessionDatabaseAdapter;
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws IOException {
@@ -35,6 +50,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         List<String> tokenList = (List<String>) session.getAttributes().get("usertoken");
         String token = tokenList.get(0);
         sessions.remove(token);
+        sessionDatabaseAdapter.closeAllCurrentSessionIfNecessary(token);
         super.afterConnectionClosed(session, status);
     }
 

@@ -1,4 +1,4 @@
-package fr.esgi.gameforgeapi.websocket;
+package fr.esgi.gameforgeapi.client.services.websocket;
 
 public class JsonCom {
 

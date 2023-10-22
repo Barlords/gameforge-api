@@ -43,4 +43,11 @@ public class UserDao extends GenericDao<UserEntity> implements IUserDao {
                 .setParameter("id", id).getResultList().stream().map(UserEntityMapper::toDomain).toList();
     }
 
+    @Override
+    public User findUserByToken(UUID token) {
+        return UserEntityMapper.toDomain(getCurrentSession ().createQuery(
+                        "from UserEntity where token = :token", UserEntity.class)
+                .setParameter("token", token).uniqueResult());
+    }
+
 }

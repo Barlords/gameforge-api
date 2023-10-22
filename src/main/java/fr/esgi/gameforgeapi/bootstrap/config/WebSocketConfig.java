@@ -1,7 +1,9 @@
 package fr.esgi.gameforgeapi.bootstrap.config;
 
-import fr.esgi.gameforgeapi.websocket.CustomHandshakeInterceptor;
-import fr.esgi.gameforgeapi.websocket.WebSocketHandler;
+import fr.esgi.gameforgeapi.client.services.websocket.CustomHandshakeInterceptor;
+import fr.esgi.gameforgeapi.client.services.websocket.WebSocketHandler;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +15,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 @CrossOrigin
 public class WebSocketConfig implements WebSocketConfigurer {
+
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {

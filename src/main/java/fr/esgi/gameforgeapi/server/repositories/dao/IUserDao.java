@@ -15,4 +15,6 @@ public interface IUserDao extends IGenericDao<UserEntity> {
 
     @Transactional
     List<User> findUserByLobbyId(UUID id);
+
+    User findUserByToken(UUID fromString);
 }

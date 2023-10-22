@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.bootstrap.dao;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
+import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
@@ -54,5 +55,14 @@ public class testUserDao {
         Assert.assertEquals("Size", 2, list.size());
     }
 
+    @Autowired
+    private SessionUpdaterService sessionUpdaterService;
+
+    @Test
+    @Transactional()
+    public void test() {
+        sessionUpdaterService.closeCurrentSessionIfNecessary("6bf05907-a137-46c8-ba82-9482f2c3624a"
+        );
+    }
 
 }

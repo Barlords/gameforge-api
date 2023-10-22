@@ -14,6 +14,7 @@ public interface SessionPersistenceSpi extends PersistenceSpi<Session, UUID> {
 
     void closeAllUserSessions(LocalDate quitDate, UUID userId);
 
-    @Transactional
     Optional<Session> findByLobbyId(UUID id);
+
+    void closeAllCurrentSessionIfNecessary(String token);
 }
