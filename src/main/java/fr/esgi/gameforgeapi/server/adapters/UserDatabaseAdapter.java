@@ -114,4 +114,11 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
         return UserEntityMapper.toDomain(userDao.update(UserEntityMapper.fromDomain(o)));
     }
 
+    @Override
+    @Transactional
+    public List<User> findActiveUsersInLobby(UUID lobbyId) {
+        return repository.findActiveUsersInLobby(lobbyId).stream().map(UserEntityMapper::toDomain).toList();
+    }
+
+
 }

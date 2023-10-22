@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.server.mappers;
 
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
+import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.SessionEntity;
 
 public interface SessionEntityMapper {

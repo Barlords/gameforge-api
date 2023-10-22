@@ -1,9 +1,20 @@
 package fr.esgi.gameforgeapi.client.services.websocket;
 
+import fr.esgi.gameforgeapi.domain.functional.models.User;
+import lombok.Builder;
+import lombok.Value;
+import lombok.With;
+
+@Builder
 public class JsonCom {
 
+    @With
     private String action;
+    @With
     private String data;
+
+    @With
+    private User user;
 
     // Constructor
     public JsonCom() {
@@ -32,11 +43,20 @@ public class JsonCom {
         this.data = data;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "JsonCom{" +
                 "action='" + action + '\'' +
                 ", data='" + data + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

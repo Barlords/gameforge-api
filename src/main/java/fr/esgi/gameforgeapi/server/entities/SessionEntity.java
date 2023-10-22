@@ -1,10 +1,8 @@
 package fr.esgi.gameforgeapi.server.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import fr.esgi.gameforgeapi.domain.functional.models.User;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -34,7 +32,7 @@ public class SessionEntity implements Serializable {
     @Column(name = "join_date", updatable = false, nullable = false)
     private LocalDate joinDate;
 
-    @Column(name = "quit_date", updatable = false)
+    @Column(name = "quit_date")
     private LocalDate quitDate;
 
 }

@@ -57,6 +57,7 @@ public class LobbyResource {
     @PostMapping
     @ResponseStatus(CREATED)
     public LobbyDto createLobby(@Valid @RequestBody LobbyCreationRequest request) {
+
         return LobbyDtoMapper.toDto(
                 lobbyCreatorApi.create(
                         UuidValidator.validate(request.userToken()),

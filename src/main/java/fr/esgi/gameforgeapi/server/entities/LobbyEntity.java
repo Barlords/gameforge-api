@@ -1,14 +1,13 @@
 package fr.esgi.gameforgeapi.server.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -48,4 +47,5 @@ public class LobbyEntity implements Serializable {
 
     @Column(name = "winner_id", nullable = false)
     private UUID winnerId;
+
 }

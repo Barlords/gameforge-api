@@ -1,22 +1,24 @@
 package fr.esgi.gameforgeapi.server.adapters;
 
+import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.server.SessionPersistenceSpi;
+import fr.esgi.gameforgeapi.server.entities.LobbyEntity;
 import fr.esgi.gameforgeapi.server.entities.SessionEntity;
+import fr.esgi.gameforgeapi.server.mappers.LobbyEntityMapper;
 import fr.esgi.gameforgeapi.server.mappers.SessionEntityMapper;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
+import fr.esgi.gameforgeapi.server.repositories.LobbyRepository;
 import fr.esgi.gameforgeapi.server.repositories.SessionRepository;
 import fr.esgi.gameforgeapi.server.repositories.UserRepository;
-import fr.esgi.gameforgeapi.server.repositories.dao.ISessionDao;
-import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,6 +30,8 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
     private final SessionRepository sessionRepository;
 
     private final UserRepository userRepository;
+
+    private final LobbyRepository lobbyRepository;
 
     @Override
     @Transactional
@@ -68,24 +72,28 @@ public class SessionDatabaseAdapter implements SessionPersistenceSpi {
 
     @Override
     @Transactional
-    public Optional<Session> findByLobbyId(UUID id) {
-        return sessionRepository.findSessionEntityByLobbyId(id).map(SessionEntityMapper::toDomain);
+    public List<Session> findByLobbyId(UUID id) {
+        return sessionRepository.findSessionEntityByLobbyId(id).stream().map(SessionEntityMapper::toDomain).toList();
     }
 
     @Override
     @Transactional
-    public void closeAllCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException {
+    public Lobby closeAllCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException {
         User u = UserEntityMapper.toDomain(userRepository.findByToken(UUID.fromString(token))
                 .orElseThrow(() -> new UserPrincipalNotFoundException("")));
         if(u != null) {
             Optional<SessionEntity> se =  sessionRepository.findLastByUserIdAndQuitTimeIsNull(u.getId());
             if(se.isPresent()) {
                 Session s = SessionEntityMapper.toDomain(se.get());
-                Session s_ = s.withQuitDate(LocalDate.now());
-                sessionRepository.save(SessionEntityMapper.fromDomain(s_));
-                System.out.println("Closed session " + s_.getId() + " for User: " + u.getId());
+                s = s.withQuitDate(LocalDate.now());
+                sessionRepository.saveAndFlush(SessionEntityMapper.fromDomain(s));
+                System.out.println("Closed session " + s.getId() + " for User: " + u.getId());
+
+                Optional<LobbyEntity> l = lobbyRepository.findLobbyEntityById(s.getLobbyId());
+                return l.map(LobbyEntityMapper::toDomain).orElse(null);
             }
         }
+        return null;
     }
 
 }

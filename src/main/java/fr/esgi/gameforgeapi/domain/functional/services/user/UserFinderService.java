@@ -80,4 +80,9 @@ public class UserFinderService implements UserFinderApi {
         return result;
 
     }
+
+    @Override
+    public List<User> findActiveUsersInLobby(UUID id) {
+        return spi.findActiveUsersInLobby(id);
+    }
 }
