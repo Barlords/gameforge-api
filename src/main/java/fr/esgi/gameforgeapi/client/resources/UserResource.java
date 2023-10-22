@@ -11,6 +11,7 @@ import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundExcepti
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.user.UserModifierService;
 import fr.esgi.gameforgeapi.domain.ports.client.user.*;
+import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

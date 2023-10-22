@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.server.repositories.dao.impl;
 
+import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
