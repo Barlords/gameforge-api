@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public interface FriendDeleterApi {
 
-    void deleteById(UUID id);
+    void deleteFriend(UUID userToken,UUID friendToken);
 
 
 }

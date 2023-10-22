@@ -104,13 +104,13 @@ public class DomainConfiguration {
     }
 
     @Bean
-    public FriendUpdaterApi friendUpdaterApi(FriendPersistenceSpi spi) {
-        return new FriendUpdaterService(spi);
+    public FriendUpdaterApi friendUpdaterApi(FriendPersistenceSpi spi,TokenControllerService tokenControllerService) {
+        return new FriendUpdaterService(spi,tokenControllerService);
     }
 
     @Bean
-    public FriendDeleterApi friendDeleterApi(FriendPersistenceSpi spi) {
-        return new FriendDeleterService(spi);
+    public FriendDeleterApi friendDeleterApi(FriendPersistenceSpi spi,TokenControllerService tokenControllerService) {
+        return new FriendDeleterService(spi,tokenControllerService);
     }
 
     @Bean

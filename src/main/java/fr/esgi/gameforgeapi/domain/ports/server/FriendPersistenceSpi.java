@@ -18,7 +18,8 @@ public interface FriendPersistenceSpi extends PersistenceSpi<Friend, UUID> {
     Boolean isFriendOfOrAsked(UUID userId, UUID otherUserId);
 
     @Transactional
-    void acceptFriend(UUID id);
+    void acceptFriend(UUID userId,UUID friendId);
 
-    void deleteById(UUID id);
+    @Transactional
+    void deleteFriend(UUID userId,UUID friendId);
 }

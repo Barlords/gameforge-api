@@ -61,16 +61,16 @@ public class FriendResource {
         friendCreatorApi.create(UuidValidator.validate(request.userToken()), UuidValidator.validate(request.friendId()));
     }
 
-    @PatchMapping("/accept/{id}")
+    @PatchMapping("/accept/{user_token}/{friend_token}")
     @ResponseStatus(OK)
-    public void updateSession(@PathVariable String id) {
-        friendUpdaterApi.acceptFriend(UuidValidator.validate(id));
+    public void acceptFriend(@PathVariable String user_token, @PathVariable String friend_token) {
+        friendUpdaterApi.acceptFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_token));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{user_token}/{friend_token}")
     @ResponseStatus(OK)
-    public void deleteSession(@PathVariable String id) {
-        friendDeleterApi.deleteById(UuidValidator.validate(id));
+    public void deleteFriend(@PathVariable String user_token, @PathVariable String friend_token) {
+        friendDeleterApi.deleteFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_token));
     }
 
 }
