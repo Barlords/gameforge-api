@@ -6,7 +6,9 @@ import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.game.GameFinderService;
@@ -25,7 +27,9 @@ import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterSer
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.action.ActionCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
@@ -102,6 +106,16 @@ public class DomainConfiguration {
     }
 
     @Bean
+    public FriendUpdaterApi friendUpdaterApi(FriendPersistenceSpi spi) {
+        return new FriendUpdaterService(spi);
+    }
+
+    @Bean
+    public FriendDeleterApi friendDeleterApi(FriendPersistenceSpi spi) {
+        return new FriendDeleterService(spi);
+    }
+
+    @Bean
     public UserCreatorApi userCreatorApi(UserPersistenceSpi spi, UserModifierService userModifierService) {
         return new UserCreatorService(spi, userModifierService);}
 
@@ -113,7 +127,12 @@ public class DomainConfiguration {
     public UserDeleterApi userDeleterApi(UserPersistenceSpi spi) {return new UserDeleterService(spi);}
 
     @Bean
-    public UserFinderApi userFinderApi(UserPersistenceSpi spi) {return new UserFinderService(spi);}
+    public FriendFinderService friendFinderService( FriendPersistenceSpi spi,
+                                                    TokenControllerService tokenControllerService,
+                                                    UserFinderApi userFinderApi) {return new FriendFinderService(spi, tokenControllerService, userFinderApi);}
+
+    @Bean
+    public UserFinderApi userFinderApi(UserPersistenceSpi spi, FriendPersistenceSpi friendPersistenceSpi) {return new UserFinderService(spi,friendPersistenceSpi);}
 
     @Bean
     public UserLoggerApi userLoggerApi(UserPersistenceSpi spi, TokenControllerService tokenControllerService) {return new UserLoggerService(spi, tokenControllerService);}
@@ -174,5 +193,4 @@ public class DomainConfiguration {
     @Bean
     public ActionCreatorApi actionCreatorApi(ActionPersistenceSpi spi,TokenControllerService tokenControllerService) {
         return new ActionCreatorService(spi,tokenControllerService);}
-
 }

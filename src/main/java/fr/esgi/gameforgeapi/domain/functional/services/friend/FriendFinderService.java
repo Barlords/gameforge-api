@@ -43,4 +43,33 @@ public class FriendFinderService implements FriendFinderApi {
                 })
                 .toList();
     }
+
+    @Override
+    public List<User> getAskedRequests(UUID userToken) {
+        User user = tokenControllerService.getUser(userToken);
+
+        List<Friend> incomingRequests = spi.findFriendsRequestsOf(user.getId());
+
+        return incomingRequests.stream()
+                .filter(f -> f.getFriendId().equals(user.getId()))
+                .map(f -> {
+                    Optional<User> requestSender = userFinderApi.findById(f.getUserId());
+                    return requestSender.orElseThrow(() -> new ResourceNotFoundException("Erreur lors de la récupération des requetes"));
+                })
+                .toList();
+    }
+
+    public List<User> getSentRequests(UUID userToken) {
+        User user = tokenControllerService.getUser(userToken);
+
+        List<Friend> outgoingRequests = spi.findFriendsRequestsOf(user.getId());
+
+        return outgoingRequests.stream()
+                .filter(f -> f.getUserId().equals(user.getId()))
+                .map(f -> {
+                    Optional<User> requestReceiver = userFinderApi.findById(f.getFriendId());
+                    return requestReceiver.orElseThrow(() -> new ResourceNotFoundException("Erreur lors de la récupération des requetes"));
+                })
+                .toList();
+    }
 }

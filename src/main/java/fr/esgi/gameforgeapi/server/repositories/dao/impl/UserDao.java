@@ -1,6 +1,5 @@
 package fr.esgi.gameforgeapi.server.repositories.dao.impl;
 
-import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
@@ -25,6 +24,8 @@ public class UserDao extends GenericDao<UserEntity> implements IUserDao {
             System.out.println(u.getId());
         };
     }
+
+
 
     public Option<UserEntity> findUserEntityByEmailAndPassword(String email, String password) {
         return null;

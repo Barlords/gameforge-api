@@ -117,6 +117,9 @@
             <column name="sender_id" type="BINARY(16)">
                 <constraints nullable="false"/>
             </column>
+            <column name="receiver_id" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
             <column name="content" type="VARCHAR(256)">
                 <constraints nullable="false"/>
             </column>

@@ -8,4 +8,8 @@ import java.util.UUID;
 public interface FriendFinderApi {
 
     List<User> findFriendOf(UUID userId);
+
+    List<User> getAskedRequests(UUID userToken);
+
+    List<User> getSentRequests(UUID userToken);
 }

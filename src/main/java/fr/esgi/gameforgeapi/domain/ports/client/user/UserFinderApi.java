@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.domain.ports.client.user;
 
+import fr.esgi.gameforgeapi.client.dto.user.UserFriendOrNotDto;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 
 import java.util.List;
@@ -21,4 +22,9 @@ public interface UserFinderApi {
     Optional<User> findByPseudo(String pseudo);
 
     List<User> findActiveUsers();
+
+    List<User> findUsersByString(String string_to_search);
+
+    List<UserFriendOrNotDto> findUsersFriendOrNotByPseudo(String string_to_search, UUID userToken);
+
 }
