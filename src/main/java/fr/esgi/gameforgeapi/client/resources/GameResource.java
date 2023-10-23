@@ -108,10 +108,9 @@ public class GameResource {
     @DeleteMapping("/{user_token}/{id}")
     @ResponseStatus(NO_CONTENT)
     public void deleteGameById(@Valid @PathVariable("user_token") String userToken, @Valid @PathVariable("id") String id) {
-        System.out.println(userToken);
         gameDeleterApi.delete(
                 UuidValidator.validate(userToken),
                 UuidValidator.validate(id)
-                );
+        );
     }
 }
