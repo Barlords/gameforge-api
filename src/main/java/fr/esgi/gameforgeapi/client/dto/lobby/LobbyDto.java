@@ -1,30 +1,17 @@
 package fr.esgi.gameforgeapi.client.dto.lobby;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record LobbyDto(
-
-        UUID id,
-
-        UUID gameId,
-
-        UUID creatorId,
-
-        String name,
-
-        String password,
-
-        LocalDate creationDate,
-
-        LocalDate startDate,
-
-        Boolean finished,
-
-        UUID winnerId
-) {
-
-}
+        @JsonProperty("id") UUID id,
+        @JsonProperty("gameId") UUID gameId,
+        @JsonProperty("creatorId") UUID creatorId,
+        @JsonProperty("name") String name,
+        @JsonProperty("password") String password,
+        @JsonProperty("creationDate") LocalDate creationDate,
+        @JsonProperty("startDate") LocalDate startDate,
+        @JsonProperty("finished") Boolean finished,
+        @JsonProperty("winnerId") UUID winnerId
+) { }

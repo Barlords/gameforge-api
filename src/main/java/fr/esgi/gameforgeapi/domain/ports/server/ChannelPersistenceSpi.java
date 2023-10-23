@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface ChannelPersistenceSpi extends PersistenceSpi<Channel, UUID> {
 
-
+    Channel getChannelByLobbyId(UUID lobbyId);
 }

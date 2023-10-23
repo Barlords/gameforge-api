@@ -9,6 +9,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import java.io.Serializable;
 import java.sql.Types;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -41,6 +42,7 @@ public class MessageEntity implements Serializable {
     private String content;
 
     @Column(name = "send_date", updatable = false, nullable = false)
-    private LocalDate sendDate;
+    private LocalDateTime sendDate;
+
 
 }

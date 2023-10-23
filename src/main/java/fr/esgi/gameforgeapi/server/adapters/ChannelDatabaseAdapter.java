@@ -42,4 +42,9 @@ public class ChannelDatabaseAdapter implements ChannelPersistenceSpi {
     }
 
 
+    @Override
+    @Transactional
+    public Channel getChannelByLobbyId(UUID lobbyId) {
+        return ChannelEntityMapper.toDomain(repository.findChannelEntityByLobbyId(lobbyId));
+    }
 }

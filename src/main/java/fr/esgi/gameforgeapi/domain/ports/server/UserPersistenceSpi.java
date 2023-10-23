@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.domain.ports.server;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,4 +30,7 @@ public interface UserPersistenceSpi extends PersistenceSpi<User, UUID> {
     void deleteByToken(UUID token);
 
     User update(User o);
+
+    @Transactional
+    List<User> findActiveUsersInLobby(UUID lobbyId);
 }

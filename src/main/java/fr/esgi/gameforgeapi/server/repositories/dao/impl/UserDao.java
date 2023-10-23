@@ -8,6 +8,7 @@ import io.vavr.control.Option;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.ByteBuffer;
 import java.util.UUID;
 import java.util.List;
 
@@ -36,12 +37,19 @@ public class UserDao extends GenericDao<UserEntity> implements IUserDao {
         return null;
     }
 
+    public static byte[] toBytes(UUID uuid) {
+        ByteBuffer byteBuffer = ByteBuffer.wrap(new byte[16]);
+        byteBuffer.putLong(uuid.getMostSignificantBits());
+        byteBuffer.putLong(uuid.getLeastSignificantBits());
+        return byteBuffer.array();
+    }
+
     @Override
     @Transactional
     public List<User> findUserByLobbyId(UUID id) {
         return getCurrentSession ().createQuery(
-                "select u from UserEntity u join SessionEntity s join LobbyEntity l " +
-                        "where s.quitDate is null and l.id = :id", UserEntity.class)
+                "select u from UserEntity u join SessionEntity s on u.id = s.userId join LobbyEntity l on s.lobbyId = l.id" +
+                        " where s.quitDate is null and l.id = :id", UserEntity.class)
                 .setParameter("id", id).getResultList().stream().map(UserEntityMapper::toDomain).toList();
     }
 

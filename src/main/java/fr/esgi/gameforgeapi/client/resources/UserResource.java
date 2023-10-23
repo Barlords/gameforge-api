@@ -173,7 +173,7 @@ public class UserResource {
     @GetMapping("/lobby/{id}")
     @ResponseStatus(OK)
     public List<UserDto> getUsersByLobby(@PathVariable UUID id) {
-        return userDao.findUserByLobbyId(id)
+        return userFinderApi.findActiveUsersInLobby(id)
                 .stream()
                 .map(UserDtoMapper::toDto)
                 .toList();

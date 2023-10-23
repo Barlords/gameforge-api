@@ -32,4 +32,9 @@ public class SessionFinderService implements SessionFinderApi {
         return spi.findLastByUserIdAndQuitTimeIsNull(userId);
     }
 
+    @Override
+    public List<Session> findByLobbyId(UUID lobbyId) {
+        return spi.findByLobbyId(lobbyId);
+    }
+
 }

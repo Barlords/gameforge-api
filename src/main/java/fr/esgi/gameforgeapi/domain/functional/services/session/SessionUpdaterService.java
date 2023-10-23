@@ -1,6 +1,7 @@
 package fr.esgi.gameforgeapi.domain.functional.services.session;
 
 import fr.esgi.gameforgeapi.domain.functional.exceptions.ResourceNotFoundException;
+import fr.esgi.gameforgeapi.domain.functional.models.Lobby;
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -48,7 +50,7 @@ public class SessionUpdaterService implements SessionUpdaterApi {
 
     @Override
     @Transactional
-    public void closeCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException {
-        spi.closeAllCurrentSessionIfNecessary(token);
+    public Lobby closeCurrentSessionIfNecessary(String token) throws UserPrincipalNotFoundException {
+        return spi.closeAllCurrentSessionIfNecessary(token);
     }
 }

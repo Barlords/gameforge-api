@@ -45,6 +45,7 @@ public class MessageDatabaseAdapter implements MessagePersistenceSpi {
 
 
     @Override
+    @Transactional
     public List<Message> findByChannelId(UUID channelId) {
         return repository.findMessageEntitiesByChannelIdOrderBySendDate(channelId).stream().map(MessageEntityMapper::toDomain).toList();
     }

@@ -10,6 +10,9 @@ public interface ChannelEntityMapper {
         return Channel.builder()
                 .id(entity.getId())
                 .creationDate(entity.getCreationDate())
+                .creatorId(entity.getCreatorId())
+                .friendId(entity.getFriendId())
+                .lobbyId(entity.getLobbyId())
                 .build();
     }
 
@@ -17,6 +20,9 @@ public interface ChannelEntityMapper {
         return ChannelEntity.builder()
                 .id(domain.getId())
                 .creationDate(domain.getCreationDate())
+                .creatorId(domain.getCreatorId())
+                .friendId(domain.getFriendId())
+                .lobbyId(domain.getLobbyId())
                 .build();
     }
 

@@ -2,7 +2,15 @@ package fr.esgi.gameforgeapi.bootstrap.config;
 
 import fr.esgi.gameforgeapi.client.services.websocket.CustomHandshakeInterceptor;
 import fr.esgi.gameforgeapi.client.services.websocket.WebSocketHandler;
+import fr.esgi.gameforgeapi.domain.functional.models.Session;
+import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
+import fr.esgi.gameforgeapi.domain.ports.client.user.UserFinderApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +24,29 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @CrossOrigin
 public class WebSocketConfig implements WebSocketConfigurer {
 
+    @Autowired
+    private SessionUpdaterApi sessionUpdaterApi;
+
+    @Autowired
+    private SessionFinderApi sessionFinderApi;
+
+    @Autowired
+    private LobbyFinderApi lobbyFinderApi;
+
+    @Autowired
+    private UserFinderApi userFinderApi;
+
+    @Autowired
+    private MessageCreatorApi messageCreatorApi;
+
+    @Autowired
+    private MessageFinderApi messageFinderApi;
+
+    @Autowired
+    private LobbyCreatorApi lobbyCreatorApi;
+
+    @Autowired
+    private GameFinderApi gameFinderApi;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -27,6 +58,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Bean
     public WebSocketHandler myHandler() {
         System.out.println("Websockets server initiating on route /ws");
-        return new WebSocketHandler();
+        return new WebSocketHandler(sessionUpdaterApi, sessionFinderApi, lobbyFinderApi, userFinderApi, messageCreatorApi,
+            messageFinderApi, lobbyCreatorApi, gameFinderApi);
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,6 +27,6 @@ public interface SessionRepository extends JpaRepository<SessionEntity, UUID> {
     @Modifying
     void closeAllUserSessions(LocalDate quitDate, UUID userId);
 
-    Optional<SessionEntity> findSessionEntityByLobbyId (UUID id);
+    List<SessionEntity> findSessionEntityByLobbyId (UUID id);
 
 }

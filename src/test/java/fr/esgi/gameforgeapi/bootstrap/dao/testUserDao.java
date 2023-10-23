@@ -2,6 +2,7 @@ package fr.esgi.gameforgeapi.bootstrap.dao;
 
 import fr.esgi.gameforgeapi.domain.functional.models.User;
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
+import fr.esgi.gameforgeapi.domain.ports.client.user.UserFinderApi;
 import fr.esgi.gameforgeapi.server.entities.UserEntity;
 import fr.esgi.gameforgeapi.server.mappers.UserEntityMapper;
 import fr.esgi.gameforgeapi.server.repositories.dao.IUserDao;
@@ -22,6 +23,9 @@ public class testUserDao {
 
     @Autowired
     private IUserDao dao;
+
+    @Autowired
+    private  UserFinderApi userFinderApi;
 
     @Test
     @Transactional()
@@ -54,6 +58,14 @@ public class testUserDao {
         list = dao.findAll();
         System.out.println(list);
         Assert.assertEquals("Size", 2, list.size());
+    }
+
+    @Test
+    @Transactional
+    public void test() {
+        //List<User> user = dao.findUserByLobbyId(UUID.fromString("d9fb5ab7-afa3-485e-b8b9-63dd43976e2e"));
+        List<User> u = userFinderApi.findActiveUsersInLobby(UUID.fromString("d9fb5ab7-afa3-485e-b8b9-63dd43976e2e"));
+        System.out.println(u);
     }
 
 

@@ -5,6 +5,7 @@ import lombok.Value;
 import lombok.With;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Value
@@ -24,6 +25,6 @@ public class Message {
     String content;
 
     @With
-    LocalDate sendDate;
+    LocalDateTime sendDate;
 
 }
