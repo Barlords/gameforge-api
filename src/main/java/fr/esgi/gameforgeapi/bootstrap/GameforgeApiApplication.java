@@ -14,6 +14,4 @@ public class GameforgeApiApplication {
         SpringApplication.run(GameforgeApiApplication.class, args);
     }
 
-
-
 }
