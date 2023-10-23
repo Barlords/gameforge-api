@@ -22,7 +22,7 @@ public class FriendDatabaseAdapter implements FriendPersistenceSpi {
     @Override
     @Transactional
     public List<Friend> findFriendsOf(UUID userId) {
-        return repository.findFriendEntitiesByAcceptedAndUserIdOrFriendId(true, userId, userId)
+        return repository.findByAcceptedAndUserIdOrAcceptedAndFriendId(true, userId,true, userId)
                 .stream()
                 .map(FriendEntityMapper::toDomain)
                 .toList();
@@ -31,7 +31,7 @@ public class FriendDatabaseAdapter implements FriendPersistenceSpi {
     @Override
     @Transactional
     public List<Friend> findFriendsRequestsOf(UUID userId) {
-        return repository.findFriendEntitiesByAcceptedAndUserIdOrFriendId(false, userId, userId)
+        return repository.findByAcceptedAndUserIdOrAcceptedAndFriendId(false, userId,false, userId)
                 .stream()
                 .map(FriendEntityMapper::toDomain)
                 .toList();
