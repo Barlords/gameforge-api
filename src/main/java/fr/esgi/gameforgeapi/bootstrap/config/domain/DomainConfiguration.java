@@ -5,6 +5,8 @@ import fr.esgi.gameforgeapi.client.services.websocket.WebSocketHandler;
 import fr.esgi.gameforgeapi.domain.functional.services.TokenControllerService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.action.ActionFinderService;
+import fr.esgi.gameforgeapi.domain.functional.services.channel.ChannelCreatorService;
+import fr.esgi.gameforgeapi.domain.functional.services.channel.ChannelFinderService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendCreatorService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendDeleterService;
 import fr.esgi.gameforgeapi.domain.functional.services.friend.FriendFinderService;
@@ -26,6 +28,8 @@ import fr.esgi.gameforgeapi.domain.functional.services.session.SessionFinderServ
 import fr.esgi.gameforgeapi.domain.functional.services.session.SessionUpdaterService;
 import fr.esgi.gameforgeapi.domain.functional.services.user.*;
 import fr.esgi.gameforgeapi.domain.ports.client.action.ActionCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.channel.ChannelCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.channel.ChannelFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendDeleterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
@@ -193,4 +197,14 @@ public class DomainConfiguration {
     @Bean
     public ActionCreatorApi actionCreatorApi(ActionPersistenceSpi spi,TokenControllerService tokenControllerService) {
         return new ActionCreatorService(spi,tokenControllerService);}
+
+    @Bean
+    public ChannelCreatorApi channelCreatorApi(ChannelPersistenceSpi spi) {
+        return new ChannelCreatorService(spi);
+    }
+
+    @Bean
+    public ChannelFinderApi channelFinderApi(ChannelPersistenceSpi spi) {
+        return new ChannelFinderService(spi);
+    }
 }

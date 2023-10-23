@@ -32,4 +32,13 @@ public class ChannelEntity implements Serializable {
     @Column(name = "creation_date", updatable = false, nullable = false)
     private LocalDate creationDate;
 
+    @Column(name = "creator_id")
+    private UUID creatorId;
+
+    @Column(name = "lobby_id")
+    private UUID lobbyId;
+
+    @Column(name = "friend_id")
+    private UUID friendId;
+
 }

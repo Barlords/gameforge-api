@@ -20,5 +20,4 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
 
     List<MessageEntity> findMessageEntitiesBySenderIdOrderBySendDate(UUID senderId);
 
-
 }

@@ -1,5 +1,6 @@
 package fr.esgi.gameforgeapi.server.repositories;
 
+import fr.esgi.gameforgeapi.domain.functional.models.Channel;
 import fr.esgi.gameforgeapi.server.entities.ActionEntity;
 import fr.esgi.gameforgeapi.server.entities.ChannelEntity;
 import fr.esgi.gameforgeapi.server.entities.GameEntity;
@@ -18,6 +19,8 @@ import java.util.UUID;
 public interface ChannelRepository extends JpaRepository<ChannelEntity, UUID> {
 
     Optional<ChannelEntity> findChannelEntityById(UUID id);
+
+    ChannelEntity findChannelEntityByLobbyId(UUID id);
 
 
 }

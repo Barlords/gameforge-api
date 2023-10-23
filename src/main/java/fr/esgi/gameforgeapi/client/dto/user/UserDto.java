@@ -1,20 +1,17 @@
 package fr.esgi.gameforgeapi.client.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public record UserDto(
-        UUID id,
-        String email,
-        String pseudo,
-        UUID token,
-        LocalDate tokenDate,
-        boolean newsletterSubscribed,
-        int playedGames,
-        int wonGames
-) {
-
-}
+        @JsonProperty("id") UUID id,
+        @JsonProperty("email") String email,
+        @JsonProperty("pseudo") String pseudo,
+        @JsonProperty("token") UUID token,
+        @JsonProperty("tokenDate") LocalDate tokenDate,
+        @JsonProperty("newsletterSubscribed") boolean newsletterSubscribed,
+        @JsonProperty("playedGames") int playedGames,
+        @JsonProperty("wonGames") int wonGames
+) { }

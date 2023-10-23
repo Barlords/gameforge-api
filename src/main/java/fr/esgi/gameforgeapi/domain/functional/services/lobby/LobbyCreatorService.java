@@ -25,4 +25,9 @@ public class LobbyCreatorService implements LobbyCreatorApi {
         return spi.save(lobby.withCreatorId(user.getId()));
     }
 
+    @Override
+    public Lobby update(Lobby lobby) {
+        return spi.save(lobby);
+    }
+
 }

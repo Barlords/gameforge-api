@@ -3,7 +3,11 @@ package fr.esgi.gameforgeapi.bootstrap.config;
 import fr.esgi.gameforgeapi.client.services.websocket.CustomHandshakeInterceptor;
 import fr.esgi.gameforgeapi.client.services.websocket.WebSocketHandler;
 import fr.esgi.gameforgeapi.domain.functional.models.Session;
+import fr.esgi.gameforgeapi.domain.ports.client.game.GameFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyCreatorApi;
 import fr.esgi.gameforgeapi.domain.ports.client.lobby.LobbyFinderApi;
+import fr.esgi.gameforgeapi.domain.ports.client.message.MessageCreatorApi;
+import fr.esgi.gameforgeapi.domain.ports.client.message.MessageFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.session.SessionUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.user.UserFinderApi;
@@ -32,6 +36,18 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Autowired
     private UserFinderApi userFinderApi;
 
+    @Autowired
+    private MessageCreatorApi messageCreatorApi;
+
+    @Autowired
+    private MessageFinderApi messageFinderApi;
+
+    @Autowired
+    private LobbyCreatorApi lobbyCreatorApi;
+
+    @Autowired
+    private GameFinderApi gameFinderApi;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(myHandler(), "/ws")
@@ -42,6 +58,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Bean
     public WebSocketHandler myHandler() {
         System.out.println("Websockets server initiating on route /ws");
-        return new WebSocketHandler(sessionUpdaterApi, sessionFinderApi, lobbyFinderApi, userFinderApi);
+        return new WebSocketHandler(sessionUpdaterApi, sessionFinderApi, lobbyFinderApi, userFinderApi, messageCreatorApi,
+            messageFinderApi, lobbyCreatorApi, gameFinderApi);
     }
 }

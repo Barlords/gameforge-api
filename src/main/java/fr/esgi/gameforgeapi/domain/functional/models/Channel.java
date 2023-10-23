@@ -20,4 +20,10 @@ public class Channel {
     @With
     LocalDate creationDate;
 
+    @With
+    UUID lobbyId;
+
+    @With
+    UUID friendId;
+
 }
