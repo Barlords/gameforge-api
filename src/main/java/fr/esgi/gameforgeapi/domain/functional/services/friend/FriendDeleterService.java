@@ -18,9 +18,8 @@ public class FriendDeleterService implements FriendDeleterApi {
     private final TokenControllerService tokenControllerService;
 
     @Override
-    public void deleteFriend(UUID userToken,UUID friendToken) {
+    public void deleteFriend(UUID userToken,UUID friendId) {
         User user = tokenControllerService.getUser(userToken);
-        User friend = tokenControllerService.getUser(friendToken);
-        spi.deleteFriend(user.getId(),friend.getId());
+        spi.deleteFriend(user.getId(),friendId);
     }
 }

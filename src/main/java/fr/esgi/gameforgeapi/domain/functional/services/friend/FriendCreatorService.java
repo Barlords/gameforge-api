@@ -26,7 +26,6 @@ public class FriendCreatorService implements FriendCreatorApi {
 
     @Override
     public void create(UUID userToken, UUID friendId) {
-
         User user = userFinderApi.findByToken(userToken)
                 .orElseThrow(() -> new TokenNotValidException(userToken.toString()));
 

@@ -24,9 +24,8 @@ public class FriendUpdaterService implements FriendUpdaterApi {
     }
 
     @Override
-    public void acceptFriend(UUID userToken,UUID friendToken) {
+    public void acceptFriend(UUID userToken,UUID friendId) {
         User user = tokenControllerService.getUser(userToken);
-        User friend = tokenControllerService.getUser(friendToken);
-        spi.acceptFriend(user.getId(),friend.getId());
+        spi.acceptFriend(user.getId(),friendId);
     }
 }
