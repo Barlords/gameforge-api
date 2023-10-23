@@ -71,7 +71,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
         }
     }
 
-
     @Override
     public void afterConnectionClosed(WebSocketSession session, @NotNull CloseStatus status) throws Exception {
         List<String> tokenList = (List<String>) session.getAttributes().get("usertoken");

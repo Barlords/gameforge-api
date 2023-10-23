@@ -9,12 +9,12 @@ import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendFinderApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendUpdaterApi;
 import fr.esgi.gameforgeapi.domain.ports.client.friend.FriendDeleterApi;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,16 +61,20 @@ public class FriendResource {
         friendCreatorApi.create(UuidValidator.validate(request.userToken()), UuidValidator.validate(request.friendId()));
     }
 
-    @PatchMapping("/accept/{user_token}/{friend_token}")
+    @PatchMapping("/accept/{user_token}/{friend_id}")
     @ResponseStatus(OK)
-    public void acceptFriend(@PathVariable String user_token, @PathVariable String friend_token) {
-        friendUpdaterApi.acceptFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_token));
+    public void acceptFriend(@PathVariable String user_token, @PathVariable String friend_id) {
+        System.out.println("token = ");
+        System.out.println(user_token);
+        System.out.println("id friend = ");
+        System.out.println(friend_id);
+        friendUpdaterApi.acceptFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_id));
     }
 
-    @DeleteMapping("/delete/{user_token}/{friend_token}")
-    @ResponseStatus(OK)
-    public void deleteFriend(@PathVariable String user_token, @PathVariable String friend_token) {
-        friendDeleterApi.deleteFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_token));
+    @DeleteMapping("/delete/{user_token}/{friend_id}")
+    @ResponseStatus(NO_CONTENT)
+    public void deleteFriend(@PathVariable String user_token, @PathVariable String friend_id) {
+        friendDeleterApi.deleteFriend(UuidValidator.validate(user_token), UuidValidator.validate(friend_id));
     }
 
 }

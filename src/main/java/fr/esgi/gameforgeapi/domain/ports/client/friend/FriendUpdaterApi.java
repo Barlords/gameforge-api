@@ -9,6 +9,6 @@ public interface FriendUpdaterApi {
 
     Friend update(Friend session);
 
-    void acceptFriend(UUID userToken,UUID friendToken);
+    void acceptFriend(UUID userToken, UUID friendId);
 
 }

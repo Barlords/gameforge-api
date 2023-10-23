@@ -86,12 +86,13 @@ public class UserDatabaseAdapter implements UserPersistenceSpi {
     }
 
     @Override
+    @Transactional
     public List<User> findActiveUsers() {
-        return repository.findActiveUser().stream().map(UserEntityMapper::toDomain).toList();
+        return repository.findActiveUserOrderByWinrate().stream().map(UserEntityMapper::toDomain).toList();
     }
 
     @Override
-    @Transactional()
+    @Transactional
     public List<User> findUsersByString(String string_to_search) {
         return repository.findUsersByPseudo(string_to_search).stream().map(UserEntityMapper::toDomain).toList();
     }

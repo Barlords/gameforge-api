@@ -15,7 +15,7 @@ import java.util.UUID;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface FriendRepository extends JpaRepository<FriendEntity, UUID> {
 
-    List<FriendEntity> findFriendEntitiesByAcceptedAndUserIdOrFriendId(boolean accepted, UUID userId, UUID friendId);
+    List<FriendEntity>  findByAcceptedAndUserIdOrAcceptedAndFriendId(boolean accepted,UUID userId, boolean _accepted,UUID friendId);
 
     @Query("UPDATE FriendEntity f SET f.accepted = true WHERE (f.userId = ?1 AND f.friendId = ?2) OR (f.userId = ?2 AND f.friendId = ?1)")
     @Modifying
