@@ -67,15 +67,11 @@ public class FriendDatabaseAdapter implements FriendPersistenceSpi {
     }
 
     @Override
-    @Transactional
     public void acceptFriend(UUID userId,UUID friendId) {
         repository.acceptFriend(userId,friendId);
     }
 
-
-
     @Override
-    @Transactional
     public void deleteFriend(UUID userId,UUID friendId) {
         repository.deleteFriend(userId, friendId);
     }
